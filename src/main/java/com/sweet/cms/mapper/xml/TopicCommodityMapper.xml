@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.cms.mapper.TopicCommodityMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sweet.cms.model.TopicCommodity">
+		<id column="id" property="id" />
+		<result column="topic_id" property="topicId" />
+		<result column="commodity_no" property="commodityNo" />
+		<result column="status" property="status" />
+		<result column="sort_no" property="sortNo" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="operator" property="operator" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, topic_id AS topicId, commodity_no AS commodityNo, status, sort_no AS sortNo, create_time AS createTime, update_time AS updateTime, operator
+    </sql>
+
+	<select id="getCommodityCountByTopicId" parameterType="java.lang.Long" resultType="int">
+		select count(*) from tbl_cms_topic_commodity where topic_id = #{topicId}
+	</select>
+
+	<select id="getCommodityListByTopicId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tbl_cms_topic_commodity where topic_id = #{topicId} order by sort_no,create_time
+	</select>
+
+</mapper>

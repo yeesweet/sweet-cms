@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.cms.mapper.TopicMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sweet.cms.model.Topic">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="title" property="title" />
+		<result column="sort_no" property="sortNo" />
+		<result column="list_sort" property="listSort" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
+		<result column="is_display" property="isDisplay" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="operator" property="operator" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name,title, sort_no, list_sort, start_time, end_time, is_display, status, create_time, update_time, operator
+    </sql>
+
+	<!-- 分页查询数据 -->
+	<select id="getCmsTopicByPage" parameterType="com.sweet.cms.model.Topic" resultMap="BaseResultMap">
+		select * from tbl_cms_topic
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name like concat('%',#{name}, '%')
+			</if>
+			<if test="isDisplay != null">
+				and is_display = #{isDisplay,jdbcType=INTEGER}
+			</if>
+			<if test="effectiveType != null">
+				<choose>
+					<when test="effectiveType==1">
+						and IF(start_time IS NOT NULL AND start_time!='',
+						TIMESTAMP(start_time) &gt; current_timestamp(),start_time IS NOT
+						NULL AND start_time!='')
+					</when>
+					<when test="effectiveType==2">
+						and IF(start_time IS NOT NULL and start_time!=''
+						and end_time IS NOT
+						NULL AND end_time!='',
+						TIMESTAMP(end_time) &gt;
+						current_timestamp() and TIMESTAMP(start_time) &lt;
+						current_timestamp() ,end_time IS NOT NULL AND end_time!='')
+					</when>
+					<when test="effectiveType==3">
+						and IF(start_time IS NOT NULL AND end_time!='',
+						TIMESTAMP(end_time) &lt; current_timestamp(),end_time IS NOT NULL
+						AND end_time!='')
+					</when>
+					<when test="effectiveType==4">
+						and (start_time IS NULL OR start_time='') and
+						(end_time IS NULL OR
+						end_time='')
+					</when>
+				</choose>
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and start_time &gt; #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and end_time &lt; #{endTime}
+			</if>
+		</where>
+		ORDER BY update_time DESC ,sort_no ,is_display desc ,create_time DESC
+	</select>
+
+	<update id="batchChangeStatus">
+		update tbl_cms_topic set is_display = #{isDisplay}
+		where id in
+		<foreach item="id" index="index" collection="ids"
+				 open="(" separator="," close=")">#{id}</foreach>
+	</update>
+
+	<select id="checkTopicName" resultType="int">
+		select count(*) from tbl_cms_topic where 1=1
+		<if test="id !=null ">
+			and id != #{id}
+		</if>
+		and name = #{name}
+	</select>
+
+	<select id="getTopicById" resultMap="BaseResultMap">
+		select * from tbl_cms_topic where id = #{id}
+	</select>
+</mapper>

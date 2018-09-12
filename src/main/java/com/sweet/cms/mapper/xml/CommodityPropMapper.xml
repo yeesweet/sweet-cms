@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.cms.mapper.CommodityPropMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sweet.cms.model.CommodityProp">
+		<id column="id" property="id" />
+		<result column="prop_no" property="propNo" />
+		<result column="prop_name" property="propName" />
+		<result column="type" property="type" />
+		<result column="create_time" property="createTime" />
+		<result column="operator" property="operator" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, prop_no AS propNo, prop_name AS propName, type, create_time AS createTime, operator
+    </sql>
+
+</mapper>

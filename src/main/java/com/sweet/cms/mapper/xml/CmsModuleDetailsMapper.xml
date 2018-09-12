@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sweet.cms.mapper.CmsModuleDetailsMapper">
+	<resultMap id="CmsModuleDetailsMapper" type="com.sweet.cms.model.CmsModuleDetails">
+		<result column="detail_id" property="detailId"/>
+		<result column="title" property="title"/>
+		<result column="subtitle" property="subTitle"/>
+		<result column="imgurl" property="imgUrl"/>
+		<result column="sort_no" property="sortNo"/>
+		<result column="subtype" property="subType"/>
+		<result column="common_id" property="commonId"/>
+		<result column="sub_start_time" property="subStartTime"/>
+		<result column="sub_end_time" property="subEndTime"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="module_id" property="moduleId"/>
+		<result column="operator" property="operator"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		detail_id,
+		title,
+		subtitle,
+		imgurl,
+		sort_no,
+		subtype,
+		common_id,
+		sub_start_time,
+		sub_end_time,
+		create_time,
+		update_time,
+		module_id,
+		operator
+	</sql>
+	
+	<insert id="insertCmsModuleDetails" parameterType="com.sweet.cms.model.CmsModuleDetails">
+		insert into tbl_cms_module_details 
+		(<include refid="Base_Column_List"></include>)
+		values(
+			#{detailId},
+			#{title},
+			#{subTitle},
+			#{imgUrl},
+			#{sortNo},
+			#{subType},
+			#{commonId},
+			#{subStartTime},
+			#{subEndTime},
+			now(),
+			now(),
+			#{moduleId},
+			#{operator}
+		)
+	</insert>
+	
+	<insert id="insertCmsDetailBatch" parameterType="java.util.List">
+		<foreach collection="list" item="cmsModuleDetail" index="index" open="" close="" separator=";"> 
+            insert into tbl_cms_module_details 
+			(<include refid="Base_Column_List"></include>)
+			values(
+				#{cmsModuleDetail.detailId},
+				#{cmsModuleDetail.title},
+				#{cmsModuleDetail.subTitle},
+				#{cmsModuleDetail.imgUrl},
+				#{cmsModuleDetail.sortNo},
+				#{cmsModuleDetail.subType},
+				#{cmsModuleDetail.commonId},
+				#{cmsModuleDetail.subStartTime},
+				#{cmsModuleDetail.subEndTime},
+				now(),
+				now(),
+				#{cmsModuleDetail.moduleId},
+				#{cmsModuleDetail.operator}
+			)
+        </foreach>
+    </insert>
+	
+	<delete id="delModuleDetailsById" parameterType="java.lang.Long">
+		delete from tbl_cms_module_details where detail_id = #{id}
+	</delete>
+	
+	<delete id="delModuleDetailsByPid" parameterType="java.lang.Long">
+		delete from tbl_cms_module_details where module_id = #{moduleId}
+	</delete>
+	
+</mapper>

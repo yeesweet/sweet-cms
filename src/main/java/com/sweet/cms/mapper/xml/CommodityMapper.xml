@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.cms.mapper.CommodityMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sweet.cms.model.Commodity">
+		<id column="id" property="id" />
+		<result column="commodity_no" property="commodityNo" />
+		<result column="commodity_name" property="commodityName" />
+		<result column="sell_point" property="sellPoint" />
+		<result column="commodity_desc" property="commodityDesc" />
+		<result column="brand_name" property="brandName" />
+		<result column="item_no" property="itemNo" />
+		<result column="sale_price" property="salePrice" />
+		<result column="market_price" property="marketPrice" />
+		<result column="cost_price" property="costPrice" />
+		<result column="default_pic" property="defaultPic" />
+		<result column="stock" property="stock" />
+		<result column="prop_no" property="propNo" />
+		<result column="commodity_status" property="commodityStatus" />
+		<result column="show_date" property="showDate" />
+		<result column="down_date" property="downDate" />
+		<result column="sales_quantity" property="salesQuantity" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="operator" property="operator" />
+	</resultMap>
+
+	<resultMap id="BaseCommodityVoResultMap" type="com.sweet.cms.model.vo.CommodityVo">
+		<id column="id" property="id" />
+		<result column="commodity_no" property="commodityNo" />
+		<result column="commodity_name" property="commodityName" />
+		<result column="sell_point" property="sellPoint" />
+		<result column="commodity_desc" property="commodityDesc" />
+		<result column="brand_name" property="brandName" />
+		<result column="item_no" property="itemNo" />
+		<result column="sale_price" property="salePrice" />
+		<result column="market_price" property="marketPrice" />
+		<result column="cost_price" property="costPrice" />
+		<result column="default_pic" property="defaultPic" />
+		<result column="stock" property="stock" />
+		<result column="prop_no" property="propNo" />
+		<result column="commodity_status" property="commodityStatus" />
+		<result column="show_date" property="showDate" />
+		<result column="down_date" property="downDate" />
+		<result column="sales_quantity" property="salesQuantity" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="operator" property="operator" />
+	</resultMap>
+
+	<resultMap id="commodityInfoResultMap" type="com.sweet.cms.model.vo.CommodityVo">
+		<id column="id" property="id" />
+		<result column="commodity_no" property="commodityNo" />
+		<result column="commodity_name" property="commodityName" />
+		<result column="sell_point" property="sellPoint" />
+		<result column="commodity_desc" property="commodityDesc" />
+		<result column="brand_name" property="brandName" />
+		<result column="item_no" property="itemNo" />
+		<result column="sale_price" property="salePrice" />
+		<result column="market_price" property="marketPrice" />
+		<result column="cost_price" property="costPrice" />
+		<result column="default_pic" property="defaultPic" />
+		<result column="stock" property="stock" />
+		<result column="prop_no" property="propNo" />
+		<result column="commodity_status" property="commodityStatus" />
+		<result column="show_date" property="showDate" />
+		<result column="down_date" property="downDate" />
+		<result column="sales_quantity" property="salesQuantity" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="operator" property="operator" />
+		<collection property="categories" ofType="com.sweet.cms.model.CategoryCommodity" column="commodityNo">
+			<result column="cid" property="id" />
+			<result column="category_id" property="categoryId" />
+			<result column="commodity_no" property="commodityNo" />
+			<result column="ccreateTime" property="createTime" />
+			<result column="operator" property="operator" />
+		</collection>
+		<collection property="pics" ofType="com.sweet.cms.model.CommodityPics" column="commodityNo">
+			<result column="pid" property="id" />
+			<result column="commodity_no" property="commodityNo" />
+			<result column="type" property="type" />
+			<result column="image" property="image" />
+			<result column="sort_no" property="sortNo" />
+			<result column="status" property="status" />
+			<result column="pcreateTime" property="createTime" />
+			<result column="pupdateTime" property="updateTime" />
+			<result column="operator" property="operator" />
+		</collection>
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, commodity_no AS commodityNo, commodity_name AS commodityName, sell_point AS sellPoint, commodity_desc AS commodityDesc, brand_name AS brandName, item_no AS itemNo, sale_price AS salePrice, market_price AS marketPrice, cost_price AS costPrice, stock, prop_no AS propNo, commodity_status AS commodityStatus, show_date AS showDate, down_date AS downDate, sales_quantity AS salesQuantity, create_time AS createTime, update_time AS updateTime, operator
+    </sql>
+
+	<select id="selectCommodityPage" resultType="Map">
+		SELECT
+		cm.id, cm.commodity_no AS commodityNo, cm.commodity_name AS commodityName, cm.sell_point AS sellPoint,
+		cm.commodity_desc AS commodityDesc, cm.brand_name AS brandName, cm.item_no AS itemNo, cm.sale_price AS salePrice,
+		cm.market_price AS marketPrice, cm.cost_price AS costPrice, cm.default_pic AS defaultPic, cm.stock, cm.prop_no AS propNo,
+		cm.commodity_status AS commodityStatus, cm.show_date AS showDate, cm.down_date AS downDate,
+		cm.sales_quantity AS salesQuantity, cm.create_time AS createTime, cm.update_time AS updateTime, cm.operator,
+		pr.prop_name,
+		ca.id AS categoryId,
+		ca.name AS categoryName
+		FROM tbl_cms_commodity cm
+		LEFT JOIN tbl_cms_commodity_prop pr ON cm.prop_no = pr.prop_no
+		LEFT JOIN tbl_cms_category_commodity cc ON cm.commodity_no = cc.commodity_no
+		LEFT JOIN tbl_cms_category ca ON cc.category_id = ca.id AND ca.display=1
+		WHERE 1=1
+		<if test=" commodityName != null and commodityName != '' ">
+			AND cm.commodity_name LIKE CONCAT(CONCAT('%',#{commodityName},'%'))
+		</if>
+		<if test=" commodityNo != null and commodityNo != '' ">
+			AND cm.commodity_no = #{commodityNo}
+		</if>
+		<if test=" categoryId != null ">
+			AND ca.id = #{categoryId}
+		</if>
+		<if test=" commodityStatus != null and commodityStatus != 0 ">
+			AND cm.commodity_status = #{commodityStatus}
+		</if>
+		<if test=" startTime != null ">
+			<![CDATA[ AND cm.show_date >= #{startTime} ]]>
+		</if>
+		<if test=" endTime != null ">
+			<![CDATA[ AND cm.show_date <= #{endTime} ]]>
+		</if>
+		<if test=" downStartTime != null ">
+			<![CDATA[ AND cm.down_date >= #{downStartTime} ]]>
+		</if>
+		<if test=" downEndTime != null ">
+			<![CDATA[ AND cm.down_date <= #{downEndTime} ]]>
+		</if>
+		 GROUP BY cm.id
+	</select>
+
+	<select id="getMaxCommodityNo" resultType="java.lang.String">
+		SELECT MAX(commodity_no) FROM tbl_cms_commodity
+	</select>
+
+	<select id="selectCommodityInfo" resultMap="commodityInfoResultMap">
+		SELECT
+		cm.*,
+		pic.id AS pid, pic.type, pic.image, pic.sort_no, pic.status, pic.create_time AS pcreateTime,
+		pic.update_time AS pupdateTime,
+		cc.id AS cid, cc.category_id, cc.create_time AS ccreateTime
+		FROM tbl_cms_commodity cm
+	    LEFT JOIN tbl_cms_commodity_prop pr ON cm.prop_no = pr.prop_no
+	    LEFT JOIN tbl_cms_commodity_pics pic ON cm.commodity_no = pic.commodity_no AND pic.status = 1
+	    LEFT JOIN tbl_cms_category_commodity cc ON cm.commodity_no = cc.commodity_no
+	    LEFT JOIN tbl_cms_category ca ON cc.category_id = ca.id AND ca.display=1
+		WHERE 1=1
+		<if test="commodity.id != null">
+			AND cm.id= #{commodity.id}
+		</if>
+		<if test="commodity.commodityNo!=null and commodity.commodityNo != ''">
+			AND cm.commodity_no = #{commodity.commodityNo}
+		</if>
+	</select>
+
+	<select id="getCommodityInfoList" resultMap="commodityInfoResultMap">
+		SELECT
+		cm.*,
+		pic.id AS pid, pic.type, pic.image, pic.sort_no, pic.status, pic.create_time AS pcreateTime,
+		pic.update_time AS pupdateTime,
+		cc.id AS cid, cc.category_id, cc.create_time AS ccreateTime
+		FROM tbl_cms_commodity cm
+		LEFT JOIN tbl_cms_commodity_prop pr ON cm.prop_no = pr.prop_no
+		LEFT JOIN tbl_cms_commodity_pics pic ON cm.commodity_no = pic.commodity_no AND pic.status = 1
+		LEFT JOIN tbl_cms_category_commodity cc ON cm.commodity_no = cc.commodity_no
+		LEFT JOIN tbl_cms_category ca ON cc.category_id = ca.id AND ca.display=1
+		WHERE 1=1
+		<if test="shelv">
+			AND commodity_status = 2
+		</if>
+		<if test="instock">
+			<![CDATA[ AND stock > 0 ]]>
+		</if>
+		<if test=" nos != null and nos.size() > 0 ">
+			AND cm.commodity_no IN
+			<foreach item="no" index="index" collection="nos" open="(" separator="," close=")">
+				#{no}
+			</foreach>
+		</if>
+	</select>
+	<select id="getCommodityList" resultMap="BaseCommodityVoResultMap">
+		SELECT *
+		FROM tbl_cms_commodity
+		WHERE 1=1
+		<if test="shelv">
+			AND commodity_status = 2
+		</if>
+		<if test="instock">
+			<![CDATA[ AND stock > 0 ]]>
+		</if>
+		<if test=" nos != null and nos.size() > 0 ">
+			AND commodity_no IN
+			<foreach item="no" index="index" collection="nos" open="(" separator="," close=")">
+				#{no}
+			</foreach>
+		</if>
+	</select>
+</mapper>
