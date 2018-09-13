@@ -69,7 +69,7 @@ public class CmsImageControler extends BaseController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/uploadImage")
+	@PostMapping("/uploadImage")
 	@ResponseBody
 	public String uploadImage(MultipartFile file, String path,Integer type, HttpServletRequest request){
 		if(type == null){
@@ -81,7 +81,7 @@ public class CmsImageControler extends BaseController {
 			if(StringUtils.isNotBlank(path)){
 				path = URLDecoder.decode(path,"UTF-8");
 			}
-			String realPath = request.getSession().getServletContext().getRealPath("/upload/file");
+//			String realPath = request.getSession().getServletContext().getRealPath("/upload/file");
 			String fileName = "";
 			String originalFilename = file.getOriginalFilename();
 			int loc = originalFilename.lastIndexOf(".");
@@ -102,19 +102,19 @@ public class CmsImageControler extends BaseController {
 				JSONObject jo = JSONObject.fromObject(map);
 				return jo.toString();
 			}
-			File localFile = new File(realPath,fileName);
-			//判断目标文件所在的目录是否存在
-			if(!localFile.getParentFile().exists()) {
-				localFile.getParentFile().mkdirs();
-			}
-			FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
+//			File localFile = new File(realPath,fileName);
+//			//判断目标文件所在的目录是否存在
+//			if(!localFile.getParentFile().exists()) {
+//				localFile.getParentFile().mkdirs();
+//			}
+//			FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
 			AccessFTP accessFTP = buildUploadImage();
-			result = cmsImageService.uploadImage(localFile,path,accessFTP,imageDomain);
+			result = cmsImageService.uploadImage(file.getInputStream(),fileName,path,accessFTP,imageDomain);
 			map.put("status", "success");
 			map.put("imageUrl", result);
-			if (localFile.exists()) {
-				localFile.delete();
-			}
+//			if (localFile.exists()) {
+//				localFile.delete();
+//			}
 		}catch(Exception e){
 			logger.error("图片上传失败",e);
 			map.put("status", "fail");

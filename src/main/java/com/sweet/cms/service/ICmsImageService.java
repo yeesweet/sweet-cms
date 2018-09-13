@@ -4,6 +4,7 @@ import com.sweet.cms.model.CmsImage;
 import com.sweet.cms.util.AccessFTP;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -23,6 +24,18 @@ public interface ICmsImageService {
 	 * @return
 	 */
 	public String uploadImage(File localFile, String path, AccessFTP accessFTP,String imageDomain) throws Exception;
+
+	/**
+	 * 上传图片
+	 * @param is
+	 * @param fileName
+	 * @param path
+	 * @param accessFTP
+	 * @param imageDomain
+	 * @return
+	 * @throws Exception
+	 */
+	public String uploadImage(InputStream is, String fileName, String path, AccessFTP accessFTP, String imageDomain) throws Exception;
 
 	/**
 	 * 获取目录、图片

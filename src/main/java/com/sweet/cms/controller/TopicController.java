@@ -6,12 +6,14 @@ import javax.validation.Valid;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.sweet.cms.commons.constant.Consts;
 import com.sweet.cms.commons.utils.StringUtils;
+import com.sweet.cms.model.Commodity;
 import com.sweet.cms.model.TopicCommodity;
 import com.sweet.cms.model.vo.CommoditySearchVo;
 import com.sweet.cms.model.vo.CommodityVo;
 import com.sweet.cms.model.vo.TopicCommodityVo;
 import com.sweet.cms.service.ICommodityService;
 import com.sweet.cms.service.ITopicCommodityService;
+import com.sweet.cms.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -230,6 +232,8 @@ public class TopicController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public Object edit(@Valid Topic topic) {
+        topic.setOperator(this.getStaffName());
+        topic.setUpdateTime(new Date());
         boolean b = topicService.updateById(topic);
         if (b) {
             return renderSuccess("编辑成功！");
@@ -309,5 +313,43 @@ public class TopicController extends BaseController {
             return countTopicsName >0?"1":"0";
         }
         return "1";
+    }
+
+    /**
+     * 添加活动商品 活动编辑里面
+     *
+     * @param commodityCodes 要添加的商品编号
+     * @param topicId 活动编号
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "addCommodityByIds")
+    public String addCommodityByIds(String[] commodityCodes, Long topicId, Integer sortNum, final HttpServletRequest request) throws Exception {
+        if (commodityCodes == null) {
+            logger.error("添加活动专题失败,commodityCodes为空.");
+            return "error";
+        }
+        // 活动商品
+        TopicCommodity topicCommodity = null;
+        // 循环将这些商品添加到活动商品表
+        for (int i = 0; i < commodityCodes.length; i++) {
+            Commodity commodity = new Commodity();
+            commodity.setCommodityNo(commodityCodes[i]);
+            CommodityVo commodityVo = commodityService.selectCommodityInfo(commodity);
+            if(commodityVo != null){
+                topicCommodity = new TopicCommodity();
+                topicCommodity.setCommodityNo(commodityCodes[i]);// 活动商品编号
+                topicCommodity.setTopicId(topicId);// 活动编号
+                topicCommodity.setStatus(1);// 默认显示
+                topicCommodity.setSortNo(sortNum + (i + 1));// 默认排序都是当前最大的排序号加1
+                // 添加活动商品
+                topicCommodityService.insert(topicCommodity);
+            }
+        }
+        Topic topic = new Topic();
+        topic.setId(topicId);
+        topic.setUpdateTime(new Date());
+        topicService.updateById(topic);
+        return "success";
     }
 }

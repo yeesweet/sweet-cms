@@ -10,6 +10,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,36 @@ public class CmsImageServiceImpl implements ICmsImageService {
 				uploadDirectory // ftp文件夹名称
 		);
 		boolean flag = ftpUtil.upload(localFile.getPath(),fileName);
+		if(flag){
+			imagePath = imageDomain+uploadDirectory.replace("/data/images","")+fileName;
+		}else{
+			logger.error("CmsImageServiceImpl uploadImage方法 图片上传失败！");
+		}
+		return imagePath;
+	}
+
+	@Override
+	public String uploadImage(InputStream is, String fileName,String path, AccessFTP accessFTP, String imageDomain) throws Exception {
+		// IP
+		String host = accessFTP.getHost();
+		// 端口
+		String port = accessFTP.getPort().toString();
+		// 用户
+		String userName = accessFTP.getUserName();
+		// 密码
+		String password = accessFTP.getPassword();
+		String directory = accessFTP.getDirectory();//上传目录
+
+		String uploadDirectory = directory + path + "/";
+		String imagePath = "";
+		FtpUtils ftpUtil = new FtpUtils();
+		ftpUtil.connectServer(host, // ftp的ip地址
+				Integer.parseInt(port), // ftp端口号
+				userName, // ftp用户名
+				password, // ftp密码
+				uploadDirectory // ftp文件夹名称
+		);
+		boolean flag = ftpUtil.upload(is,fileName);
 		if(flag){
 			imagePath = imageDomain+uploadDirectory.replace("/data/images","")+fileName;
 		}else{

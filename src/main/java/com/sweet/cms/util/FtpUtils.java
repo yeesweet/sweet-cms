@@ -107,14 +107,24 @@ public class FtpUtils {
         boolean uploadRes = false;
         FileInputStream in = new FileInputStream(localFile.getName());
         uploadRes = ftpClient.storeFile(remoteFile, in);
+        //关闭文件流
+        if (null != in) {
+            in.close();
+            in = null;
+        }
         System.out.println("上传成功 !");
         return uploadRes;
     }
 
     public boolean upload(InputStream in, String remoteFile) throws IOException {
         boolean uploadRes = false;
-        ftpClient.enterLocalPassiveMode();
+//        ftpClient.enterLocalPassiveMode();
         uploadRes = ftpClient.storeFile(remoteFile, in);
+        //关闭文件流
+        if (null != in) {
+            in.close();
+            in = null;
+        }
         System.out.println("上传成功 !");
         return uploadRes;
     }
