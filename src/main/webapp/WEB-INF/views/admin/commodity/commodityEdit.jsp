@@ -558,7 +558,7 @@
                         $.ajax({
                             type: "POST",
                             url: "${path}/cmsImageControler/uploadImageBase64",
-                            data: {'image': single.target.result, path: encodeURI("commodity/test", "UTF-8"), type: 0},//图片base64编码，图片格式（当前仅支持jpg,png,jpeg三种），图片对象索引
+                            data: {'image': single.target.result, path: encodeURI("commodity/"+Commodity.commodityNo, "UTF-8"), type: 0},//图片base64编码，图片格式（当前仅支持jpg,png,jpeg三种），图片对象索引
                             dataType: "json",
                             success: function (data) {
                                 alert(data);
