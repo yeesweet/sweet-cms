@@ -132,6 +132,8 @@ public class TopicController extends BaseController {
         topic.setIsDisplay(0);
         topic.setStatus(0);
         topic.setOperator(this.getStaffName());
+        topic.setCreateTime(new Date());
+        topic.setUpdateTime(new Date());
         topicService.insert(topic);
         Long id = topic.getId();
 
@@ -145,6 +147,8 @@ public class TopicController extends BaseController {
                 topicCommodity.setSortNo(i);
                 topicCommodity.setStatus(1);
                 topicCommodity.setOperator(this.getStaffName());
+                topicCommodity.setCreateTime(new Date());
+                topicCommodity.setUpdateTime(new Date());
                 commodityList.add(topicCommodity);
             }
             if(commodityList != null && commodityList.size()>0){
@@ -315,6 +319,35 @@ public class TopicController extends BaseController {
         return "1";
     }
 
+    @GetMapping("/getCommodityByNo")
+    @ResponseBody
+    public Object getCommodityByNo(String[] commodityCodes) {
+        List<String> commodityNoList = new ArrayList<>();
+        List<TopicCommodityVo> commodityVoList = new ArrayList<>();
+        if(commodityCodes != null && commodityCodes.length>0){
+            for(int i=0;i<commodityCodes.length;i++) {
+                commodityNoList.add(commodityCodes[i]);
+            }
+            List<CommodityVo> commodityVos = commodityService.getCommodityList(commodityNoList,false,false);
+            if(commodityVos != null && commodityVos.size()>0) {
+                for (int i = 0; i < commodityVos.size(); i++) {
+                    CommodityVo commodityVo = commodityVos.get(i);
+                    TopicCommodityVo topicCommodityVo = new TopicCommodityVo();
+                    topicCommodityVo.setDefaultPic(commodityVo.getDefaultPic());
+                    topicCommodityVo.setCommodityName(commodityVo.getCommodityName());
+                    topicCommodityVo.setCommodityNo(commodityVo.getCommodityNo());
+                    topicCommodityVo.setStock(commodityVo.getStock());
+                    topicCommodityVo.setMarketPrice(commodityVo.getMarketPrice());
+                    topicCommodityVo.setSalePrice(commodityVo.getSalePrice());
+                    topicCommodityVo.setPropNo(commodityVo.getPropNo());
+                    topicCommodityVo.setStatus(1);
+                    commodityVoList.add(topicCommodityVo);
+                }
+            }
+        }
+        return commodityVoList;
+    }
+
     /**
      * 添加活动商品 活动编辑里面
      *
@@ -329,19 +362,23 @@ public class TopicController extends BaseController {
             logger.error("添加活动专题失败,commodityCodes为空.");
             return "error";
         }
-        // 活动商品
-        TopicCommodity topicCommodity = null;
         // 循环将这些商品添加到活动商品表
         for (int i = 0; i < commodityCodes.length; i++) {
             Commodity commodity = new Commodity();
             commodity.setCommodityNo(commodityCodes[i]);
             CommodityVo commodityVo = commodityService.selectCommodityInfo(commodity);
-            if(commodityVo != null){
-                topicCommodity = new TopicCommodity();
+            TopicCommodity topicC = new TopicCommodity();
+            topicC.setCommodityNo(commodityCodes[i]);
+            List<TopicCommodity> topicCommodityList = topicCommodityService.getCommodityList(topicC);
+            if(commodityVo != null && !(topicCommodityList != null && topicCommodityList.size()>0)){
+                TopicCommodity topicCommodity = new TopicCommodity();
                 topicCommodity.setCommodityNo(commodityCodes[i]);// 活动商品编号
                 topicCommodity.setTopicId(topicId);// 活动编号
                 topicCommodity.setStatus(1);// 默认显示
                 topicCommodity.setSortNo(sortNum + (i + 1));// 默认排序都是当前最大的排序号加1
+                topicCommodity.setCreateTime(new Date());
+                topicCommodity.setUpdateTime(new Date());
+                topicCommodity.setOperator(this.getStaffName());
                 // 添加活动商品
                 topicCommodityService.insert(topicCommodity);
             }
@@ -351,5 +388,85 @@ public class TopicController extends BaseController {
         topic.setUpdateTime(new Date());
         topicService.updateById(topic);
         return "success";
+    }
+
+    /**
+     * 删除专题商品
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteTopicCommodity")
+    @ResponseBody
+    public Object deleteTopicCommodity(Long id) {
+        boolean b = topicCommodityService.deleteById(id);
+        if (b) {
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    /**
+     * 批量删除专题商品
+     * @param ids
+     * @return
+     */
+    @PostMapping("/deleteTopicCommodityBatch")
+    @ResponseBody
+    public Object deleteTopicCommodityBatch(Long[] ids) {
+        List<Long> idList = new ArrayList<>();
+        if(ids != null && ids.length>0){
+            idList = Arrays.asList(ids);
+        }
+        boolean b = topicCommodityService.deleteBatchIds(idList);
+        if (b) {
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    /**
+     * 修改活动商品的排序号
+     * @param sortNo 排序号
+     * @param id  活动ID
+     * @author  li.sk
+     * @history 2012-4-23
+     */
+    @ResponseBody
+    @RequestMapping(value = "updateTopicCommoditySortNo")
+    public String updateTopicCommoditySortNo(Integer sortNo, Long id) {
+        TopicCommodity topicCommodity = new TopicCommodity();
+        topicCommodity.setId(id);
+        topicCommodity.setSortNo(sortNo);
+        topicCommodity.setUpdateTime(new Date());
+        boolean result = topicCommodityService.updateById(topicCommodity);
+        if(result){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    /**
+     * 修改活动商品的状态
+     * @param status 状态
+     * @param id  活动ID
+     * @author  li.sk
+     * @history 2012-4-23
+     */
+    @ResponseBody
+    @RequestMapping(value = "updateTopicCommodityStatus")
+    public String updateTopicCommodityStatus(Integer status, Long id) {
+        TopicCommodity topicCommodity = new TopicCommodity();
+        topicCommodity.setId(id);
+        topicCommodity.setStatus(status);
+        topicCommodity.setUpdateTime(new Date());
+        boolean result = topicCommodityService.updateById(topicCommodity);
+        if(result){
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 }

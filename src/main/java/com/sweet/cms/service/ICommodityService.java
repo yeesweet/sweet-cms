@@ -43,7 +43,7 @@ public interface ICommodityService extends IService<Commodity> {
     /**
      * 更新商品信息
      * @param commodityVo
-     * @param staffName
+     * @param operator
      * @return
      */
     boolean updateCommodityInfo(CommodityVo commodityVo, String operator);

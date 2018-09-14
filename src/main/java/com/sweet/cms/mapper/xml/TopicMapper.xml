@@ -89,6 +89,12 @@
 	</select>
 
 	<select id="getTopicById" resultMap="BaseResultMap">
-		select * from tbl_cms_topic where id = #{id}
+		select <include refid="Base_Column_List"/> from tbl_cms_topic where id = #{id}
+	</select>
+
+	<select id="getEffectiveTopicList" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tbl_cms_topic
+		where is_display = 1 and status = 0 and now() <![CDATA[<=]]> end_time
+		ORDER BY update_time DESC ,sort_no ,create_time DESC
 	</select>
 </mapper>

@@ -32,6 +32,8 @@ public class CmsModuleController extends BaseController {
 	private IPageManagerService pageManagerService;
 	@Resource
 	private ICommodityService commodityService;
+	@Resource
+	private ITopicService topicService;
 
 	/**
 	 * 添加模块页面
@@ -57,11 +59,11 @@ public class CmsModuleController extends BaseController {
 				List<CmsModuleDetails> moduleDetails = cmsModule.getModuleDetails();
 				for (CmsModuleDetails moduleDetail : moduleDetails) {
 					if(moduleDetail.getSubType()!=null){
-//						//5促销专题
-//						if(moduleDetail.getSubType() == PageManagerConstant.TOPICS_LIST){
-//							List<CmsTopics> topicsList = cmsTopicsService.getActiveTopics(CmsConstant.GENERALL_TOPICS,CmsConstant.LINKPLACEMENT_ADVERT);
-//							model.addAttribute("topicsList",topicsList);
-//				   		}
+						//5促销专题
+						if(moduleDetail.getSubType() == PageManagerConstant.TOPICS_LIST){
+							List<Topic> topicList = topicService.getEffectiveTopicList();
+							model.addAttribute("topicList",topicList);
+				   		}
 						//1007商品详情 这里的commonId对应的是商品no
 						if(moduleDetail.getSubType() == PageManagerConstant.COMMODITY_LIST){
 							if(StringUtils.isNotBlank(moduleDetail.getCommonId())){
@@ -143,6 +145,8 @@ public class CmsModuleController extends BaseController {
 			//新增模块
 			cmsModule.setIsDisplay(PageManagerConstant.NOT_DISPLAYED);
 			cmsModule.setIsDelete(PageManagerConstant.NOT_DELETED);
+			cmsModule.setCreateTime(new Date());
+			cmsModule.setUpdateTime(new Date());
 			cmsModule.setOperator(this.getStaffName());
 			String starttime = cmsModule.getStarttime();
 			if(starttime!=null && starttime!=""){
@@ -233,6 +237,7 @@ public class CmsModuleController extends BaseController {
 				if(subEndtime!=null && subEndtime!=""){
 					moduleDetail.setSubEndTime(DateUtil.getdate1(subEndtime));
 				}
+				moduleDetail.setUpdateTime(new Date());
 				cmsModuleDetailsService.insert(moduleDetail);
 			}
 		}
@@ -254,6 +259,7 @@ public class CmsModuleController extends BaseController {
 						moduleCommodity.setModuleId(id);
 						moduleCommodity.setSortNo(j+1);
 						moduleCommodity.setCommodityCode(commodityArr[j]);
+						moduleCommodity.setUpdateTime(new Date());
 						moduleCommodity.setOperator(this.getStaffName());
 						this.cmsModuleCommodityService.insert(moduleCommodity);
 					}
@@ -313,13 +319,9 @@ public class CmsModuleController extends BaseController {
 		try{
 			//促销专题
 			if(linkType == PageManagerConstant.TOPICS_LIST){
-//	    		List<CmsTopics> list = null;
-//	    		if(effectRange == 3){
-//	    			list = cmsTopicsService.getActiveTopics(CmsConstant.GENERALL_TOPICS,CmsConstant.LINKPLACEMENT_SMALL_ADS);
-//	   			} else {
-//	   				list = cmsTopicsService.getActiveTopics(CmsConstant.GENERALL_TOPICS,CmsConstant.LINKPLACEMENT_ADVERT);
-//	   			}
-//	   			json = JSONArray.fromObject(list);
+				//5促销专题
+				List<Topic> topicList = topicService.getEffectiveTopicList();
+	   			json = JSONArray.fromObject(topicList);
 	   		}else if(linkType == PageManagerConstant.ACTIVITY_LIST){//活动列表页
 				PageManager pageManager = new PageManager();
 				pageManager.setType(PageManagerConstant.ACTIVITY_LIST);
@@ -408,63 +410,4 @@ public class CmsModuleController extends BaseController {
 			return null;
 		}
 	}
-	
-//	/**
-//	 * 异步查询促销专题商品数据
-//	 * @param topicId
-//	 * @param page
-//	 * @param map
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "getTopicCommodityMore")
-//	public String getTopicCommodityMore(String topicId,int page, Model map) throws Exception {
-//		List<CmsModuleCommodity> moList = new ArrayList<CmsModuleCommodity>();
-//		Query query = new Query();
-//		query.setPage(page);
-//		query.setPageSize(PageManagerConstant.MODULE16_PAGESIZE);
-//		int count = 0;
-//		try {
-//			count = cmsTopicsCommodityService.queryTopicCommodityByTopicIdCount(topicId);
-//			List<CmsTopicsCommodity> commodityList = cmsTopicsCommodityService.getTopicCommodityByTopicIdOfPage(
-//					topicId, query);
-//			if(commodityList != null && commodityList.size()>0){
-//				List<String> nos = new ArrayList<String>();
-//				String[] nosArr=new String[commodityList.size()];
-//				for(int i=0;i<commodityList.size();i++){
-//					nos.add(commodityList.get(i).getCommodityCode());
-//					nosArr[i]=commodityList.get(i).getCommodityCode();
-//				}
-//				List<CommodityStyle> commList = commodityStyleService.getCommodityByNoList(nos);
-//				Map<String,Integer> inventoryMap = inventoryService.queryCommodityInventoryWithCache(nosArr);
-//
-//				//由CommodityStyle实体类的list转化为包含MixCommodity的map,目的为了获取促销价格
-//				Map<String, MixCommodity> mixMap = cmsModuleService.changeListToMap(commList);
-//				//对商品进行排序 start
-//				for (CmsTopicsCommodity commodity : commodityList) {
-//					MixCommodity mixCommodity = mixMap.get(commodity.getCommodityCode());
-//					if (mixCommodity!=null) {
-//						CmsModuleCommodity cmsModuleCommodity = new CmsModuleCommodity();
-//						cmsModuleCommodity.setCommodityCode(commodity.getCommodityCode());
-//						cmsModuleCommodity.setDefaultPic(mixCommodity.getDefaultPic());
-//						cmsModuleCommodity.setInventoryNumber(inventoryMap.get(commodity.getCommodityCode()));
-//						cmsModuleCommodity.setPublicPrice(mixCommodity.getPublicPrice());
-//						cmsModuleCommodity.setSalePriceN(cmsModuleService.packageSalePriceN(mixCommodity));
-//						moList.add(cmsModuleCommodity);
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		JSONArray moduleCommodityList = new JSONArray();
-//		moduleCommodityList.addAll(moList);
-//		JSONObject object = new JSONObject();
-//		object.put("moduleCommodityList", moduleCommodityList);
-//		PageFinder<CmsModuleCommodity> pageFinder = new PageFinder<CmsModuleCommodity>(query.getPage(),query.getPageSize(),count);
-//		object.put("hasNext", pageFinder.isHasNext());
-//		return object.toString();
-//	}
-
 }

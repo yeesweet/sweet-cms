@@ -33,4 +33,9 @@ public class TopicCommodityServiceImpl extends ServiceImpl<TopicCommodityMapper,
     public List<TopicCommodity> getCommodityListByTopicId(long topicId) {
         return topicCommodityMapper.getCommodityListByTopicId(topicId);
     }
+
+    @Override
+    public List<TopicCommodity> getCommodityList(TopicCommodity topicCommodity) {
+        return topicCommodityMapper.getCommodityList(topicCommodity);
+    }
 }

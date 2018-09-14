@@ -4,6 +4,8 @@ import com.sweet.cms.commons.result.PageInfo;
 import com.sweet.cms.model.Topic;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 专题表 服务类
@@ -44,5 +46,11 @@ public interface ITopicService extends IService<Topic> {
      * @return
      */
     public Topic getTopicById(Long id);
+
+    /**
+     * 获取未删除、已启用、有效期未开始或有效期内专题
+     * @return
+     */
+    public List<Topic> getEffectiveTopicList();
 
 }

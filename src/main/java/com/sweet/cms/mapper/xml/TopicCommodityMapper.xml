@@ -24,7 +24,14 @@
 	</select>
 
 	<select id="getCommodityListByTopicId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-		select * from tbl_cms_topic_commodity where topic_id = #{topicId} order by sort_no,create_time
+		select <include refid="Base_Column_List"/> from tbl_cms_topic_commodity where topic_id = #{topicId} order by sort_no,create_time
+	</select>
+
+	<select id="getCommodityList" parameterType="com.sweet.cms.model.TopicCommodity" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tbl_cms_topic_commodity where 1=1
+		<if test="commodityNo != null and commodityNo != ''">
+			and commodity_no = #{commodityNo}
+		</if>
 	</select>
 
 </mapper>

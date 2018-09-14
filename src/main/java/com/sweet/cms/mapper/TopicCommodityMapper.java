@@ -29,4 +29,11 @@ public interface TopicCommodityMapper extends BaseMapper<TopicCommodity> {
      * @return
      */
     public List<TopicCommodity> getCommodityListByTopicId(long topicId);
+
+    /**
+     * 根据条件查询专题商品
+     * @param topicCommodity
+     * @return
+     */
+    public List<TopicCommodity> getCommodityList(TopicCommodity topicCommodity);
 }

@@ -48,4 +48,10 @@ public interface TopicMapper extends BaseMapper<Topic> {
      */
     public Topic getTopicById(@Param(value = "id") Long id);
 
+    /**
+     * 获取未删除、已启用、有效期未开始或有效期内专题
+     * @return
+     */
+    public List<Topic> getEffectiveTopicList();
+
 }

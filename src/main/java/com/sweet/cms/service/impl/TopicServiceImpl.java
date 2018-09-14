@@ -49,4 +49,9 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
         return topicMapper.getTopicById(id);
     }
 
+    @Override
+    public List<Topic> getEffectiveTopicList() {
+        return topicMapper.getEffectiveTopicList();
+    }
+
 }
