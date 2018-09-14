@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
-<script src="/static/jquery/ajaxfileupload.js"></script>
 <script type="text/javascript">
     $(function() {
         $('#categoryAddForm').form({
@@ -36,7 +35,6 @@
             alert("请选择文件");
             return false;
         }
-        var fileInput = $("#fileimg");
         var fileType = file.substring(file.lastIndexOf(".")+1);
         if(fileType.toLowerCase()!="jpg" && fileType.toLowerCase()!="png" && fileType.toLowerCase()!="gif" && fileType.toLowerCase()!="bmp"){
             alert("只能上传图片!");
@@ -47,28 +45,33 @@
             var month=date.getMonth()+1;
             var path = "category/"+year+"/"+month;
 
-            $.ajaxFileUpload({
-            url: '${path}/cmsImageControler/uploadImage.sc?path='+encodeURI(path,"UTF-8")+'&type=1',
-            type: 'post',
-            secureuri: false, //一般设置为false
-            fileElementId: 'fileimg', // 上传文件的id、name属性名
-            success: function(data){
-                var str = $(data).find("body").text();//获取返回的字符串
-                var json = $.parseJSON(str);//把字符串转化为json对象
-                if(json.status == "success"){
-                    alert("上传成功！");
-                    $("#iptimg").attr("src",json.imageUrl);
-                    $("#image").val(json.imageUrl);
-                }else{
-                    alert(json.errorDesc);
+            var formData = new FormData();
+            formData.append("file", document.getElementById("fileimg").files[0]);
+            formData.append("path", encodeURI(path,"UTF-8"));
+            formData.append("type", 1);
+            $.ajax({
+                url: '${path}/cmsImageControler/uploadImage.sc',
+                type: 'post',
+                data: formData,
+                dataType: "json",
+                cache: false,//上传文件无需缓存
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function(data){
+                    if(data.status == "success"){
+                        alert("上传成功！");
+                        $("#iptimg").attr("src",data.imageUrl);
+                        $("#image").val(data.imageUrl);
+                    }else{
+                        alert(data.errorDesc);
+                        $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
+                        $("#image").val("");
+                    }
+                },
+                error: function(data, e){
+                    alert("上传失败！");
                     $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
-                    $("#image").val("");
                 }
-            },
-            error: function(data, e){
-                alert("上传失败！");
-                $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
-            }
             });
         }
     }
@@ -83,7 +86,7 @@
                     <td>分类级别</td>
                     <td><input name="levelName" type="text" placeholder="" class="easyui-validatebox span2" data-options="required:true"
                                value="<c:choose><c:when test="${level==1}">一级分类</c:when><c:otherwise>二级分类</c:otherwise></c:choose>"></td>
-                </tr> 
+                </tr>
                 <tr>
                     <td>分类名称</td>
                     <td><input name="name" type="text" placeholder="" class="easyui-validatebox span2" data-options="required:true"
