@@ -108,7 +108,7 @@
                         <p>
                             <input type="file" name="file" id="fileimg" class="fileimg"/>
                             <input type="button" id="uploadBtn" class="uploadBtn" value="上传图片" onclick="javascript:ajaxImageUpload()"/>
-                            <input type="button" class="addImageBtn" value="添加图片" onclick="javaScript:selectImage();" />
+                            <input type="button" class="addImageBtn" value="添加图片"/>
                             <font color="red">(建议图片尺寸160*160)</font>
                         </p>
                         <div style="position: relative;max-width:150px;margin:10px 0 10px 10px;">
