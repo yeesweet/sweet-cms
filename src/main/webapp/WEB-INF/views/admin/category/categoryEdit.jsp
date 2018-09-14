@@ -62,19 +62,19 @@
                 fileElementId: 'fileimg', // 上传文件的id、name属性名
                 dataType: 'json', //返回值类型，一般设置为json、application/json
                 success: function(data){
-                    if(data.status == "success"){
+                    if (data.status == 'success') {
                         alert("上传成功！");
                         $("#iptimg").attr("src",data.imageUrl);
                         $("#image").val(data.imageUrl);
                     }else{
                         alert(data.errorDesc);
-                        $("#iptimg").attr("src","http://47.95.213.244/pics/fenlei/1534342517454.jpg");
+                        $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
                         $("#image").val("");
                     }
                 },
                 error: function(data, e){
                     alert("上传失败！");
-                    $("#iptimg").attr("src","http://47.95.213.244/pics/fenlei/1534342517454.jpg");
+                    $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
                 }
             });
         }
@@ -112,7 +112,7 @@
                             <font color="red">(建议图片尺寸160*160)</font>
                         </p>
                         <div style="position: relative;max-width:150px;margin:10px 0 10px 10px;">
-                            <a href="javascript:closeImg(2);"><img src="http://47.95.213.244/pics/fenlei/1534342672877.png" style="position: absolute;top:0px;right:0px;z-index: 1000;width:25px;"/></a>
+                            <a href="javascript:closeImg(2);"><img src="http://47.95.213.244/pics/category/2018/9/1536891782986.png" style="position: absolute;top:0px;right:0px;z-index: 1000;width:25px;"/></a>
                             <img src="${category.image}" id="iptimg" class="iptimgs" style="max-width:150px;"/>
                             <input type="hidden" id="image" name="image" value="${category.image}"/>
                         </div>
