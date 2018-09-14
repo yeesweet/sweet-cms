@@ -21,6 +21,7 @@
 <script type="text/javascript">
     var commodityWaitSaleDataGrid;
     $(function() {
+
         commodityWaitSaleDataGrid = $('#commodityWaitSaleDataGrid').datagrid({
         url : '${path}/commodity/waitSale/dataGrid',
         striped : true,

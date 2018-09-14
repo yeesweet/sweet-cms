@@ -322,7 +322,6 @@
                         <div class="btn-area">
                             <span class="btn" id="desc-space-choose-btn">图片空间选择</span>
                         </div>
-
                     </div>
                 </div>
                 <a id="save-btn" href="#" class="easyui-linkbutton" plain="true" iconCls="icon-save">保存且下架</a>
@@ -867,7 +866,7 @@
                         $.ajax({
                             type: "POST",
                             url: "${path}/cmsImageControler/uploadImageBase64",
-                            data: {'image': single.target.result, path: encodeURI("commodity/test", "UTF-8"), type: 0},//图片base64编码，图片格式（当前仅支持jpg,png,jpeg三种），图片对象索引
+                            data: {'image': single.target.result, path: encodeURI("commodity/"+Commodity.commodityNo, "UTF-8"), type: 0},//图片base64编码，图片格式（当前仅支持jpg,png,jpeg三种），图片对象索引
                             dataType: "json",
                             success: function (data) {
                                 if (data.status == 'success') {
@@ -925,6 +924,30 @@
         }
         specTable.list = arr;
     }
+
+    //打开在售商品列表（慎用）
+    function openSaleListTab(){
+        var opts = opts = {title: "在售商品管理", border: false, closable: true, fit: true, iconCls: "fi-annotate"};
+        var url = "/commodity/sale/manager";
+        if (url && url.indexOf("http") == -1) {
+            url = '${path }' + url;
+        }
+        opts.href = url;
+        addTab(opts);
+        $('#commodityDataGrid').datagrid('reload');
+    }
+
+    //打开待售商品列表（慎用）
+    function openWaitSaleListTab(){
+        var opts = {title: "待售商品管理", border: false, closable: true, fit: true, iconCls: "fi-book"};
+        var url = "/commodity/waitSale/manager";
+        if (url && url.indexOf("http") == -1) {
+            url = '${path }' + url;
+        }
+        opts.href = url;
+        addTab(opts);
+        $('#commodityWaitSaleDataGrid').datagrid('reload');
+    }
     $(function () {
         $("#categoryTable1").datagrid({
             onCheck: function (index, row) {
@@ -942,6 +965,8 @@
             }
         });
         $('#nextBtn').bind('click', function () {
+
+
             var rows = $('#categoryTable2 ').datagrid('getChecked');
             if(rows.length==0){
                 return alert('请选择二级分类');
@@ -966,10 +991,11 @@
             Commodity.status = 1;
             saveCommodity();
         })
-        $('#sale-save-btnn').bind('click',function () {
+        $('#sale-save-btn').bind('click',function () {
             Commodity.status = 2;
             saveCommodity();
         })
+
 
     })
 
@@ -1054,7 +1080,7 @@
         }
         var data = Commodity.getCommitData();
         var jsonData = JSON.stringify(data);
-        alert(jsonData)
+        // alert(jsonData)
         console.log('add data',data);
         $.ajax({
             headers:{
@@ -1068,8 +1094,19 @@
             success: function(result) {
                 console.log('add data success',result);
                 if (result.success) {
-                    alert(result.msg);
-                    //commodityDataGrid.datagrid('reload');
+                    (function () {
+                        var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
+                        var tab = index_tabs.tabs('getTab', index);
+                        if (tab.panel('options').closable) {
+                            index_tabs.tabs('close', index);
+                        }
+                    })();
+
+                    if(Commodity.status==1){
+                        openWaitSaleListTab();
+                    }else{
+                        openSaleListTab();
+                    }
                 }
                 //progressClose();
             }

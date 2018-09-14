@@ -39,6 +39,7 @@
                     var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
                     var tab = index_tabs.tabs('getTab', index);
                     if (tab.panel('options').closable) {
+                        console.log('test index',index);
                         index_tabs.tabs('close', index);
                     }
                 }
@@ -47,6 +48,7 @@
         // 选项卡菜单
         indexTabsMenu = $('#tabsMenu').menu({
             onClick : function(item) {
+
                 var curTabTitle = $(this).data('tabTitle');
                 var type = $(item.target).attr('type');
                 if (type === 'refresh') {
