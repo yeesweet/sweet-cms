@@ -37,16 +37,7 @@
             return false;
         }
         var fileInput = $("#fileimg");
-//        byteSize  = fileInput.files.size;
-//        var fileSize = Math.floor(byteSize / 1024);
         var fileType = file.substring(file.lastIndexOf(".")+1);
-//        if(fileType.toLowerCase()=="gif" && fileSize > 100){
-//            alert("上传GIF格式图片大小不能超过100KB！");
-//            return false;
-//        } else if (fileType.toLowerCase()!="gif" && fileSize > 60){
-//            alert("上传图片大小不能超过60KB！");
-//            return false;
-//        }
         if(fileType.toLowerCase()!="jpg" && fileType.toLowerCase()!="png" && fileType.toLowerCase()!="gif" && fileType.toLowerCase()!="bmp"){
             alert("只能上传图片!");
             return false;
@@ -55,19 +46,21 @@
             var year=date.getFullYear();
             var month=date.getMonth()+1;
             var path = "category/"+year+"/"+month;
+
             $.ajaxFileUpload({
                 url: '${path}/cmsImageControler/uploadImage.sc?path='+encodeURI(path,"UTF-8")+'&type=1',
                 type: 'post',
                 secureuri: false, //一般设置为false
                 fileElementId: 'fileimg', // 上传文件的id、name属性名
-                dataType: 'json', //返回值类型，一般设置为json、application/json
                 success: function(data){
-                    if (data.status == 'success') {
+                    var str = $(data).find("body").text();//获取返回的字符串
+                    var json = $.parseJSON(str);//把字符串转化为json对象
+                    if(json.status == "success"){
                         alert("上传成功！");
-                        $("#iptimg").attr("src",data.imageUrl);
-                        $("#image").val(data.imageUrl);
+                        $("#iptimg").attr("src",json.imageUrl);
+                        $("#image").val(json.imageUrl);
                     }else{
-                        alert(data.errorDesc);
+                        alert(json.errorDesc);
                         $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
                         $("#image").val("");
                     }
