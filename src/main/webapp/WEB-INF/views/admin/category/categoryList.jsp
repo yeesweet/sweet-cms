@@ -141,7 +141,6 @@
  */
 function categoryAddFun() {
     var level = $("#level").val();
-    alert(level);
     var pid = $("#pid").val();
     parent.$.modalDialog({
         title : '添加',
