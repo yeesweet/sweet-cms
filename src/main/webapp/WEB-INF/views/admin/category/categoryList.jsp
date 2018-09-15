@@ -11,6 +11,8 @@
                 //如果点击的一级分类，则查询该一级分类下所以二级分类，如果点击的某个二级分类，则只展示该分类
                 if(node.pid == 0){
                     if(node.pid == 0 && node.id == 0){
+                        $("#level").val(1);
+                        $("#pid").val(0);
                         categoryDataGrid.datagrid('load', {
                             level:1,
                             pid: 0
@@ -139,6 +141,7 @@
  */
 function categoryAddFun() {
     var level = $("#level").val();
+    alert(level);
     var pid = $("#pid").val();
     parent.$.modalDialog({
         title : '添加',
