@@ -56,4 +56,12 @@ public interface ICmsImageService {
 	 * @throws Exception
 	 */
 	public List<CmsImage> getDirList(AccessFTP accessFTP, String path) throws Exception;
+
+	/**
+	 * 创建文件夹
+	 * @param path
+	 * @param accessFTP
+	 * @throws Exception
+	 */
+	public void mkDir(String path, AccessFTP accessFTP) throws Exception;
 }

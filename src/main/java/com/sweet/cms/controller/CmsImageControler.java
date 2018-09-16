@@ -1,6 +1,7 @@
 package com.sweet.cms.controller;
 
 import com.sweet.cms.commons.base.BaseController;
+import com.sweet.cms.commons.result.PageInfo;
 import com.sweet.cms.model.CmsImage;
 import com.sweet.cms.service.ICmsImageService;
 import com.sweet.cms.util.AccessFTP;
@@ -38,6 +39,11 @@ public class CmsImageControler extends BaseController {
 
 	//图片访问域名
 	private static final String imageDomain = "http://47.95.213.244";
+
+	@GetMapping("/manager")
+	public String manager() {
+		return "admin/image/imageList";
+	}
 
 	/**
 	 * 构建上传图片对象
@@ -102,7 +108,7 @@ public class CmsImageControler extends BaseController {
 				return jo.toString();
 			}
 			AccessFTP accessFTP = buildUploadImage();
-			result = cmsImageService.uploadImage(file.getInputStream(),fileName,path,accessFTP,imageDomain);
+			result = cmsImageService.uploadImage(file.getInputStream(),URLDecoder.decode(fileName,"UTF-8"),path,accessFTP,imageDomain);
 			map.put("status", "success");
 			map.put("imageUrl", result);
 		}catch(Exception e){
@@ -159,7 +165,7 @@ public class CmsImageControler extends BaseController {
 						return jo.toString();
 					}
 					AccessFTP accessFTP = buildUploadImage();
-					imageUrl = cmsImageService.uploadImage(file.getInputStream(),fileName,path,accessFTP,imageDomain);
+					imageUrl = cmsImageService.uploadImage(file.getInputStream(),URLDecoder.decode(fileName,"UTF-8"),path,accessFTP,imageDomain);
 					imageUrlList.add(imageUrl);
 				}
 			}
@@ -218,7 +224,7 @@ public class CmsImageControler extends BaseController {
 				return jo.toString();
 			}
 			AccessFTP accessFTP = buildUploadImage();
-			imageUrl = cmsImageService.uploadImage(file.getInputStream(),fileName,path,accessFTP,imageDomain);
+			imageUrl = cmsImageService.uploadImage(file.getInputStream(),URLDecoder.decode(fileName,"UTF-8"),path,accessFTP,imageDomain);
 			map.put("status", "success");
 			map.put("imageUrl", imageUrl);
 		}catch(Exception e){
@@ -275,6 +281,29 @@ public class CmsImageControler extends BaseController {
 			e.printStackTrace();
 		}
 		return  dirList;
+	}
+
+	/**
+	 * 创建文件夹
+	 * @param path
+	 * @return
+	 */
+	@RequestMapping("/mkDir")
+	@ResponseBody
+	public String mkDir(String path){
+		String result = "";
+		try{
+			if(StringUtils.isNotBlank(path)){
+				path = URLDecoder.decode(path,"UTF-8");
+			}
+			AccessFTP accessFTP = buildUploadImage();
+			cmsImageService.mkDir(path,accessFTP);
+			result = "success";
+		}catch(Exception e){
+			logger.error("创建文件夹失败",e);
+			result = "fail";
+		}
+		return result;
 	}
 
 }

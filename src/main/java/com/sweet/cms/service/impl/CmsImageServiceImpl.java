@@ -38,7 +38,6 @@ public class CmsImageServiceImpl implements ICmsImageService {
 		
 		String fileName = localFile.getName();
 		String uploadDirectory = directory + path + "/";
-		String imagePath = "";
 		FtpUtils ftpUtil = new FtpUtils();
 		ftpUtil.connectServer(host, // ftp的ip地址
 				Integer.parseInt(port), // ftp端口号
@@ -46,6 +45,7 @@ public class CmsImageServiceImpl implements ICmsImageService {
 				password, // ftp密码
 				uploadDirectory // ftp文件夹名称
 		);
+		String imagePath = "";
 		boolean flag = ftpUtil.upload(localFile.getPath(),fileName);
 		if(flag){
 			imagePath = imageDomain+uploadDirectory.replace("/data/images","")+fileName;
@@ -68,7 +68,6 @@ public class CmsImageServiceImpl implements ICmsImageService {
 		String directory = accessFTP.getDirectory();//上传目录
 
 		String uploadDirectory = directory + path + "/";
-		String imagePath = "";
 		FtpUtils ftpUtil = new FtpUtils();
 		ftpUtil.connectServer(host, // ftp的ip地址
 				Integer.parseInt(port), // ftp端口号
@@ -76,6 +75,7 @@ public class CmsImageServiceImpl implements ICmsImageService {
 				password, // ftp密码
 				uploadDirectory // ftp文件夹名称
 		);
+		String imagePath = "";
 		boolean flag = ftpUtil.upload(is,fileName);
 		if(flag){
 			imagePath = imageDomain+uploadDirectory.replace("/data/images","")+fileName;
@@ -87,25 +87,11 @@ public class CmsImageServiceImpl implements ICmsImageService {
 
 	@Override
 	public List<CmsImage> getNameList(AccessFTP accessFTP, String imageDomain,String path) throws Exception {
-		// IP
-		String host = accessFTP.getHost();
-		// 端口
-		String port = accessFTP.getPort().toString();
-		// 用户
-		String userName = accessFTP.getUserName();
-		// 密码
-		String password = accessFTP.getPassword();
-		String directory = accessFTP.getDirectory();//上传目录
-
-		FtpUtils ftpUtil = new FtpUtils();
-		ftpUtil.connectServer(host, // ftp的ip地址
-				Integer.parseInt(port), // ftp端口号
-				userName, // ftp用户名
-				password, // ftp密码
-				directory // ftp文件夹名称
-		);
+		FtpUtils ftpUtil = connectServer(accessFTP);
+		//上传目录
+		String directory = accessFTP.getDirectory();
 		if(StringUtils.isNotBlank(path)){
-			directory = directory + "/" + path;
+			directory = directory + path;
 		}
 		List<String> nameList = ftpUtil.nameList(directory);
 		List<CmsImage> imageList = new ArrayList<>();
@@ -146,25 +132,11 @@ public class CmsImageServiceImpl implements ICmsImageService {
 
 	@Override
 	public List<CmsImage> getDirList(AccessFTP accessFTP,String path) throws Exception {
-		// IP
-		String host = accessFTP.getHost();
-		// 端口
-		String port = accessFTP.getPort().toString();
-		// 用户
-		String userName = accessFTP.getUserName();
-		// 密码
-		String password = accessFTP.getPassword();
-		String directory = accessFTP.getDirectory();//上传目录
-
-		FtpUtils ftpUtil = new FtpUtils();
-		ftpUtil.connectServer(host, // ftp的ip地址
-				Integer.parseInt(port), // ftp端口号
-				userName, // ftp用户名
-				password, // ftp密码
-				directory // ftp文件夹名称
-		);
+		FtpUtils ftpUtil = connectServer(accessFTP);
+		//上传目录
+		String directory = accessFTP.getDirectory();
 		if(StringUtils.isNotBlank(path)){
-			directory = directory + "/" + path;
+			directory = directory + path;
 		}
 		List<String> nameList = ftpUtil.nameList(directory);
 		List<CmsImage> dirList = new ArrayList<>();
@@ -186,5 +158,53 @@ public class CmsImageServiceImpl implements ICmsImageService {
 			}
 		}
 		return dirList;
+	}
+
+	/**
+	 * 连接服务器
+	 * @param accessFTP
+	 * @return
+	 */
+	public FtpUtils connectServer(AccessFTP accessFTP){
+		// IP
+		String host = accessFTP.getHost();
+		// 端口
+		String port = accessFTP.getPort().toString();
+		// 用户
+		String userName = accessFTP.getUserName();
+		// 密码
+		String password = accessFTP.getPassword();
+		String directory = accessFTP.getDirectory();//上传目录
+
+		FtpUtils ftpUtil = new FtpUtils();
+		ftpUtil.connectServer(host, // ftp的ip地址
+				Integer.parseInt(port), // ftp端口号
+				userName, // ftp用户名
+				password, // ftp密码
+				directory // ftp文件夹名称
+		);
+		return ftpUtil;
+	}
+
+	@Override
+	public void mkDir(String path, AccessFTP accessFTP) throws Exception {
+		// IP
+		String host = accessFTP.getHost();
+		// 端口
+		String port = accessFTP.getPort().toString();
+		// 用户
+		String userName = accessFTP.getUserName();
+		// 密码
+		String password = accessFTP.getPassword();
+		String directory = accessFTP.getDirectory();//上传目录
+
+		String uploadDirectory = directory + path + "/";
+		FtpUtils ftpUtil = new FtpUtils();
+		ftpUtil.connectServer(host, // ftp的ip地址
+				Integer.parseInt(port), // ftp端口号
+				userName, // ftp用户名
+				password, // ftp密码
+				uploadDirectory // ftp文件夹名称
+		);
 	}
 }
