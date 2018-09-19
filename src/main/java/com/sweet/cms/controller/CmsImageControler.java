@@ -291,19 +291,20 @@ public class CmsImageControler extends BaseController {
 	@RequestMapping("/mkDir")
 	@ResponseBody
 	public String mkDir(String path){
-		String result = "";
+		Map<String,Object> map = new HashMap<>();
 		try{
 			if(StringUtils.isNotBlank(path)){
 				path = URLDecoder.decode(path,"UTF-8");
 			}
 			AccessFTP accessFTP = buildUploadImage();
 			cmsImageService.mkDir(path,accessFTP);
-			result = "success";
+			map.put("status", "success");
 		}catch(Exception e){
 			logger.error("创建文件夹失败",e);
-			result = "fail";
+			map.put("status", "fail");
 		}
-		return result;
+		JSONObject jo = JSONObject.fromObject(map);
+		return jo.toString();
 	}
 
 }
