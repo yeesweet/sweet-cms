@@ -72,7 +72,6 @@
                     $("#iptimg").attr("src",data.imageUrl);
                     $("#image").val(data.imageUrl);
                 }else{
-                    alert(data.errorDesc);
                     $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
                     $("#image").val("");
                 }
