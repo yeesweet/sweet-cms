@@ -181,6 +181,7 @@
             $('#edit-dir-win').window('open');
 
             $('.edit-dir-area .edit-dir-title span').text(this.curDir);
+            $('.edit-dir-area input').val('');
         },
         createDir:function () {
             var self = imageListMgr;
@@ -196,7 +197,7 @@
             }
             var url = '${path}/cmsImageControler/mkDir?path='
             if (typeof curDir == 'string' && curDir != '') {
-                url = '${path}/cmsImageControler/mkDir?path=' + curDir
+                url = '${path}/cmsImageControler/mkDir?path=' +  encodeURI(curDir,"UTF-8")
             }
             $.ajax({
                 headers: {
@@ -208,7 +209,10 @@
                 url: url,
                 success: function (result) {
                     $('#edit-dir-win').window('close');
-                    self.getServiceDir(this.curDir);
+                    self.getServiceDir(self.curDir);
+                },
+                error:function (e) {
+                    console.log('error',e)
                 }
 
             })
