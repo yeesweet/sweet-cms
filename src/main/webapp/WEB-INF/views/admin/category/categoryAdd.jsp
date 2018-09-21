@@ -98,8 +98,8 @@
 <div class="easyui-layout" data-options="fit:true,border:false" >
     <div data-options="region:'center',border:false" style="overflow: hidden;padding: 3px;" >
         <form id="categoryAddForm" method="post">
-            <input name="level"  type="hidden" value="${level}"/>
-            <input name="pid"  type="hidden" value="${pid}"/>
+            <input name="level" id="level" type="hidden" value="${level}"/>
+            <input name="pid" id="pid" type="hidden" value="${pid}"/>
             <table class="grid">
                 <tr>
                     <td>分类级别</td>

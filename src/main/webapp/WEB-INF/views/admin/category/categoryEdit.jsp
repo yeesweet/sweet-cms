@@ -99,9 +99,9 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="categoryEditForm" method="post">
-            <input name="level"  type="hidden" value="${category.level}"/>
-            <input name="pid"  type="hidden" value="${category.pid}"/>
-            <input name="id"  type="hidden" value="${category.id}"/>
+            <input name="level" id="level" type="hidden" value="${category.level}"/>
+            <input name="pid" id="pid" type="hidden" value="${category.pid}"/>
+            <input name="id" id="id" type="hidden" value="${category.id}"/>
             <table class="grid">
                 <tr>
                     <td>分类级别</td>
