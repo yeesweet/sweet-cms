@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface CategoryCommodityMapper extends BaseMapper<CategoryCommodity> {
 
+    /**
+     * 获取分类下商品数量
+     * @param categoryId
+     * @return
+     */
+    public int getCategorySkuNum(Long categoryId);
 }

@@ -2,6 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     var categoryDataGrid;
+    var categoryTree;
     $(function() {
         categoryTree = $('#categoryTree').tree({
             url : '${path }/category/tree',
@@ -89,6 +90,11 @@
             }
         }, {
             width : '60',
+            title : 'sku数',
+            field : 'skuNum',
+            sortable : true,
+        }, {
+            width : '60',
             title : '状态',
             field : 'display',
             sortable : true,
@@ -100,11 +106,6 @@
                     return '启用';
                 }
             }
-//        }, {
-//            width : '140',
-//            title : 'sku数',
-//            field : '',
-//            sortable : true
         }, {
             width : '140',
             title : '排序号',
@@ -150,7 +151,8 @@ function categoryAddFun() {
         buttons : [ {
             text : '确定',
             handler : function() {
-                parent.$.modalDialog.openner_dataGrid = categoryDataGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+                parent.$.modalDialog.openner_dataGrid = categoryDataGrid;//因为添加成功之后，需要刷新这个categoryDataGrid，所以先预定义好
+                parent.$.modalDialog.openner_treeGrid = categoryTree;//因为添加成功之后，需要刷新这个categoryTree，所以先预定义好
                 var f = parent.$.modalDialog.handler.find('#categoryAddForm');
                 f.submit();
             }
@@ -177,7 +179,8 @@ function categoryEditFun(id) {
         buttons : [ {
             text : '确定',
             handler : function() {
-                parent.$.modalDialog.openner_dataGrid = categoryDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                parent.$.modalDialog.openner_dataGrid = categoryDataGrid;//因为添加成功之后，需要刷新这个categoryDataGrid，所以先预定义好
+                parent.$.modalDialog.openner_treeGrid = categoryTree;//因为添加成功之后，需要刷新这个categoryTree，所以先预定义好
                 var f = parent.$.modalDialog.handler.find('#categoryEditForm');
                 f.submit();
             }
@@ -196,7 +199,7 @@ function categoryEditFun(id) {
      } else {//点击操作里面的删除图标会触发这个
          categoryDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
      }
-     parent.$.messager.confirm('询问', '您是否要删除当前角色？', function(b) {
+     parent.$.messager.confirm('询问', '您是否要删除当前分类？', function(b) {
          if (b) {
              progressLoad();
              $.post('${path}/category/delete', {
@@ -206,6 +209,7 @@ function categoryEditFun(id) {
                  if (result.success) {
                      parent.$.messager.alert('提示', result.msg, 'info');
                      categoryDataGrid.datagrid('reload');
+                     categoryTree.tree('reload');
                  }
                  progressClose();
              }, 'JSON');

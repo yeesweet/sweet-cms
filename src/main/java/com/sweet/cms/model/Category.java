@@ -64,6 +64,9 @@ public class Category extends Model<Category> {
      */
 	private String operator;
 
+	@TableField(value = "skuNum",exist = false)
+	private Integer skuNum;
+
 
 	public Long getId() {
 		return id;
@@ -143,6 +146,14 @@ public class Category extends Model<Category> {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public Integer getSkuNum() {
+		return skuNum;
+	}
+
+	public void setSkuNum(Integer skuNum) {
+		this.skuNum = skuNum;
 	}
 
 	@Override

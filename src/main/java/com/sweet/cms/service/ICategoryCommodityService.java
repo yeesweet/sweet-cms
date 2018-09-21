@@ -12,5 +12,12 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-08-18
  */
 public interface ICategoryCommodityService extends IService<CategoryCommodity> {
-	
+
+    /**
+     * 获取分类下商品数量
+     * @param categoryId
+     * @return
+     */
+	public int getCategorySkuNum(Long categoryId);
+
 }

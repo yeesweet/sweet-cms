@@ -6,12 +6,6 @@
         $('#categoryEditForm').form({
             url : '${path}/category/edit',
             onSubmit : function() {
-                var image = $("#image").val();
-                var level = $("#level").val();
-                if(level == 2 && image == ""){
-                    alert("二级分类图片不能为空");
-                    return false;
-                }
                 progressLoad();
                 var isValid = $(this).form('validate');
                 if (!isValid) {
@@ -24,6 +18,7 @@
                 result = $.parseJSON(result);
                 if (result.success) {
                     parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+                    parent.$.modalDialog.openner_treeGrid.tree('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
                     var form = $('#categoryEditForm');

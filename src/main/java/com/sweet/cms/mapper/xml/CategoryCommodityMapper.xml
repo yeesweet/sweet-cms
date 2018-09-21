@@ -16,4 +16,7 @@
         id, category_id AS categoryId, commodity_no AS commodityNo, create_time AS createTime, operator
     </sql>
 
+	<select id="getCategorySkuNum" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+		select count(*) from tbl_cms_category_commodity where category_id=#{categoryId}
+	</select>
 </mapper>

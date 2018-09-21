@@ -8,6 +8,7 @@ import com.sweet.cms.commons.result.Tree;
 import com.sweet.cms.mapper.CategoryMapper;
 import com.sweet.cms.model.Category;
 import com.sweet.cms.model.Organization;
+import com.sweet.cms.service.ICategoryCommodityService;
 import com.sweet.cms.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private ICategoryCommodityService categoryCommodityService;
+
 
     @Override
     public List<Category> selectCategoryList(Category category) {
@@ -41,6 +45,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public void selectDataGrid(PageInfo pageInfo,Category category) {
         Page<Map<String, Object>> page = new Page<Map<String, Object>>(pageInfo.getNowpage(), pageInfo.getSize());
         List<Category> list = categoryMapper.selectCategoryList(page,category);
+        if(category.getLevel()==2 && list != null && list.size()>0){
+            for(int i=0;i<list.size();i++){
+                Category categoryC = list.get(i);
+                int skuNum = categoryCommodityService.getCategorySkuNum(categoryC.getId());
+                categoryC.setSkuNum(skuNum);
+            }
+        }
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());
     }
@@ -49,6 +60,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public List<Tree> selectTree() {
         EntityWrapper<Category> wrapper = new EntityWrapper<Category>();
         wrapper.orderBy("display",false);
+        wrapper.orderBy("sortNo",true);
         List<Category> categoryList = categoryMapper.selectList(wrapper);
 
         List<Tree> trees = new ArrayList<Tree>();
