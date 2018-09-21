@@ -6,6 +6,12 @@
         $('#categoryEditForm').form({
             url : '${path}/category/edit',
             onSubmit : function() {
+                var image = $("#image").val();
+                var level = $("#level").val();
+                if(level == 2 && image == ""){
+                    alert("二级分类图片不能为空");
+                    return false;
+                }
                 progressLoad();
                 var isValid = $(this).form('validate');
                 if (!isValid) {
@@ -84,6 +90,11 @@
             }
         });
     }
+
+    function closeImg() {
+        $("#iptimg").attr("src","http://47.95.213.244/pics/category/2018/9/1536891709591.png");
+        $("#image").val("");
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
@@ -108,7 +119,7 @@
                                value="${category.sortNo}"></td>
                 </tr>
                 <tr>
-                    <th>分享图片：</th>
+                    <td>图片：</td>
                     <td>
                         <p>
                             <input type="file" name="file" id="fileimg" class="fileimg"/>
@@ -117,7 +128,7 @@
                             <font color="red">(建议图片尺寸160*160)</font>
                         </p>
                         <div style="position: relative;max-width:150px;margin:10px 0 10px 10px;">
-                            <a href="javascript:closeImg(2);"><img src="http://47.95.213.244/pics/category/2018/9/1536891782986.png" style="position: absolute;top:0px;right:0px;z-index: 1000;width:25px;"/></a>
+                            <a href="javascript:closeImg();"><img src="http://47.95.213.244/pics/category/2018/9/1536891782986.png" style="position: absolute;top:0px;right:0px;z-index: 1000;width:25px;"/></a>
                             <img src="${category.image}" id="iptimg" class="iptimgs" style="max-width:150px;"/>
                             <input type="hidden" id="image" name="image" value="${category.image}"/>
                         </div>
