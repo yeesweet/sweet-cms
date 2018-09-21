@@ -42,6 +42,7 @@ public class FtpUtils {
                 System.out.println("Connected to " + url + ": success!");
             }
 
+            path=new String(path.getBytes("UTF-8"),"iso-8859-1");
             this.createDir(path);
 
             if (path.length() != 0)
@@ -120,11 +121,6 @@ public class FtpUtils {
         boolean uploadRes = false;
 //        ftpClient.enterLocalPassiveMode();
         uploadRes = ftpClient.storeFile(remoteFile, in);
-        //关闭文件流
-        if (null != in) {
-            in.close();
-            in = null;
-        }
         System.out.println("上传成功 !");
         return uploadRes;
     }
