@@ -1,5 +1,6 @@
 package com.sweet.cms.service;
 
+import com.sweet.cms.commons.base.Query;
 import com.sweet.cms.model.TopicCommodity;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -35,5 +36,12 @@ public interface ITopicCommodityService extends IService<TopicCommodity> {
      * @return
      */
     public List<TopicCommodity> getCommodityList(TopicCommodity topicCommodity);
+
+    /**
+     * 分页查询该活动专题编号下的商品列表
+     * @param topicId
+     * @param query
+     */
+    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(String topicId, Query query) throws Exception;
 	
 }

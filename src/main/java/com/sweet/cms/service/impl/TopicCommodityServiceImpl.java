@@ -1,9 +1,11 @@
 package com.sweet.cms.service.impl;
 
+import com.sweet.cms.commons.base.Query;
 import com.sweet.cms.model.TopicCommodity;
 import com.sweet.cms.mapper.TopicCommodityMapper;
 import com.sweet.cms.service.ITopicCommodityService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,12 @@ public class TopicCommodityServiceImpl extends ServiceImpl<TopicCommodityMapper,
     @Override
     public List<TopicCommodity> getCommodityList(TopicCommodity topicCommodity) {
         return topicCommodityMapper.getCommodityList(topicCommodity);
+    }
+
+    @Override
+    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(
+            String topicId, Query query) throws Exception {
+        return topicCommodityMapper.getTopicCommodityByTopicIdOfPage(topicId,
+                new RowBounds(query.getOffset(), query.getPageSize()));
     }
 }

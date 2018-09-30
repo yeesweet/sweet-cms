@@ -1,6 +1,7 @@
 package com.sweet.cms.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.sweet.cms.commons.base.Query;
 import com.sweet.cms.constant.PageManagerConstant;
 import com.sweet.cms.mapper.CmsModuleCommodityMapper;
 import com.sweet.cms.mapper.CmsModuleDetailsMapper;
@@ -8,9 +9,11 @@ import com.sweet.cms.mapper.CmsModuleMapper;
 import com.sweet.cms.model.CmsModule;
 import com.sweet.cms.model.CmsModuleCommodity;
 import com.sweet.cms.model.CmsModuleDetails;
+import com.sweet.cms.model.TopicCommodity;
 import com.sweet.cms.model.vo.CommodityVo;
 import com.sweet.cms.service.ICmsModuleService;
 import com.sweet.cms.service.ICommodityService;
+import com.sweet.cms.service.ITopicCommodityService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,8 @@ public class CmsModuleServiceImpl extends ServiceImpl<CmsModuleMapper, CmsModule
 	private CmsModuleCommodityMapper cmsModuleCommodityMapper;
 	@Resource
 	private ICommodityService commodityService;
+	@Resource
+	private ITopicCommodityService topicCommodityService;
 
 
 	@Override
@@ -39,7 +44,7 @@ public class CmsModuleServiceImpl extends ServiceImpl<CmsModuleMapper, CmsModule
 				CmsModule module = cmsModules.get(i);
 				//模块对应商品列表查询
 				if(module.getModuleStyle() == 16){
-//					setGoodsModule(module,PageManagerConstant.MODULE16_PAGESIZE);
+					setGoodsModule(module,PageManagerConstant.MODULE16_PAGESIZE);
 				}else if(module.getModuleStyle() == 15 || module.getModuleStyle() == 12){
 					setModuleCommodity(module);
 				}
@@ -134,7 +139,7 @@ public class CmsModuleServiceImpl extends ServiceImpl<CmsModuleMapper, CmsModule
 		if(cmsModule!=null){
 			//模块对应商品列表查询
 			if(cmsModule.getModuleStyle() == 16){
-//				setGoodsModule(cmsModule,PageManagerConstant.MODULE16_PAGESIZE);
+				setGoodsModule(cmsModule,PageManagerConstant.MODULE16_PAGESIZE);
 			}else if(cmsModule.getModuleStyle() == 15 || cmsModule.getModuleStyle() == 12){
 				setModuleCommodity(cmsModule);
 			}
@@ -177,47 +182,50 @@ public class CmsModuleServiceImpl extends ServiceImpl<CmsModuleMapper, CmsModule
 		cmsModule.setModuleCommoditys(cmsCommodities);
 	}
 	
-//	/**
-//	 * 模块16对应商品列表查询,从促销专题查询商品
-//	 * @param cmsModule
-//	 */
-//	private void setGoodsModule(CmsModule cmsModule,int pageSize){
-//		List<CmsModuleCommodity> cmsCommodities = new ArrayList<CmsModuleCommodity>();
-//		try {
-//			Query query = new Query();
-//			query.setPageSize(pageSize);
-//			List<CmsTopicsCommodity> commodityList = cmsTopicsCommodityService.getTopicCommodityByTopicIdOfPage(
-//					cmsModule.getModuleDetails().get(0).getCommonId(), query);
-//			if(commodityList != null && commodityList.size()>0){
-//				List<String> nos = new ArrayList<String>();
-//				String[] nosArr=new String[commodityList.size()];
-//				for(int i=0;i<commodityList.size();i++){
-//					nos.add(commodityList.get(i).getCommodityCode());
-//					nosArr[i]=commodityList.get(i).getCommodityCode();
-//				}
-//				List<CommodityStyle> commList = commodityStyleService.getCommodityByNoList(nos);
-//				Map<String,Integer> inventoryMap = inventoryService.queryCommodityInventoryWithCache(nosArr);
-//				//由CommodityStyle实体类的list转化为包含MixCommodity的map,目的为了获取促销价格
-//				Map<String, MixCommodity> mixMap = changeListToMap(commList);
-//				//对商品进行排序 start
-//				for (CmsTopicsCommodity commodity : commodityList) {
-//					MixCommodity mixCommodity = mixMap.get(commodity.getCommodityCode());
-//					if (mixCommodity!=null) {
-//						CmsModuleCommodity cmsModuleCommodity = new CmsModuleCommodity();
-//						cmsModuleCommodity.setCommodityCode(commodity.getCommodityCode());
-//						cmsModuleCommodity.setDefaultPic(mixCommodity.getDefaultPic());
-//						cmsModuleCommodity.setInventoryNumber(inventoryMap.get(commodity.getCommodityCode()));
-//						cmsModuleCommodity.setPublicPrice(mixCommodity.getPublicPrice());
-//						cmsModuleCommodity.setSalePriceN(packageSalePriceN(mixCommodity));
-//						cmsCommodities.add(cmsModuleCommodity);
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		cmsModule.setModuleCommoditys(cmsCommodities);
-//	}
+	/**
+	 * 模块16对应商品列表查询,从促销专题查询商品
+	 * @param cmsModule
+	 */
+	private void setGoodsModule(CmsModule cmsModule,int pageSize){
+		List<CmsModuleCommodity> cmsCommodities = new ArrayList<CmsModuleCommodity>();
+		try {
+			Query query = new Query();
+			query.setPageSize(pageSize);
+			List<TopicCommodity> commodityList = topicCommodityService.getTopicCommodityByTopicIdOfPage(
+					cmsModule.getModuleDetails().get(0).getCommonId(), query);
+			if(commodityList != null && commodityList.size()>0){
+				List<String> nos = new ArrayList<String>();
+				String[] nosArr=new String[commodityList.size()];
+				for(int i=0;i<commodityList.size();i++){
+					nos.add(commodityList.get(i).getCommodityNo());
+				}
+				List<CommodityVo> commodityVos = commodityService.getCommodityList(nos,false,false);
+				Map<String,Object> commdityMap = new HashMap<>();
+				if(commodityVos != null && commodityVos.size()>0){
+					for(int i=0;i<commodityVos.size();i++){
+						CommodityVo commodityVo = commodityVos.get(i);
+						commdityMap.put(commodityVo.getCommodityNo(),commodityVo);
+					}
+				}
+				//对商品进行排序 start
+				for (TopicCommodity commodity : commodityList) {
+					CommodityVo commodityVo = (CommodityVo) commdityMap.get(commodity.getCommodityNo());
+					if (commodityVo!=null) {
+						CmsModuleCommodity cmsModuleCommodity = new CmsModuleCommodity();
+						cmsModuleCommodity.setCommodityCode(commodity.getCommodityNo());
+						cmsModuleCommodity.setDefaultPic(commodityVo.getDefaultPic());
+						cmsModuleCommodity.setInventoryNumber(commodityVo.getStock());
+						cmsModuleCommodity.setMarketPrice(commodityVo.getMarketPrice());
+						cmsModuleCommodity.setSalePrice(commodityVo.getSalePrice());
+						cmsCommodities.add(cmsModuleCommodity);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		cmsModule.setModuleCommoditys(cmsCommodities);
+	}
 
 	@Override
 	@Transactional

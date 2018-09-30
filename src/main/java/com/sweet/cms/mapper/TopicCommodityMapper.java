@@ -3,6 +3,7 @@ package com.sweet.cms.mapper;
 import com.sweet.cms.model.TopicCommodity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
@@ -36,4 +37,11 @@ public interface TopicCommodityMapper extends BaseMapper<TopicCommodity> {
      * @return
      */
     public List<TopicCommodity> getCommodityList(TopicCommodity topicCommodity);
+
+    /**
+     * 查询该活动专题编号下的商品 集合
+     *
+     * @param topicId
+     */
+    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(@Param("topicId")String topicId, RowBounds rowBounds);
 }
