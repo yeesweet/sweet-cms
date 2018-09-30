@@ -43,5 +43,5 @@ public interface TopicCommodityMapper extends BaseMapper<TopicCommodity> {
      *
      * @param topicId
      */
-    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(@Param("topicId")String topicId, RowBounds rowBounds);
+    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(@Param("topicId")Long topicId, RowBounds rowBounds);
 }

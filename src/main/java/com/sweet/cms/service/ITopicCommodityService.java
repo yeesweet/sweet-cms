@@ -42,6 +42,6 @@ public interface ITopicCommodityService extends IService<TopicCommodity> {
      * @param topicId
      * @param query
      */
-    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(String topicId, Query query) throws Exception;
+    public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(Long topicId, Query query) throws Exception;
 	
 }

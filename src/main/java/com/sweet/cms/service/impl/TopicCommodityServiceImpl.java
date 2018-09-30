@@ -43,7 +43,7 @@ public class TopicCommodityServiceImpl extends ServiceImpl<TopicCommodityMapper,
 
     @Override
     public List<TopicCommodity> getTopicCommodityByTopicIdOfPage(
-            String topicId, Query query) throws Exception {
+            Long topicId, Query query) throws Exception {
         return topicCommodityMapper.getTopicCommodityByTopicIdOfPage(topicId,
                 new RowBounds(query.getOffset(), query.getPageSize()));
     }

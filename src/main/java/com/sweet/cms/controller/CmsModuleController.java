@@ -1,6 +1,8 @@
 package com.sweet.cms.controller;
 
 import com.sweet.cms.commons.base.BaseController;
+import com.sweet.cms.commons.base.PageFinder;
+import com.sweet.cms.commons.base.Query;
 import com.sweet.cms.constant.PageManagerConstant;
 import com.sweet.cms.model.*;
 import com.sweet.cms.model.vo.CommodityVo;
@@ -11,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,6 +37,8 @@ public class CmsModuleController extends BaseController {
 	private ICommodityService commodityService;
 	@Resource
 	private ITopicService topicService;
+	@Resource
+	private ITopicCommodityService topicCommodityService;
 
 	/**
 	 * 添加模块页面
@@ -409,5 +414,64 @@ public class CmsModuleController extends BaseController {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * 异步查询促销专题商品数据
+	 * @param topicId
+	 * @param page
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getTopicCommodityMore")
+	public String getTopicCommodityMore(Long topicId,int page, ModelMap map) throws Exception {
+		List<CmsModuleCommodity> moList = new ArrayList<CmsModuleCommodity>();
+		Query query = new Query();
+		query.setPage(page);
+		query.setPageSize(PageManagerConstant.MODULE16_PAGESIZE);
+		int count = 0;
+		try {
+			count = topicCommodityService.getCommodityCountByTopicId(topicId);
+			List<TopicCommodity> commodityList = topicCommodityService.getTopicCommodityByTopicIdOfPage(
+					topicId, query);
+			if(commodityList != null && commodityList.size()>0){
+				List<String> nos = new ArrayList<String>();
+				for(int i=0;i<commodityList.size();i++){
+					nos.add(commodityList.get(i).getCommodityNo());
+				}
+				List<CommodityVo> commodityVos = commodityService.getCommodityList(nos,false,false);
+				Map<String,Object> commdityMap = new HashMap<>();
+				if(commodityVos != null && commodityVos.size()>0){
+					for(int i=0;i<commodityVos.size();i++){
+						CommodityVo commodityVo = commodityVos.get(i);
+						commdityMap.put(commodityVo.getCommodityNo(),commodityVo);
+					}
+				}
+				//对商品进行排序 start
+				for (TopicCommodity commodity : commodityList) {
+					CommodityVo commodityVo = (CommodityVo) commdityMap.get(commodity.getCommodityNo());
+					if (commodityVo!=null) {
+						CmsModuleCommodity cmsModuleCommodity = new CmsModuleCommodity();
+						cmsModuleCommodity.setCommodityCode(commodity.getCommodityNo());
+						cmsModuleCommodity.setDefaultPic(commodityVo.getDefaultPic());
+						cmsModuleCommodity.setInventoryNumber(commodityVo.getStock());
+						cmsModuleCommodity.setMarketPrice(commodityVo.getMarketPrice());
+						cmsModuleCommodity.setSalePrice(commodityVo.getSalePrice());
+						moList.add(cmsModuleCommodity);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JSONArray moduleCommodityList = new JSONArray();
+		moduleCommodityList.addAll(moList);
+		JSONObject object = new JSONObject();
+		object.put("moduleCommodityList", moduleCommodityList);
+		PageFinder<CmsModuleCommodity> pageFinder = new PageFinder<CmsModuleCommodity>(query.getPage(),query.getPageSize(),count);
+		object.put("hasNext", pageFinder.isHasNext());
+		return object.toString();
 	}
 }

@@ -2,6 +2,7 @@ package com.sweet.cms.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.sweet.cms.commons.base.Query;
+import com.sweet.cms.commons.utils.StringUtils;
 import com.sweet.cms.constant.PageManagerConstant;
 import com.sweet.cms.mapper.CmsModuleCommodityMapper;
 import com.sweet.cms.mapper.CmsModuleDetailsMapper;
@@ -191,11 +192,14 @@ public class CmsModuleServiceImpl extends ServiceImpl<CmsModuleMapper, CmsModule
 		try {
 			Query query = new Query();
 			query.setPageSize(pageSize);
-			List<TopicCommodity> commodityList = topicCommodityService.getTopicCommodityByTopicIdOfPage(
-					cmsModule.getModuleDetails().get(0).getCommonId(), query);
+			String commonId = cmsModule.getModuleDetails().get(0).getCommonId();
+			Long topicId = 0l;
+			if(StringUtils.isNotBlank(commonId) && org.apache.commons.lang.StringUtils.isNumeric(commonId)){
+				topicId = Long.parseLong(commonId);
+			}
+			List<TopicCommodity> commodityList = topicCommodityService.getTopicCommodityByTopicIdOfPage(topicId, query);
 			if(commodityList != null && commodityList.size()>0){
 				List<String> nos = new ArrayList<String>();
-				String[] nosArr=new String[commodityList.size()];
 				for(int i=0;i<commodityList.size();i++){
 					nos.add(commodityList.get(i).getCommodityNo());
 				}
