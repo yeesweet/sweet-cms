@@ -274,10 +274,10 @@
                                 <c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
                                     <c:choose>
                                         <c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
-                                            <img src="${cmsModuleDetail.imgUrl}" style="margin-bottom:5px;height:${cmsModule.height!'128'}px;"/>
+                                            <img src="${cmsModuleDetail.imgUrl}" style='margin-bottom:5px;height:<c:choose><c:when test="${not empty cmsModule.height && !(cmsModule.height eq null)}">${cmsModule.height}</c:when><c:otherwise>128</c:otherwise></c:choose>px;'/>
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="${staticPath }/static/style/images/homepage/img6.jpg" style="margin-bottom:5px;height:${cmsModule.height!'128'}px;"/>
+                                            <img src="${staticPath }/static/style/images/homepage/img6.jpg" style='margin-bottom:5px;height:<c:choose><c:when test="${not empty cmsModule.height && !(cmsModule.height eq null)}">${cmsModule.height}</c:when><c:otherwise>128</c:otherwise></c:choose>px;'/>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
@@ -313,7 +313,7 @@
 			            	<div class="fl" style="width:33.3%;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[0].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[0].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -323,7 +323,7 @@
 			            	<div class="fl" style="width:33.3%;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[1].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[1].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -333,7 +333,7 @@
 			            	<div class="fl" style="width:33.3%;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[2].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[2].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -411,7 +411,7 @@
 		                  	<div class="fl" style="width:226px;margin-left:7px;height:184px;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[0].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[0].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -422,7 +422,7 @@
 			                    <div style="height:85px;">
 									<c:choose>
 										<c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
-											<img src="${cmsModule.moduleDetails[1].imgUrl!}" />
+											<img src="${cmsModule.moduleDetails[1].imgUrl}" />
 										</c:when>
 										<c:otherwise>
 											<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
@@ -432,7 +432,7 @@
 			                    <div style="height:85px;margin-top:13px;">
 									<c:choose>
 										<c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
-											<img src="${cmsModule.moduleDetails[2].imgUrl!}" />
+											<img src="${cmsModule.moduleDetails[2].imgUrl}" />
 										</c:when>
 										<c:otherwise>
 											<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
@@ -472,7 +472,7 @@
 			                    <div style="height:50%;">
 									<c:choose>
 										<c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-											<img src="${cmsModule.moduleDetails[0].imgUrl!}" />
+											<img src="${cmsModule.moduleDetails[0].imgUrl}" />
 										</c:when>
 										<c:otherwise>
 											<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
@@ -482,7 +482,7 @@
 			                    <div style="height:50%;">
 									<c:choose>
 										<c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
-											<img src="${cmsModule.moduleDetails[1].imgUrl!}" />
+											<img src="${cmsModule.moduleDetails[1].imgUrl}" />
 										</c:when>
 										<c:otherwise>
 											<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
@@ -493,7 +493,7 @@
 	                  		<div class="fl" style="width:50%;height:184px;float:right;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[2].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[2].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -531,7 +531,7 @@
 		                  	<div class="fl" style="width:50%;height:185px;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[0].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[0].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -541,7 +541,7 @@
 		                  	<div class="fl" style="width:50%;height:185px;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[1].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[1].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -579,7 +579,7 @@
 		                  	<div class="fl" style="width:466px;margin:0 7px 15px 7px;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[0].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[0].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/img6.jpg" />
@@ -591,7 +591,7 @@
 		                  	<div class="fl" style="width:226px;height:185px;float:left;margin-left:7px;;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[1].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[1].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/img1.jpg" />
@@ -602,7 +602,7 @@
 		                  	<div class="fl" style="width:226px;height:185px;float:right;margin-right:7px;">
 								<c:choose>
 									<c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
-										<img src="${cmsModule.moduleDetails[2].imgUrl!}" />
+										<img src="${cmsModule.moduleDetails[2].imgUrl}" />
 									</c:when>
 									<c:otherwise>
 										<img src="${staticPath }/static/style/images/homepage/img1.jpg" />
@@ -1142,10 +1142,10 @@
                                 <input type="button" value="预约" style="position: absolute;top:0px;left:0px;margin-top: 10px;margin-left: 10px;width: 100px;height: 30px;"/>
                                 <c:choose>
                                     <c:when test="${not empty cmsModule.moduleDetails[0] && !(cmsModule.moduleDetails[0] eq null) && not empty cmsModule.moduleDetails[0].imgUrl && !(cmsModule.moduleDetails[0].imgUrl eq null)  && cmsModule.moduleDetails[0].imgUrl != ''}">
-                                        <img src="${cmsModule.moduleDetails[0].imgUrl}" style="margin-bottom:5px;height:${cmsModule.height!'128'}px;"/>
+                                        <img src="${cmsModule.moduleDetails[0].imgUrl}" style='margin-bottom:5px;height:<c:choose><c:when test="${not empty cmsModule.height && !(cmsModule.height eq null)}">${cmsModule.height}</c:when><c:otherwise>128</c:otherwise></c:choose>px;'/>
                                     </c:when>
                                     <c:otherwise>
-                                        <img src="${staticPath }/static/style/images/homepage/img6.jpg" style="margin-bottom:5px;height:${cmsModule.height!'128'}px;"/>
+                                        <img src="${staticPath }/static/style/images/homepage/img6.jpg" style='margin-bottom:5px;height:<c:choose><c:when test="${not empty cmsModule.height && !(cmsModule.height eq null)}">${cmsModule.height}</c:when><c:otherwise>128</c:otherwise></c:choose>px;'/>
                                     </c:otherwise>
                                 </c:choose>
                             </div>

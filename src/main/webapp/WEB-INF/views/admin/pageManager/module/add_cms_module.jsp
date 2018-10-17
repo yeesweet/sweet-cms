@@ -421,9 +421,9 @@
 	      <form id="form1" name="form1" action="${BasePath}/system/CmsModuleController/saveModule.sc" method="post">
 	      	  <input type="hidden" id="effectRange" name="effectRange" value="1" />
 	      	  <input type="hidden" id="imgType" name="imgType" value="5" /><!-- 图片类型：5：专题icon -->
-	      	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle!''}" />
-	      	  <input type="hidden" id="moduleType" name="moduleType" value="${moduleType!'1'}" />
-	          <input type="hidden" id="navigationId" name="navigationId" value="${navigationId!''}" />
+	      	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle}" />
+	      	  <input type="hidden" id="moduleType" name="moduleType" value="${moduleType}" />
+	          <input type="hidden" id="navigationId" name="navigationId" value="${navigationId}" />
 	          <input type="hidden" id="activityId" name="activityId" value="${activityId!''}" />
 	          <div class="wayCon">
 	              <p><span class="red">&nbsp;</span>模块名称：
