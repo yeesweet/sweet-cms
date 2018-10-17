@@ -2,6 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     var pageManagerDataGrid;
+    var editPageDialog;
     $(function() {
         pageManagerDataGrid = $('#pageManagerDataGrid').datagrid({
         url : '${path}/pageManager/dataGrid',
@@ -94,7 +95,7 @@
  * @param url
  */
 function pageManagerAddFun() {
-    parent.$.modalDialog({
+    editPageDialog = parent.$.modalDialog({
         title : '添加',
         width : 700,
         height : 600,
@@ -121,9 +122,10 @@ function pageManagerEditFun(id) {
     } else {
         pageManagerDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
     }
-    parent.$.modalDialog({
+    console.log('parent.$.modalDialog',typeof parent.$.modalDialog)
+    editPageDialog = parent.$.modalDialog({
         title : '编辑',
-        width : 700,
+        width : 1500,
         height : 600,
         href :  '${path}/pageManager/editPage?id=' + id,
         buttons : [ {

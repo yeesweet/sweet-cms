@@ -106,10 +106,160 @@
         border-radius: 4px;
     }
 
+
+    /*图片上传部分*/
+    .imgs {
+        position: relative;
+        margin: 20px 0px;
+        border-bottom: 1px solid #aaaaaa;
+    }
+
+    .imageDiv {
+        display: inline-block;
+        width: 140px;
+        height: 140px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px dashed darkgray;
+        background: #f8f8f8;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .imageDiv img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .cover {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 140px;
+        height: 140px;
+        background-color: rgba(0, 0, 0, .3);
+        display: none;
+        line-height: 125px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .cover > .delbtn {
+        color: red;
+        font-size: 20px;
+    }
+
+    .imageDiv:hover .cover {
+        display: block;
+    }
+    #imageList-upload-win .imgs{
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+    #imageList-upload-win .imgs,#imageList-upload-win .imgs .picDiv{
+        text-align: left;
+    }
+    .addImages {
+        display: inline-block;
+        width: 140px;
+        height: 140px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px dashed darkgray;
+        background: #f8f8f8;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .text-detail {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .text-detail > span {
+        font-size: 40px;
+    }
+
+
+
+    .fix-space{
+        height: 100px;
+    }
+
 </style>
 <script type="text/javascript">
     var imageListMgr = {
         curDir:'',
+        showUploadDialog:function(){
+            $('#imageList-upload-win').window('open');
+            var self = this;
+            var imgs = $('#imageList-upload-win .imgs');
+            var dirStr = $('<h3>上传到<span>'+self.curDir+'</span></h3>');
+
+            var addImage = $('<div class="picDiv"><div class="addImages" id="addImages_imgList"><input type="file" class="file" id="fileInput" multiple accept="image/png, image/jpeg, image/gif, image/jpg"/><div class="text-detail"><span>+</span><p>点击上传</p></div></div></div>');
+            imgs.empty();
+            imgs.append(dirStr);
+            imgs.append(addImage);
+
+            $("#imageList-upload-win .file").change(function () {
+                //获取选择图片的对象
+                var docObj = $(this)[0];
+                var addImages = $(this).parents(".addImages");
+                //得到所有的图片文件
+                var fileList = docObj.files;
+                for (var i = 0; i < fileList.length; i++) {
+                    var fr = new FileReader();
+                    var single = fileList[i];
+                    fr.onload = function (single) {
+                        //图片上传成功回调
+                        var picHtml = "<div class='imageDiv' > <img id='img" + single.name + "' src='" + single.target.result + "' /> <div class='cover'><i class='delbtn'>删除</i></div></div>"
+                        addImages.before(picHtml);
+                        var imgObjPreview = document.getElementById("img" + single.name);
+                        //图片属性
+                        imgObjPreview.style.display = 'block';
+                        imgObjPreview.style.width = '140px';
+                        imgObjPreview.style.height = '140px';
+                    };
+                    fr.readAsDataURL(single);
+                }
+
+                /*点击删除已选图片*/
+                $(document).on("click", "#imageList-upload-win .delbtn", function () {
+                    console.log("click");
+                    var _this = $(this);
+                    _this.parents(".imageDiv").remove();
+                });
+            });
+        },
+        uploadImg:function(){
+            var self = this;
+            // console.log('img num',$('#imageList-upload-win .imageDiv img').length)
+            $('#imageList-upload-win .imageDiv img').each(function(){
+                var base64 = $(this).attr('src');
+                $.ajax({
+                    type: "POST",
+                    url: "${path}/cmsImageControler/uploadImageBase64",
+                    data: {'image': base64, path: encodeURI(self.curDir, "UTF-8"), type: 0},//图片base64编码，图片格式（当前仅支持jpg,png,jpeg三种），图片对象索引
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            $('#imageList-upload-win').window('close');
+                            self.getServiceDir(self.curDir);
+                        }else {//图片未上传成功回调
+
+                        }
+                    },
+                    error: function (err) {
+                        //服务器连接失败报错处理
+                        alert("error");
+                        //alert(err.responseText);
+                    }
+                });
+            });
+        },
         getServiceDir: function (dir) {
             var self = this;
 
@@ -179,7 +329,6 @@
         showCreatDirDialog:function () {
 
             $('#edit-dir-win').window('open');
-
             $('.edit-dir-area .edit-dir-title span').text(this.curDir);
             $('.edit-dir-area input').val('');
         },
@@ -282,8 +431,9 @@
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
-    <div data-options="region:'north',border:true" style="height: 50px" >
-        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="javascript:imageListMgr.showCreatDirDialog()">Add</a>
+    <div data-options="region:'north',border:true" style="height: 50px;padding: 10px;" >
+        <a href="#" class="easyui-linkbutton" data-options="" onclick="javascript:imageListMgr.showUploadDialog()">上传图片</a>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="javascript:imageListMgr.showCreatDirDialog()">新建分类</a>
     </div>
     <div data-options="region:'center',border:false" style="overflow: auto;padding: 3px;" >
         <div data-options="region:'west',split:true" style="width:100px"></div>
@@ -291,6 +441,28 @@
             <div class="image-list-files-area">
 
             </div>
+        </div>
+    </div>
+    <div id="imageList-upload-win" class="easyui-window" title="上传图片" style="width:600px;max-height: 600px;"
+         data-options="iconCls:'icon-edit',modal:true,closed:true">
+        <div data-options="region:'north',border:false" style="text-align:left;padding:5px 0 0;max-height: 400px;">
+            <%--上传描述图片区域--%>
+            <div class="imgs"><h3>上传到<span></span></h3>
+                <div class="picDiv">
+                    <div class="addImages" id="addImages_imgList"><input type="file" class="file" id="fileInput" multiple
+                                                                      accept="image/png, image/jpeg, image/gif, image/jpg"/>
+                        <div class="text-detail"><span>+</span>
+                            <p>点击上传</p></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;" style="min-height: 120px;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+               onclick="javascript:imageListMgr.uploadImg()" style="width:180px">上传图片</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)"
+               onclick="javascript:$('#imageList-upload-win').window('close');" style="width:80px">取消</a>
         </div>
     </div>
     <div id="edit-dir-win" class="easyui-window" title="创建分类" style="width:600px;height:400px"
