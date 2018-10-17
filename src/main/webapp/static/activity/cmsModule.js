@@ -55,8 +55,8 @@ for(var i=1;i<=num;i++){
             "<input type='button' id='uploadBtn"+i+"' class='uploadBtn' value='上传图片' onclick='javascript:ajaxImageUpload(this)'/>" +
             "<input type='button' class='addImageBtn' value='添加图片' onclick='javaScript:selectImage("+i+");'/></p>"+
             "<div class='uploadimgshow'>"+
-              "<a href='javascript:void(0)'><img src='/images/homepage/close.png'  class='close1'/></a>"+
-              "<img src='/images/homepage/1img1.jpg' id='iptimg"+i+"' class='iptimgs'/>"+
+              "<a href='javascript:void(0)'><img src='/static/style/images/homepage/close.png'  class='close1'/></a>"+
+              "<img src='/static/style/images/homepage/1img1.jpg' id='iptimg"+i+"' class='iptimgs'/>"+
               "<input type='hidden' id='img"+i+"' name='moduleDetails["+(i-1)+"].imgUrl'/>"+
             "</div>";
     }
@@ -131,7 +131,6 @@ for(var i=1;i<=num;i++){
     }
     divHtml=divHtml+"<input type='hidden' name='moduleDetails["+(i-1)+"].commonId' id='commonId"+i+"' />"+
 			"<input type='hidden' name='moduleDetails["+(i-1)+"].subType' id='subType"+i+"' />"+
-			"<input type='hidden' name='moduleDetails["+(i-1)+"].linkUrl' id='linkUrl"+i+"' />"+
 	 		"</div>";
     if(data == 17){//复用模块
     	divHtml=divHtml +"</div>";

@@ -122,7 +122,6 @@ function pageManagerEditFun(id) {
     } else {
         pageManagerDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
     }
-    console.log('parent.$.modalDialog',typeof parent.$.modalDialog)
     editPageDialog = parent.$.modalDialog({
         title : '编辑',
         width : 1500,

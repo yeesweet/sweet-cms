@@ -107,17 +107,13 @@ function showIndex(){
 		var moduleId = $("input[name='moduleId']")[dataIndex].value;
 		var moduleStyle = $("input[name='moduleStyle']")[dataIndex].value;
 		var moduleType = $("input[name='moduleType']")[dataIndex].value;
-		var navigationId = $("#navigationId").val();
-		var productLineCode = $("#productLineCode").val();
-		var activityId = $("#activityId").val();
-		alert(editPageDialog)
-		if(editPageDialog){
-            $(editPageDialog).window('close');
-            return;
-		}
-		location="/system/CmsModuleController/toAddModule.sc?id="+moduleId+"&moduleStyle="+moduleStyle+"" +
-				"&moduleType="+moduleType+"&navigationId="+navigationId+"&productLineCode="+productLineCode+
-				"&activityId="+activityId;
+		var pageManagerId = $("#pageManagerId").val();
+		// if(editPageDialog){
+         //    $(editPageDialog).window('close');
+         //    return;
+		// }
+		location="/cmsModuleController/toAddModule.sc?id="+moduleId+"&moduleStyle="+moduleStyle+"" +
+				"&moduleType="+moduleType+"&pageManagerId="+pageManagerId;
 	});
 	
 	//右侧模块点击事件
@@ -225,14 +221,14 @@ function changeNavigation(activityId,navigationId){
 }
 
 //首页根据时间查询模块
-function selectBoardByTime(activityId,navigationId){
+function selectBoardByTime(activityId){
 	var startTime = $("#startTime").val();
 	var endTime = $("#endTime").val();
 	if(startTime=="" && endTime==""){
 		alert("请输入开始时间或者结束时间");
 		return false;
 	}
-	var url = "/system/CmsActivityController/toEditActivity.sc?activityId="+activityId+"&navigationId="+navigationId;
+	var url = "/system/CmsActivityController/toEditActivity.sc?activityId="+activityId;
 	if(startTime != ""){
 		url = url+"&startTime="+startTime;
 	}

@@ -51,7 +51,7 @@ $(function(){
 		  var number=$(".number").length;
 		  for(var i=num+1;i<=number;i++){
 		     $(".upload").eq(i-1).attr("id","upload"+i).find(".number").text(i);
-		     $(".upload .uploadimgshow").eq(i-1).children("img").attr("src","/images/homepage/1img1.jpg");
+		     $(".upload .uploadimgshow").eq(i-1).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
 		  	 $(".upload .uploadimgshow").eq(i-1).children("input").val("");
 		     commonL(i,108,1);
 		   }
@@ -61,7 +61,7 @@ $(function(){
 		  //alert("number:"+number+" index:"+index+" row_col:"+row_col);
 		  for(var j=0;j<=row_col-1;j++){
 		  	$(".recommendlist").eq((index-1)/row_col).find("img").eq(j).attr("id","fl108"+(index+j));
-		  	$(".recommendlist").eq((index-1)/row_col).find("img").eq(j).attr("src","/images/homepage/tuijian1.jpg");
+		  	$(".recommendlist").eq((index-1)/row_col).find("img").eq(j).attr("src","/static/style/images/homepage/tuijian1.jpg");
 		  }
 
 	  });
@@ -107,19 +107,19 @@ $(function(){
 		  var number=$(".number").length;   
 		  for(var i=5;i<=number;i++){
 		     $(".upload").eq(i-1).attr("id","upload"+i).find(".number").text(i);
-		     $(".upload .uploadimgshow").eq(i-1).children("img").attr("src","/images/homepage/1img1.jpg");
+		     $(".upload .uploadimgshow").eq(i-1).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
 		  	 $(".upload .uploadimgshow").eq(i-1).children("input").val("");
 		     commonL(i,102,1);
 		   }
 		  var index = number-3;
 		  $(".recommendlist").eq((index-1)/4).find("img").eq(0).attr("id","fl102"+(index));
-		  $(".recommendlist").eq((index-1)/4).find("img").eq(0).attr("src","/images/homepage/tuijian1.jpg");
+		  $(".recommendlist").eq((index-1)/4).find("img").eq(0).attr("src","/static/style/images/homepage/tuijian1.jpg");
 		  $(".recommendlist").eq((index-1)/4).find("img").eq(1).attr("id","fl102"+(index+1));
-		  $(".recommendlist").eq((index-1)/4).find("img").eq(1).attr("src","/images/homepage/tuijian1.jpg");
+		  $(".recommendlist").eq((index-1)/4).find("img").eq(1).attr("src","/static/style/images/homepage/tuijian1.jpg");
 		  $(".recommendlist").eq((index-1)/4).find("img").eq(2).attr("id","fl102"+(index+2));
-		  $(".recommendlist").eq((index-1)/4).find("img").eq(2).attr("src","/images/homepage/tuijian1.jpg");
+		  $(".recommendlist").eq((index-1)/4).find("img").eq(2).attr("src","/static/style/images/homepage/tuijian1.jpg");
 		  $(".recommendlist").eq((index-1)/4).find("img").eq(3).attr("id","fl102"+(index+3));
-		  $(".recommendlist").eq((index-1)/4).find("img").eq(3).attr("src","/images/homepage/tuijian1.jpg");
+		  $(".recommendlist").eq((index-1)/4).find("img").eq(3).attr("src","/static/style/images/homepage/tuijian1.jpg");
 	  });
 	//推荐模块删除
 	$("body").on("click",".delete1", function() {
@@ -152,12 +152,12 @@ $(function(){
 	 	   $(".upload").eq(index).children(".choosep").css("display","none");
 	    
 	  	   $(".upload").eq(index).find(".number").text(index+1); 
-	  	   $(".uploadimgshow").eq(index).children("img").attr("src","/images/homepage/1img1.jpg");
+	  	   $(".uploadimgshow").eq(index).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
 	  	   $(".uploadimgshow").eq(index).children("input").val("");
 	  	   commonL(index,flag,1);
 	  	   var index1=index+1;
 	  	   $(".lunboimgshow").eq(index).find("img").attr("id","fl"+flag+index1);
-	  	   $(".lunboimgshow").eq(index).find("img").attr("src","/images/homepage/lunbo1.jpg");
+	  	   $(".lunboimgshow").eq(index).find("img").attr("src","/static/style/images/homepage/lunbo1.jpg");
 	  	   if(flag==104){//优购快报
 	  		   $(".megP").eq(index).find("span").attr("id","message"+index1);
 	  	   }
@@ -196,12 +196,12 @@ $(function(){
 	  $(".upload").eq(index).children(".choosep").css("display","none");
 	  
 	  $(".upload").eq(index).find(".number").text(number); 
-	  $(".uploadimgshow").eq(index).children("img").attr("src","/images/homepage/1img1.jpg");
+	  $(".uploadimgshow").eq(index).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
  	  $(".uploadimgshow").eq(index).children("input").val("");
 	  commonL(index,3,1); 
 	  var index1=index+1;
 	  $(".oneimg").eq(index).find("img").attr("id","fl3"+index1);
-	  $(".oneimg").eq(index).find("img").attr("src","/images/homepage/img6.jpg");
+	  $(".oneimg").eq(index).find("img").attr("src","/static/style/images/homepage/img6.jpg");
 	  });
 	//模块3删除
 	$("body").on("click",".delete3", function() {
@@ -243,14 +243,14 @@ $(function(){
 		}
 		var index1=index+1;
 		for(var i=index;i<=index1;i++){
-			$(".uploadimgshow").eq(i-1).children("img").attr("src","/images/homepage/1img1.jpg");
+			$(".uploadimgshow").eq(i-1).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
 			$(".uploadimgshow").eq(i-1).children("input").val("");
 			commonL(i,5,1);
 		}
 		$(".twoimg").eq((index-1)/2).find("img").eq(0).attr("id","fl5"+index);
-		$(".twoimg").eq((index-1)/2).find("img").eq(0).attr("src","/images/homepage/2img1.jpg");
+		$(".twoimg").eq((index-1)/2).find("img").eq(0).attr("src","/static/style/images/homepage/2img1.jpg");
 	    $(".twoimg").eq((index-1)/2).find("img").eq(1).attr("id","fl5"+index1);
-	    $(".twoimg").eq((index-1)/2).find("img").eq(1).attr("src","/images/homepage/2img1.jpg");
+	    $(".twoimg").eq((index-1)/2).find("img").eq(1).attr("src","/static/style/images/homepage/2img1.jpg");
 	  });
 	//模块5删除
 	$("body").on("click",".delete5", function() {
@@ -284,12 +284,12 @@ $(function(){
 	  $(".upload").eq(index).children(".choosep").css("display","none");
 	  
 	  $(".upload").eq(index).find(".number").text(number); 
-	  $(".uploadimgshow").eq(index).children("img").attr("src","/images/homepage/1img1.jpg");
+	  $(".uploadimgshow").eq(index).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
  	  $(".uploadimgshow").eq(index).children("input").val("");
 	  commonL(index,11,1); 
 	  var index1=index+1;
 	  $(".threeimg").eq(index).find("img").attr("id","fl11"+index1);
-	  $(".threeimg").eq(index).find("img").attr("src","/images/homepage/img6.jpg");
+	  $(".threeimg").eq(index).find("img").attr("src","/static/style/images/homepage/img6.jpg");
 	  });
 	//模块11删除
 	$("body").on("click",".delete11", function() {
@@ -316,7 +316,7 @@ $(function(){
 		  alert("添加活动图片最大限度为30个!");
 		  return false;
 	  }
-	  var  str="<div class='slbdiv'><img src='/images/homepage/2img1.jpg'/><a href='javascript:void(0);'><img class='close delModule17' src='/images/homepage/close.png'/></a></div>";
+	  var  str="<div class='slbdiv'><img src='/static/style/images/homepage/2img1.jpg'/><a href='javascript:void(0);'><img class='close delModule17' src='/static/style/images/homepage/close.png'/></a></div>";
 	  $("#leftBoard17").append(str);
 	  var cloneContent="<div class='Tj5'>" + $(".Tj5").clone().html() + "</div>";
 	  $("#wayCon").append(cloneContent);
@@ -326,12 +326,12 @@ $(function(){
 	  $(".upload").eq(index).children(".choosep").css("display","none");
 	  
 	  $(".upload").eq(index).find(".number").text(number); 
-	  $(".uploadimgshow").eq(index).children("img").attr("src","/images/homepage/1img1.jpg");
+	  $(".uploadimgshow").eq(index).children("img").attr("src","/static/style/images/homepage/1img1.jpg");
  	  $(".uploadimgshow").eq(index).children("input").val("");
 	  commonL(index,17,1); 
 	  var index1=index+1;
 	  $("#leftBoard17 .slbdiv").eq(index).find("img").eq(0).attr("id","fl17"+index1);
-	  $("#leftBoard17 .slbdiv").eq(index).find("img").eq(0).attr("src","/images/homepage/2img1.jpg");
+	  $("#leftBoard17 .slbdiv").eq(index).find("img").eq(0).attr("src","/static/style/images/homepage/2img1.jpg");
 	});
 	//模块12删除
 	$("body").on("click",".delModule17", function() {
@@ -440,15 +440,15 @@ $(function(){
 	
 	//删除图片
 	$("body").on("click",".close1",function(){
-		$(this).parent().siblings().eq(0).attr("src","/images/homepage/1img1.jpg");
+		$(this).parent().siblings().eq(0).attr("src","/static/style/images/homepage/1img1.jpg");
 		$(this).parent().siblings().eq(1).val("");
 		var id = $(this).parent().siblings().eq(0).attr("id").substring(6);
 		if(flag==101){
-			$("#fl"+flag+id).attr("src","/images/homepage/lunbo1.jpg");
+			$("#fl"+flag+id).attr("src","/static/style/images/homepage/lunbo1.jpg");
 		}else if(flag==3||flag==9){
-			$("#fl"+flag+id).attr("src","/images/homepage/img6.jpg");
+			$("#fl"+flag+id).attr("src","/static/style/images/homepage/img6.jpg");
 		}else{
-			$("#fl"+flag+id).attr("src","/images/homepage/1img1.jpg");
+			$("#fl"+flag+id).attr("src","/static/style/images/homepage/1img1.jpg");
 		}
 	});
 	
@@ -702,7 +702,6 @@ function selectSingleGoods(id){
 function ajaxImageUpload(em) {
 	var $this = $(em);
 	var id =$this.attr("id").substring(9);
-	var imgType =	$("#imgType").val();
 	var file = $("#fileimg"+id).val();
 	if(file==""){
 		alert("请选择文件");
@@ -723,8 +722,12 @@ function ajaxImageUpload(em) {
 		 alert("只能上传图片!");
 		 return false;
 	 }else{
+        var date = new Date();
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        var path = "pagemanager/"+year+"/"+month;
 		 $.ajaxFileUpload({
-	            url: '../cmsImageControler/uploadImage.sc?type='+imgType, 
+	            url: '/cmsImageControler/uploadImage.sc?type=1&path='+path,
 	            type: 'post',
 	            secureuri: false, //一般设置为false
 	            fileElementId: 'fileimg'+id, // 上传文件的id、name属性名
@@ -732,19 +735,19 @@ function ajaxImageUpload(em) {
 	            success: function(data){  
 	                if(data.status == "success"){
 	                	alert("上传成功！");
-	                	$("#iptimg"+id).attr("src",data.picpath);
-		                $("#img"+id).val(data.picpath);
-		                $("#fl"+flag+id).attr("src",data.picpath);
+	                	$("#iptimg"+id).attr("src",data.imageUrl);
+		                $("#img"+id).val(data.imageUrl);
+		                $("#fl"+flag+id).attr("src",data.imageUrl);
 	                }else{
 	                	alert(data.errorDesc);
-	                	$("#iptimg"+id).attr("src","/images/homepage/1img1.jpg");
-		                $("#fl"+flag+id).attr("src","/images/homepage/1img1.jpg");
+	                	$("#iptimg"+id).attr("src","/static/style/images/homepage/1img1.jpg");
+		                $("#fl"+flag+id).attr("src","/static/style/images/homepage/1img1.jpg");
 	                }
 	            },
 	            error: function(data, e){ 
 	                alert(e);
 	                alert("上传失败！");
-	                $("#iptimg"+id).attr("src","/images/homepage/1img1.jpg");
+	                $("#iptimg"+id).attr("src","/static/style/images/homepage/1img1.jpg");
 	            }
 	        });
 	 }
@@ -771,13 +774,8 @@ function getArticleName(em){
 	$("#title"+id).val(txt);
 }
 //返回
-function goto_back(navigationId,activityId){
-	if(activityId == ''){
-		location = "/system/CmsNavigationController/toEditNavigation.sc?navigationId="+navigationId;
-	}else{
-		location = "/system/CmsActivityController/toEditActivity.sc?activityId="+activityId+"&navigationId="+navigationId;
-	}
-	
+function goto_back(pageManagerId){
+	location = "/pageManager/editPage.sc?id="+pageManagerId;
 }
 function checkText(str){
 	 return !(/^[^\|"'<>]*$/.test(str));
@@ -807,7 +805,7 @@ function setRecommend2Rows(){
 		var num = parseInt(rows,10)*parseInt(cols,10);
 		var divHtml = '';
 		for(var i = 1 ; i <= num ;i++){
-			divHtml = divHtml + '<div class="col'+cols+'"><a href="#"><img id="fl108'+i+'" src="/images/homepage/tuijian1.jpg" /></a><span class="num" style="display:none;">'+i+'.</span><p>标题'+i+'</p></div>';
+			divHtml = divHtml + '<div class="col'+cols+'"><a href="#"><img id="fl108'+i+'" src="/static/style/images/homepage/tuijian1.jpg" /></a><span class="num" style="display:none;">'+i+'.</span><p>标题'+i+'</p></div>';
 
 		}
 
@@ -965,7 +963,6 @@ function checkForm(){
 	    		}
 			 	return false;
 			 }
-	   		 $("#linkUrl"+i).val("");
 	   		 $("#commonId"+i).val(commonId);
 	     }
 		//web专题或手动输入链接
@@ -981,8 +978,7 @@ function checkForm(){
 				alert("请输入url链接!");
 				return false;
 			}else{
-				$("#linkUrl"+i).val(linkUrl);
-				$("#commonId"+i).val(commonId);
+				$("#commonId"+i).val(linkUrl);
 			}
 		}
 		//关键字列表
@@ -992,7 +988,6 @@ function checkForm(){
 				alert("请输入关键字!");
 				return false;
 			}else{
-				$("#linkUrl"+i).val("");
 				$("#commonId"+i).val(commonId);
 			}
 		}
@@ -1004,17 +999,17 @@ function checkForm(){
 			 	return false;
 			 }
 	 	 }
-		//优购快报
-		if(subType==8){
-		   	commonId =$("#articleName"+i+" option:selected").val();
-		   	if(commonId == null || commonId ==""){
-			 	alert("请选择优购快报!");
-			 	return false;
-			}
-	   		 var articleNameAndId = commonId.split(";");
-	   		 $("#commonId"+i).val(articleNameAndId[0]);
-			 $("#linkUrl"+i).val(articleNameAndId[1]);
-		 }
+		// //优购快报
+		// if(subType==8){
+		//    	commonId =$("#articleName"+i+" option:selected").val();
+		//    	if(commonId == null || commonId ==""){
+		// 	 	alert("请选择优购快报!");
+		// 	 	return false;
+		// 	}
+	   	// 	 var articleNameAndId = commonId.split(";");
+	   	// 	 $("#commonId"+i).val(articleNameAndId[0]);
+		// 	 $("#linkUrl"+i).val(articleNameAndId[1]);
+		//  }
 		
 		$("#subType"+i).val(subType);
 		//判断轮播图必填项---begin
@@ -1144,14 +1139,14 @@ function addCommodity(){
 			          "<img src='"+item.defaultPic+"'/>"+
 			          "<p>库存："+item.inventoryNumber+"</p>"+
 			          "<p>¥"+item.salePriceN+"<span>/¥<del>"+item.publicPrice+"</del></span></p>"+
-		              "<a href='javascript:void(0);'><img class='close delCommodity' src='/images/homepage/close.png'></a></div>";
+		              "<a href='javascript:void(0);'><img class='close delCommodity' src='/static/style/images/homepage/close.png'></a></div>";
 			}
 			if(flag == 15){
 				html+="<div class='goodThreediv'>"+
 				"<img src='"+item.defaultPic+"' class='goodDivImg'/>"+
 				"<p>库存："+item.inventoryNumber+"</p>"+
 				"<p>¥"+item.salePriceN+"<span>/¥<del>"+item.publicPrice+"</del></span></p>"+
-				"<a href='javascript:void(0);'><img class='close delCommodity' src='/images/homepage/close.png'></a></div>";
+				"<a href='javascript:void(0);'><img class='close delCommodity' src='/static/style/images/homepage/close.png'></a></div>";
 			}
 		});
 		$("#commodity").val("");
