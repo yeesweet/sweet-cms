@@ -420,6 +420,7 @@ public class TopicController extends BaseController {
             CommodityVo commodityVo = commodityVoMap.get(commodityCodes[i]);
             TopicCommodity topicC = new TopicCommodity();
             topicC.setCommodityNo(commodityCodes[i]);
+            topicC.setTopicId(id);
             List<TopicCommodity> topicCommodityList = topicCommodityService.getCommodityList(topicC);
             if(commodityVo != null && !(topicCommodityList != null && topicCommodityList.size()>0)){
                 TopicCommodity topicCommodity = new TopicCommodity();

@@ -122,7 +122,7 @@
                                 商品编号：
                                 <textarea rows="5" cols="35" name="activeTopicIds"></textarea>
                                 <span>&nbsp;</span><span></span>
-                                <a class="l-btn" onclick="addCommodityByIds(this)" ><span>添加商品</span></a>&nbsp;&nbsp;
+                                <a class="l-btn" onclick="addCommodityByIds(this,${topic.id})" ><span>添加商品</span></a>&nbsp;&nbsp;
                                 <a class="l-btn" onclick="javascript:selectGoods();"><span>按条件添加商品</span></a>
                                 &nbsp;&nbsp;
                                 <br/><br/>

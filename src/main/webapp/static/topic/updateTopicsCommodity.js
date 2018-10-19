@@ -4,7 +4,7 @@ var idIsExists=false;//编号是否存在
 var commodityNos="";//已添加的商品编号
 
 //按编号添加商品
-function addCommodityByIds(obj){
+function addCommodityByIds(obj,topicId){
 	var commodityText1 = $.trim($(obj).prev().prev().prev().val());
 	if(commodityText1==""){
 		alert("请输入商品编号！");
@@ -103,7 +103,7 @@ function addCommodityByIds(obj){
         });
 		//将添加的商品保存到活动商品表
 		if(comIds!=""){
-			$.get("/topic/addCommodityByIds.sc?para=new Date()",{"commodityCodes":comIds,"id":$("#id").val(),"sortNum":sortNum},function(data){
+			$.get("/topic/addCommodityByIds.sc?para=new Date()",{"commodityCodes":comIds,"id":topicId,"sortNum":sortNum},function(data){
 				alert("添加商品成功！");
 			});
 		}

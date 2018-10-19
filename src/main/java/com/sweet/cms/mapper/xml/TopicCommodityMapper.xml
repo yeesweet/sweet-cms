@@ -32,6 +32,9 @@
 		<if test="commodityNo != null and commodityNo != ''">
 			and commodity_no = #{commodityNo}
 		</if>
+		<if test="topicId != null and topicId != ''">
+			and topic_id = #{topicId}
+		</if>
 	</select>
 
 	<!--  查询该活动专题编号下的商品 集合		根据它所在的专题活动 -->
