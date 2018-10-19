@@ -48,12 +48,12 @@ public class Topic extends Model<Topic> {
      * 专题开始时间
      */
 	@TableField("start_time")
-	private Date startTime;
+	private String startTime;
     /**
      * 专题结束时间
      */
 	@TableField("end_time")
-	private Date endTime;
+	private String endTime;
     /**
      * 是否启用  1 启用 0 停用
      */
@@ -134,19 +134,19 @@ public class Topic extends Model<Topic> {
 		this.listSort = listSort;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

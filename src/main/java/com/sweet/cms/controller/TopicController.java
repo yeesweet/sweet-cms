@@ -14,6 +14,8 @@ import com.sweet.cms.model.vo.TopicCommodityVo;
 import com.sweet.cms.service.ICommodityService;
 import com.sweet.cms.service.ITopicCommodityService;
 import com.sweet.cms.util.DateUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,9 @@ import com.sweet.cms.model.Topic;
 import com.sweet.cms.service.ITopicService;
 import com.sweet.cms.commons.base.BaseController;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -70,20 +75,31 @@ public class TopicController extends BaseController {
                 // 给当前循环得到的活动专题的商品数量赋值
                 topics.setCommitityCount(topicCommodityService.getCommodityCountByTopicId(topics.getId()));
                 // 判断活动有效期 有效期1，未开始 2,未过期3，已过期4，无有效期
-                Date beginDates = topics.getStartTime();
-                Date endDates = topics.getEndTime();
-                if (beginDates != null && endDates != null) {
-                    if (today.getTime() < beginDates.getTime()) {
-                        topics.setEffectiveType(1);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String beginDate = topics.getStartTime();
+                String endDate = topics.getEndTime();
+                if (beginDate != null && endDate != null &&  beginDate.length() == 21 && endDate.length() == 21) {
+                    Date beginDates = new Date();
+                    Date endDates = new Date();
+                    try {
+                        beginDates = df.parse(beginDate);
+                        endDates = df.parse(endDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    if (today.getTime() < endDates.getTime() && today.getTime() > beginDates.getTime()) {
-                        topics.setEffectiveType(2);
+                    if (beginDates != null && endDates != null) {
+                        if (today.getTime() < beginDates.getTime()) {
+                            topics.setEffectiveType(1);
+                        }
+                        if (today.getTime() < endDates.getTime() && today.getTime() > beginDates.getTime()) {
+                            topics.setEffectiveType(2);
+                        }
+                        if (today.getTime() > endDates.getTime()) {
+                            topics.setEffectiveType(3);
+                        }
+                    } else {
+                        topics.setEffectiveType(4);
                     }
-                    if (today.getTime() > endDates.getTime()) {
-                        topics.setEffectiveType(3);
-                    }
-                } else {
-                    topics.setEffectiveType(4);
                 }
             }
         }
@@ -128,8 +144,7 @@ public class TopicController extends BaseController {
      */
     @PostMapping("/add")
     @ResponseBody
-    public Object add(Topic topic, String[] commodityNoArr) {
-        topic.setIsDisplay(0);
+    public Object add(Topic topic, String[] commodityNoArr,Integer[] sortNoComm) {
         topic.setStatus(0);
         topic.setOperator(this.getStaffName());
         topic.setCreateTime(new Date());
@@ -144,7 +159,7 @@ public class TopicController extends BaseController {
                 TopicCommodity topicCommodity = new TopicCommodity();
                 topicCommodity.setTopicId(id);
                 topicCommodity.setCommodityNo(commodityNo);
-                topicCommodity.setSortNo(i);
+                topicCommodity.setSortNo(sortNoComm[i]);
                 topicCommodity.setStatus(1);
                 topicCommodity.setOperator(this.getStaffName());
                 topicCommodity.setCreateTime(new Date());
@@ -189,6 +204,7 @@ public class TopicController extends BaseController {
         List<String> commodityNoList = new ArrayList<>();
         List<TopicCommodityVo> commodityVoList = new ArrayList<>();
         if(topicCommodityList != null && topicCommodityList.size()>0){
+            topic.setCommitityCount(topicCommodityList.size());
             for(int i=0;i<topicCommodityList.size();i++){
                 TopicCommodity topicCommodity = topicCommodityList.get(i);
                 if(topicCommodity != null){
@@ -319,62 +335,97 @@ public class TopicController extends BaseController {
         return "1";
     }
 
+    /**
+     * 添加专题添加商品编号
+     * @param commodityCodes
+     * @return
+     */
     @GetMapping("/getCommodityByNo")
     @ResponseBody
-    public Object getCommodityByNo(String[] commodityCodes) {
+    public String getCommodityByNo(String[] commodityCodes) {
         List<String> commodityNoList = new ArrayList<>();
+        List<String> sellIdList = new ArrayList<>();
         List<TopicCommodityVo> commodityVoList = new ArrayList<>();
         if(commodityCodes != null && commodityCodes.length>0){
             for(int i=0;i<commodityCodes.length;i++) {
-                commodityNoList.add(commodityCodes[i]);
+                if(StringUtils.isNotBlank(commodityCodes[i])){
+                    commodityNoList.add(commodityCodes[i]);
+                }
             }
             List<CommodityVo> commodityVos = commodityService.getCommodityList(commodityNoList,false,false);
             if(commodityVos != null && commodityVos.size()>0) {
                 for (int i = 0; i < commodityVos.size(); i++) {
                     CommodityVo commodityVo = commodityVos.get(i);
-                    TopicCommodityVo topicCommodityVo = new TopicCommodityVo();
-                    topicCommodityVo.setDefaultPic(commodityVo.getDefaultPic());
-                    topicCommodityVo.setCommodityName(commodityVo.getCommodityName());
-                    topicCommodityVo.setCommodityNo(commodityVo.getCommodityNo());
-                    topicCommodityVo.setStock(commodityVo.getStock());
-                    topicCommodityVo.setMarketPrice(commodityVo.getMarketPrice());
-                    topicCommodityVo.setSalePrice(commodityVo.getSalePrice());
-                    topicCommodityVo.setPropNo(commodityVo.getPropNo());
-                    topicCommodityVo.setStatus(1);
-                    commodityVoList.add(topicCommodityVo);
+                    if(commodityVo.getStock() >0){
+                        TopicCommodityVo topicCommodityVo = new TopicCommodityVo();
+                        topicCommodityVo.setDefaultPic(commodityVo.getDefaultPic());
+                        topicCommodityVo.setCommodityName(commodityVo.getCommodityName());
+                        topicCommodityVo.setCommodityNo(commodityVo.getCommodityNo());
+                        topicCommodityVo.setStock(commodityVo.getStock());
+                        topicCommodityVo.setMarketPrice(commodityVo.getMarketPrice());
+                        topicCommodityVo.setSalePrice(commodityVo.getSalePrice());
+                        topicCommodityVo.setPropNo(commodityVo.getPropNo());
+                        topicCommodityVo.setStatus(commodityVo.getCommodityStatus());
+                        commodityVoList.add(topicCommodityVo);
+                    }
+                    if(commodityVo.getStock() == 0){
+                        sellIdList.add(commodityVo.getCommodityNo());
+                    }
                 }
             }
         }
-        return commodityVoList;
+        JSONObject object = new JSONObject();
+        JSONArray sellIds = new JSONArray();
+        sellIds.addAll(sellIdList);
+        object.put("sellIds", sellIds);
+        JSONArray result = new JSONArray();
+        result.addAll(commodityVoList);
+        object.put("result", result);
+        return object.toString();
     }
 
     /**
      * 添加活动商品 活动编辑里面
      *
      * @param commodityCodes 要添加的商品编号
-     * @param topicId 活动编号
+     * @param id
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "addCommodityByIds")
-    public String addCommodityByIds(String[] commodityCodes, Long topicId, Integer sortNum, final HttpServletRequest request) throws Exception {
+    public String addCommodityByIds(String[] commodityCodes, Long id, Integer sortNum, final HttpServletRequest request) throws Exception {
         if (commodityCodes == null) {
             logger.error("添加活动专题失败,commodityCodes为空.");
             return "error";
         }
+        List<String> commodityNoList = new ArrayList<>();
+        List<TopicCommodityVo> commodityVoList = new ArrayList<>();
+        if(commodityCodes != null && commodityCodes.length>0) {
+            for (int i = 0; i < commodityCodes.length; i++) {
+                if(StringUtils.isNotBlank(commodityCodes[i])){
+                    commodityNoList.add(commodityCodes[i]);
+                }
+            }
+        }
+        Map<String,CommodityVo> commodityVoMap = new HashMap<>();
+        List<CommodityVo> commodityVos = commodityService.getCommodityList(commodityNoList,false,false);
+        if(commodityVos != null && commodityVos.size()>0) {
+            for (int i = 0; i < commodityVos.size(); i++) {
+                CommodityVo commodityVo = commodityVos.get(i);
+                commodityVoMap.put(commodityVo.getCommodityNo(),commodityVo);
+            }
+        }
         // 循环将这些商品添加到活动商品表
         for (int i = 0; i < commodityCodes.length; i++) {
-            Commodity commodity = new Commodity();
-            commodity.setCommodityNo(commodityCodes[i]);
-            CommodityVo commodityVo = commodityService.selectCommodityInfo(commodity);
+            CommodityVo commodityVo = commodityVoMap.get(commodityCodes[i]);
             TopicCommodity topicC = new TopicCommodity();
             topicC.setCommodityNo(commodityCodes[i]);
             List<TopicCommodity> topicCommodityList = topicCommodityService.getCommodityList(topicC);
             if(commodityVo != null && !(topicCommodityList != null && topicCommodityList.size()>0)){
                 TopicCommodity topicCommodity = new TopicCommodity();
                 topicCommodity.setCommodityNo(commodityCodes[i]);// 活动商品编号
-                topicCommodity.setTopicId(topicId);// 活动编号
-                topicCommodity.setStatus(1);// 默认显示
+                topicCommodity.setTopicId(id);// 活动编号
+                topicCommodity.setStatus(commodityVo.getCommodityStatus());// 默认显示
                 topicCommodity.setSortNo(sortNum + (i + 1));// 默认排序都是当前最大的排序号加1
                 topicCommodity.setCreateTime(new Date());
                 topicCommodity.setUpdateTime(new Date());
@@ -384,7 +435,7 @@ public class TopicController extends BaseController {
             }
         }
         Topic topic = new Topic();
-        topic.setId(topicId);
+        topic.setId(id);
         topic.setUpdateTime(new Date());
         topicService.updateById(topic);
         return "success";
