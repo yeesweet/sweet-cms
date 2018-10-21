@@ -85,7 +85,7 @@
 	          </div>
 	      </div><!--leftCon1-->
 	      <div class="rightCon1">
-	      <form id="form1" name="form1" action="${BasePath}/system/CmsModuleController/saveModule.sc" method="post">
+	      <form id="form1" name="form1" action="${BasePath}/CmsModuleController/saveModule.sc" method="post">
 	      	  <input type="hidden" id="effectRange" name="effectRange" value="1" />
 	      	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle}" />
 			  <input type="hidden" id="moduleType" name="moduleType" value="${(moduleType == null || moduleType == "")?'108':moduleType}" />
