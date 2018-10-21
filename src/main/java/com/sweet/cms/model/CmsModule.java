@@ -54,8 +54,10 @@ public class CmsModule extends Model<CmsModule>  implements Serializable {
 	@TableField("end_time")
 	private Date endTime;
 	//开始时间(页面使用)
+	@TableField(value = "starttime",exist = false)
 	private String starttime;
 	//结束时间(页面使用)
+	@TableField(value = "endtime",exist = false)
 	private String endtime;
 	//创建时间
 	@TableField("create_time")
