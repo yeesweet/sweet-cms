@@ -1,6 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/commons/global.jsp" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <%@ include file="/commons/basejs.jsp" %>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content=" , ,优购网,B网络营销系统,商品管理" />
 	<meta name="Description" content=" , ,B网络营销系统-商品管理" />
@@ -33,7 +35,7 @@
 					<span class="btn_r"></span> 
 				</div>
 			</div>
-		</div>
+	</div>
     <!--工具栏end-->
   	<!-- 活动专题正文部分 -->
 	<div class="list_content">
@@ -42,7 +44,7 @@
 			    <ul class="tab">
 			        <li class="curr"><span>编辑</span></li>
 			    </ul>
-			  </div>
+		</div>
         <!--当前位置end-->
 	<!--主体start--> 
     <div id="modify" class="modify_homepage">
@@ -142,7 +144,7 @@
 		                             <div style="width:50%;">
                                          <c:choose>
                                              <c:when test="${not empty cmsModule.moduleDetails[3] && !(cmsModule.moduleDetails[3] eq null) && not empty cmsModule.moduleDetails[3].imgUrl && !(cmsModule.moduleDetails[3].imgUrl eq null)  && cmsModule.moduleDetails[3].imgUrl != ''}">
-                                                 <img id="fl24" src="${cmsModule.moduleDetails[3].imgUrl!}" />
+                                                 <img id="fl24" src="${cmsModule.moduleDetails[3].imgUrl}" />
                                              </c:when>
                                              <c:otherwise>
                                                  <img id="fl24" src="${staticPath }/static/style/images/homepage/2img1.jpg" />
@@ -650,10 +652,10 @@
 	      	  <input type="hidden" id="id" name="id" value="${cmsModule.id}" />
 	      	  <input type="hidden" id="effectRange" name="effectRange" value="1" />
 	      	  <input type="hidden" id="imgType" name="imgType" value="5" /><!-- 图片类型：5：专题icon -->
-      	  	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle!''}" />
-	      	  <input type="hidden" id="moduleType" name="moduleType" value="${moduleType!'1'}" />
-	          <input type="hidden" id="navigationId" name="navigationId" value="${navigationId!''}" />
-	          <input type="hidden" id="activityId" name="activityId" value="${activityId!''}" />
+      	  	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle}" />
+	      	  <input type="hidden" id="moduleType" name="moduleType" value="${moduleType}" />
+	          <input type="hidden" id="navigationId" name="navigationId" value="${navigationId}" />
+	          <input type="hidden" id="activityId" name="activityId" value="${activityId}" />
 	          <div style="color:#3d4245;font-size:14px;">
 	          	<p>当前状态：
                     <c:choose><c:when test="${cmsModule.isDisplay==1}">启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${activityId}');" style="margin-left:40px;"/>
@@ -683,8 +685,8 @@
 	              </c:if>
                   <c:if test="${not empty moduleStyle && !(moduleStyle eq null) && moduleStyle!=20}">
 	              <p><span class="red">*</span>模块尺寸：
-	              	宽*高=<input type="text" class="ipt_text" name="width" id="width" value="${cmsModule.width!''}"/>px
-				     *&nbsp;&nbsp;<input type="text" class="ipt_text" name="height" id="height" value="${cmsModule.height!''}"/>px
+	              	宽*高=<input type="text" class="ipt_text" name="width" id="width" value="${cmsModule.width}"/>px
+				     *&nbsp;&nbsp;<input type="text" class="ipt_text" name="height" id="height" value="${cmsModule.height}"/>px
 	              </p>
                   </c:if>
 	              <p style="display:none;"><span class="red">*</span>模块间距：
@@ -729,8 +731,7 @@
 								  </c:if>
                                   <c:if test="${cmsModule.moduleStyle==17}">
                                       <p class="title"><span class="red">&nbsp;</span>模块名称：
-                                          <input id="title${cmsModuleDetailS.index+1}" class="ipt_text" type="text"
-                                                 value="${cmsModuleDetail.title! }" name="moduleDetails[${cmsModuleDetailS.index}].title"/>
+                                          <input id="title${cmsModuleDetailS.index+1}" class="ipt_text" type="text" value="${cmsModuleDetail.title}" name="moduleDetails[${cmsModuleDetailS.index}].title"/>
 								  </c:if>
 								  <c:if test="${cmsModule.moduleStyle!=19}">
                                       <%@ include file="/WEB-INF/views/admin/pageManager/module/module_link_position.jsp" %>
@@ -771,6 +772,7 @@
 	    </div>
 	  </div>
 	</div>
-</div>	  
+</div>
+    </div>
 </body>
 </html>

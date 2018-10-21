@@ -56,7 +56,7 @@
 					<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && status.index%(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols))==0}">
 	             	<div class="recommendlist"  id="editDiv108" >
 					   </c:if>
-	                    <div class="col${cmsModule.cols?default(4)}">
+	                    <div class="col<c:choose><c:when test="${not empty cmsModule.cols && !(cmsModule.cols eq null)}">${cmsModule.cols}</c:when><c:otherwise>4</c:otherwise></c:choose>">
 	                        <a href="#">
 								<c:choose>
 									<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
@@ -125,13 +125,13 @@
 	              	</select>
 	              </p>
                   <p><span class="red">*</span>模块行数：
-                      <input class="ipt_text" name="rows" id="rows" value="${cmsModule.rows?default(0)}" />
+                      <input class="ipt_text" name="rows" id="rows" value="<c:choose><c:when test="${not empty cmsModule.rows && !(cmsModule.rows eq null)}">${cmsModule.rows}</c:when><c:otherwise>0</c:otherwise></c:choose>" />
                   </p>
                   <p><span class="red">*</span>模块列数：
-                      <input class="ipt_text" name="cols" id="cols" value="${cmsModule.cols?default(0)}" />
+                      <input class="ipt_text" name="cols" id="cols" value="<c:choose><c:when test="${not empty cmsModule.cols && !(cmsModule.cols eq null)}">${cmsModule.cols}</c:when><c:otherwise>0</c:otherwise></c:choose>" />
                   </p>
                   <p><span class="red">*</span>模块高：
-                      <input class="ipt_text" name="height" id="height" value="${cmsModule.height?default(0)}" />
+                      <input class="ipt_text" name="height" id="height" value="<c:choose><c:when test="${not empty cmsModule.height && !(cmsModule.height eq null)}">${cmsModule.height}</c:when><c:otherwise>0</c:otherwise></c:choose>" />
                       <input style="display: none" class="ipt_text" name="width" id="width" value="640" />
 				  </p>
                   <p style="margin-left: 10px;">模块背景：
@@ -141,7 +141,7 @@
                           <option value="2" <c:if test="${not empty cmsModule.typeBg && !(cmsModule.typeBg eq null)  && cmsModule.typeBg==2}">selected="selected"</c:if>>背景色</option>
                       </select>
                   </p>
-                  <div id="bg1" style="margin-left: 10px;<#if !(cmsModule.typeBg?? && cmsModule.typeBg==1)>display:none</#if>">
+                  <div id="bg1" style="margin-left: 10px;<c:if test="${not empty cmsModule.typeBg && !(cmsModule.typeBg eq null) && cmsModule.typeBg == 1}">display:none</c:if>">
                       <p>图片：
                           <input id="fileimg0" class="fileimg" type="file" name="file"/>
                           <input id="uploadBtn0" class="uploadBtn" type="button" onclick="javascript:ajaxImageUploadBg(this)" value="上传图片"/>
@@ -159,7 +159,7 @@
 						  </c:choose>
                       </div>
                   </div>
-                  <div id="bg2" style="margin:0 0 35px 10px;<#if !(cmsModule.typeBg?? && cmsModule.typeBg==2)>display:none</#if>">
+                  <div id="bg2" style="margin:0 0 35px 10px;<c:if test="${not empty cmsModule.typeBg && !(cmsModule.typeBg eq null)  && cmsModule.typeBg==2}">display:none</c:if>">
                       <div style="float:left;"><p>色值：<input id="bgColor" name="bgColor" type="text" class="ipt_text" value="${cmsModule.bg}" onblur="javascript:changeBgColor();"/></p></div>
                       <div id="bgColorBlock" style="width: 15px;height: 15px;margin: 5px 20px 0 10px;float:left;background-color:${cmsModule.bg};"></div>
                   </div>
@@ -191,12 +191,7 @@
 										</c:choose>
 									<input id="img${status.index+1}" type="hidden" name="moduleDetails[${status.index}].imgUrl" value="${cmsModuleDetail.imgUrl}"/>
 									</div>
-									<!--
-									<p class="title"><span class="red">&nbsp;</span>模块名称：
-										<input id="title${status.index+1}" class="ipt_text" type="text"
-											   value="${cmsModuleDetail.title! }" name="moduleDetails[${status.index}].title"/>
-									</p>
-									-->
+
 									<%@ include file="/WEB-INF/views/admin/pageManager/module/module_link_position.jsp" %>
 									<input type="hidden" name="moduleDetails[${status.index}].sortNo" id="sortNo${status.index+1}" value="${status.index+1}" />
 									<input type="hidden" name="moduleDetails[${status.index}].commonId" id="commonId${status.index+1}" value="${cmsModuleDetail.commonId}"/>
