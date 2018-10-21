@@ -429,7 +429,7 @@
 	              	 <input type="text" id="moduleName" name="moduleName" class="ipt_text" style="width:340px;"/>
 	              </p>
 	              <p><span class="pl10"></span>起止时间：
-	              	 <input type="text" class="ipt_text" readonly="readonly" name="starttime" id="starttime" class="Wdate" 
+	              	 <input type="text" class="ipt_text" readonly="readonly" name="starttime" id="starttime" class="Wdate"
 				            onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true,
 				            maxDate:'#F{$dp.$D(\'endtime\')||\'2020-10-01 00:00:00\'}'})" size="20"/>&nbsp;&nbsp;
 				          至  &nbsp;&nbsp;<input type="text" class="ipt_text" readonly="readonly"  name="endtime" id="endtime"  class="Wdate"

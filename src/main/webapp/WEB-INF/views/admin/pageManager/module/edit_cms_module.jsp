@@ -20,33 +20,33 @@
     <script type="text/javascript" src="${staticPath }/static/component/imageSelector.js?v=201809242210"></script>
     <script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>
     <script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>
-    <script type="text/javascript" src="${staticPath }/static/activity/cmsModule.js?v=201809242210"></script>
+    <%--<script type="text/javascript" src="${staticPath }/static/activity/cmsModule.js?v=201809242210"></script>--%>
     <script type="text/javascript" src="${staticPath }/static/activity/module_common.js?v=201809242210"></script>
 </head>
 <body style="background:#f6f6f6">
 <div class="container">
-  	<!--工具栏start--> 
+  	<!--工具栏start-->
     <div class="toolbar">
 			<div class="t-content"> <!--操作按钮start-->
 				<div class="btn" onclick="goto_back('${navigationId}','${activityId}')">
 					<span class="btn-back"></span>
 					<b class="ico_btn back"></b>
 					<span class="btn_txt">返回</span>
-					<span class="btn_r"></span> 
+					<span class="btn_r"></span>
 				</div>
 			</div>
 	</div>
     <!--工具栏end-->
   	<!-- 活动专题正文部分 -->
 	<div class="list_content">
-		<!--当前位置start--> 
+		<!--当前位置start-->
         <div class="top clearfix">
 			    <ul class="tab">
 			        <li class="curr"><span>编辑</span></li>
 			    </ul>
 		</div>
         <!--当前位置end-->
-	<!--主体start--> 
+	<!--主体start-->
     <div id="modify" class="modify_homepage">
 		<!-- <div class="left"></div> -->
 	    <div class="right">
@@ -54,7 +54,7 @@
 	         <div class="divlist"><c:if test="${not empty cmsModule.moduleStyle && !(cmsModule.moduleStyle eq null)}">
 				 <c:choose>
 				<c:when test="${cmsModule.moduleStyle==103}">
-		          	<div class="editDiv" id="editDiv0" style="display:block">              
+		          	<div class="editDiv" id="editDiv0" style="display:block">
 		              	<div class="divs">
 		                	<div class="writetext"><img src="${staticPath }/static/style/images/homepage/img3.jpg" /></div>
 		             	</div>
@@ -62,7 +62,7 @@
 		            </div>
 				</c:when>
                 <c:when test="${cmsModule.moduleStyle==1}">
-		            <div class="editDiv" id="editDiv1" style="display:block">              
+		            <div class="editDiv" id="editDiv1" style="display:block">
 		            	<div class="divs">
 		                	<div class="fl fl1"  style="width:40%;height:224px;">
                                 <c:choose>
@@ -104,7 +104,7 @@
 		            </div>
                 </c:when>
                 <c:when test="${cmsModule.moduleStyle==2}">
-		            <div class="editDiv" id="editDiv2" style="display:block">              
+		            <div class="editDiv" id="editDiv2" style="display:block">
 		              	<div class="divs">
 		                   <div class="fl fl2" style="width:40%;height:225px;">
                                <c:choose>
@@ -162,15 +162,15 @@
 		            <div class="editDiv" id="editDiv3" style="display:block">
 		              	<div class="addBox1">
                             <c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
-                                <c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
+                                <c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="cmsModuleDetailS">
                                     <div class="divs oneimg">
                                         <div class="fl fl3" style="width:100%;">
                                     <c:choose>
                                         <c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
-                                            <img id="fl3${cmsModuleDetail_index+1}" src="${cmsModuleDetail.imgUrl}" />
+                                            <img id="fl3${cmsModuleDetailS.index+1}" src="${cmsModuleDetail.imgUrl}" />
                                         </c:when>
                                         <c:otherwise>
-                                            <img id="fl3${cmsModuleDetail_index+1}" src="${staticPath }/static/style/images/homepage/img6.jpg" />
+                                            <img id="fl3${cmsModuleDetailS.index+1}" src="${staticPath }/static/style/images/homepage/img6.jpg" />
                                         </c:otherwise>
                                     </c:choose>
                                         <span class="num"></span>
@@ -180,14 +180,14 @@
                                 </c:forEach>
 							</c:if>
 		              	</div>
-		               	<div class="Addimg">                  
+		               	<div class="Addimg">
 		                	<a href="javascript:void(0)" class="addone">＋</a>
 		              	</div>
 		              	<p class="areaName">模块3</p>
 					</div>
                 </c:when>
                 <c:when test="${cmsModule.moduleStyle==4}">
-		           	<div class="editDiv" id="editDiv4" style="display:block">              
+		           	<div class="editDiv" id="editDiv4" style="display:block">
 		              	<div class="divs">
 		                  	<div class="fl fl4" style="width:33.3%;">
                                 <c:choose>
@@ -265,14 +265,14 @@
                                 </c:forEach>
 		                    </c:if>
 		              	</div>
-		               	<div class="Addimg">                  
+		               	<div class="Addimg">
 		                  	<a href="javascript:void(0)" class="addtwo">＋</a>
 		              	</div>
 		              	<p class="areaName">模块5</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==6}">
-		            <div class="editDiv" id="editDiv6" style="display:block">              
+		            <div class="editDiv" id="editDiv6" style="display:block">
 		              	<div class="divs">
 		                	<div class="fl fl6" style="width:226px;margin-left:7px;height:184px;">
                                 <c:choose>
@@ -308,13 +308,13 @@
                                     </c:choose>
 		                        	<span class="num">3.</span>
 		                    	</div>
-		                  	</div> 
+		                  	</div>
 		              	</div>
 		              	<p class="areaName">模块6</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==7}">
-		            <div class="editDiv" id="editDiv7" style="display:block">              
+		            <div class="editDiv" id="editDiv7" style="display:block">
 		              	<div class="divs">
 		                	<div class="fl fl7" style="width:226px;margin-left:7px;">
 		                    	<div style="height:85px;">
@@ -339,7 +339,7 @@
                                     </c:choose>
 		                          	<span class="num">2.</span>
 		                      	</div>
-		                  	</div>   
+		                  	</div>
 		                  	<div class="fl fl7"  style="width:226px;height:184px;float:right;margin-right:7px">
                                 <c:choose>
                                     <c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
@@ -356,7 +356,7 @@
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==8}">
-		            <div class="editDiv" id="editDiv8" style="display:block">              
+		            <div class="editDiv" id="editDiv8" style="display:block">
 		            	<div class="divs">
 		                	<div class="fl fl8" style="width:50%;height:185px;">
                                 <c:choose>
@@ -367,8 +367,8 @@
                                         <img id="fl81" src="${staticPath }/static/style/images/homepage/1img1.jpg" />
                                     </c:otherwise>
                                 </c:choose>
-			                    <span class="num">1.</span>                   
-		                  	</div>   
+			                    <span class="num">1.</span>
+		                  	</div>
 		                  	<div class="fl fl8" style="width:50%;height:185px;">
                                 <c:choose>
                                     <c:when test="${not empty cmsModule.moduleDetails[1] && !(cmsModule.moduleDetails[1] eq null) && not empty cmsModule.moduleDetails[1].imgUrl && !(cmsModule.moduleDetails[1].imgUrl eq null)  && cmsModule.moduleDetails[1].imgUrl != ''}">
@@ -378,14 +378,14 @@
                                         <img id="fl82" src="${staticPath }/static/style/images/homepage/2img1.jpg" />
                                     </c:otherwise>
                                 </c:choose>
-			                    <span class="num">2.</span> 
+			                    <span class="num">2.</span>
 		                  	</div>
 		              	</div>
 		              	<p class="areaName">模块8</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==9}">
-		            <div class="editDiv" id="editDiv9" style="display:block">              
+		            <div class="editDiv" id="editDiv9" style="display:block">
 		            	<div class="divs">
 		                	<div class="fl fl9" style="width:466px;margin:0 7px 15px 7px;">
                                 <c:choose>
@@ -396,7 +396,7 @@
                                         <img id="fl91" src="${staticPath }/static/style/images/homepage/img6.jpg" />
                                     </c:otherwise>
                                 </c:choose>
-		                      	<span class="num">1.</span>                                       
+		                      	<span class="num">1.</span>
 		                  	</div>
 		                  	<div class="fl fl9" style="width:226px;height:185px;float:left;margin-left:7px;;">
                                 <c:choose>
@@ -407,8 +407,8 @@
                                         <img id="fl92" src="${staticPath }/static/style/images/homepage/img1.jpg" />
                                     </c:otherwise>
                                 </c:choose>
-		                      	<span class="num">2.</span>                                       
-		                  	</div>   
+		                      	<span class="num">2.</span>
+		                  	</div>
 		                  	<div class="fl fl9" style="width:226px;height:185px;float:right;margin-right:7px;">
                                 <c:choose>
                                     <c:when test="${not empty cmsModule.moduleDetails[2] && !(cmsModule.moduleDetails[2] eq null) && not empty cmsModule.moduleDetails[2].imgUrl && !(cmsModule.moduleDetails[2].imgUrl eq null)  && cmsModule.moduleDetails[2].imgUrl != ''}">
@@ -418,14 +418,14 @@
                                         <img id="fl93" src="${staticPath }/static/style/images/homepage/img1.jpg" />
                                     </c:otherwise>
                                 </c:choose>
-			                    <span class="num">3.</span> 
+			                    <span class="num">3.</span>
 		                  	</div>
 		            	</div>
 		              	<p class="areaName">模块9</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==10}">
-		            <div class="editDiv" id="editDiv10" style="display:block">              
+		            <div class="editDiv" id="editDiv10" style="display:block">
 		            	<div class="divs">
                             <c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
 								<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="cmsModuleDetailS">
@@ -468,7 +468,7 @@
                                 </c:forEach>
                             </c:if>
 		              	</div>
-		               	<div class="Addimg">                  
+		               	<div class="Addimg">
 		                	<a href="javascript:void(0)" class="addthree">＋</a>
 		              	</div>
 		              	<p class="areaName">模块11</p>
@@ -476,7 +476,7 @@
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==12}">
 					<div class="editDiv" id="editDiv12" style="display:block">
-		                <div class="divs">                       
+		                <div class="divs">
 		                  	<div class="fl fl12" style="width:100%;" >
 		                      	<a href="javascript:void(0);" class="clickLeft"><img src="${staticPath }/static/style/images/activity/div_arrowleft.jpg" /></a>
 		                      	<div class="allimgs">
@@ -502,14 +502,14 @@
 				                    </div>
 		                    	</div>
 		                      	<a href="javascript:void(0);" class="clickRight"><img src="${staticPath }/static/style/images/activity/div_arrowright.jpg" /></a>
-		                  	</div>                                          
+		                  	</div>
 		              	</div>
 		              	<p class="areaName">商品模块</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==15}">
 					<div class="editDiv" id="editDiv15" style="display:block">
-		                <div class="divs">                   
+		                <div class="divs">
 		                  	<div class="fl" style="width:100%;" id="leftModule15">
                                 <c:if test="${not empty cmsModule.moduleCommoditys && !(cmsModule.moduleCommoditys eq null)}">
                                     <c:forEach  items="${cmsModule.moduleCommoditys}" var="cmsModuleCommodity">
@@ -529,7 +529,7 @@
                                         </div>
                                     </c:forEach>
                                 </c:if>
-		                  	</div>                                          
+		                  	</div>
 		              	</div>
 		              	<p class="areaName">商品模块</p>
 		            </div>
@@ -547,14 +547,14 @@
 	                            		<img src="${staticPath }/static/style/images/homepage/2img1.jpg"/>
 	                               </div>
 		                    	</div>
-	                    	</div> 
+	                    	</div>
 		              	</div>
 		              	<p class="areaName">商品模块</p>
 		            </div>
                  </c:when>
                  <c:when test="${cmsModule.moduleStyle==17}">
 					<div class="editDiv" id="editDiv17" style="display:block">
-		                <div class="divs">                     
+		                <div class="divs">
 		                  	<div class="fl fl17" style="width:100%;" >
 		                      	<a href="javascript:void(0);" class="clickLeft"><img src="${staticPath }/static/style/images/activity/div_arrowleft.jpg" /></a>
 		                      	<div class="allimgs">
@@ -578,9 +578,9 @@
 				                    </div>
 		                    	</div>
 		                      	<a href="javascript:void(0);" class="clickRight"><img src="${staticPath }/static/style/images/activity/div_arrowright.jpg" /></a>
-		                  	</div>                                          
+		                  	</div>
 		              	</div>
-		              	<div class="Addimg">                  
+		              	<div class="Addimg">
 		                  <a href="javascript:void(0)" class="addfour">＋</a>
 		              	</div>
 		              	<p class="areaName">模块12</p>
@@ -645,17 +645,16 @@
                  </c:when>
 				</c:choose>
              </c:if></div><!--divlist-->
-	
+
 	      </div><!--leftCon-->
 	      <div class="rightCon1">
-	      <form id="form1" name="form1" action="${path}/system/CmsModuleController/updateModule.sc" method="post">
+	      <form id="form1" name="form1" action="${path}/cmsModuleController/updateModule.sc" method="post">
 	      	  <input type="hidden" id="id" name="id" value="${cmsModule.id}" />
 	      	  <input type="hidden" id="effectRange" name="effectRange" value="1" />
 	      	  <input type="hidden" id="imgType" name="imgType" value="5" /><!-- 图片类型：5：专题icon -->
       	  	  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle}" />
-	      	  <input type="hidden" id="moduleType" name="moduleType" value="${moduleType}" />
-	          <input type="hidden" id="navigationId" name="navigationId" value="${navigationId}" />
-	          <input type="hidden" id="activityId" name="activityId" value="${activityId}" />
+              <input type="hidden" id="moduleType" name="moduleType" value="${(moduleType == null || moduleType == "")?'1':moduleType}" />
+              <input type="hidden" id="pageManagerId" name="pageManagerId" value="${pageManagerId}" />
 	          <div style="color:#3d4245;font-size:14px;">
 	          	<p>当前状态：
                     <c:choose><c:when test="${cmsModule.isDisplay==1}">启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${activityId}');" style="margin-left:40px;"/>
@@ -667,7 +666,7 @@
 	              	 <input type="text" id="moduleName" name="moduleName" value="${cmsModule.moduleName}" class="ipt_text" style="width:340px;"/>
 	              </p>
 	              <p><span class="pl10"></span>起止时间：
-	              	 <input type="text" class="ipt_text" readonly="readonly" name="starttime" id="starttime" class="Wdate" 
+	              	 <input type="text" class="ipt_text" readonly="readonly" name="starttime" id="starttime" class="Wdate"
 	              	 		value='<c:if test="${not empty cmsModule.startTime && !(cmsModule.startTime eq null)}"><fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${cmsModule.startTime}" /></c:if>'
 				            onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true,
 				            maxDate:'#F{$dp.$D(\'endtime\')||\'2020-10-01 00:00:00\'}'})" size="20"/>&nbsp;&nbsp;
@@ -678,7 +677,7 @@
 	              </p>
                   <c:if test="${not empty moduleStyle && !(moduleStyle eq null) && moduleStyle==19}">
 	              <p><span class="red">*</span>活动开始时间：
-	              	 <input type="text" class="ipt_text" readonly="readonly" name="remindtime" id="remindtime" class="Wdate" 
+	              	 <input type="text" class="ipt_text" readonly="readonly" name="remindtime" id="remindtime" class="Wdate"
 	              	 		value='<c:if test="${not empty cmsModule.remindTime && !(cmsModule.remindTime eq null)}"><fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${cmsModule.remindTime}" /></c:if>'
 				            onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" size="20"/>&nbsp;&nbsp;
 	              </p>
@@ -736,12 +735,12 @@
 								  <c:if test="${cmsModule.moduleStyle!=19}">
                                       <%@ include file="/WEB-INF/views/admin/pageManager/module/module_link_position.jsp" %>
 								  </c:if>
-                              <input type="hidden" name="moduleDetails[${cmsModuleDetail_index}].sortNo" id="sortNo${cmsModuleDetail_index+1}" value="${cmsModuleDetail_index+1}" />
-                              <input type="hidden" name="moduleDetails[${cmsModuleDetail_index}].commonId" id="commonId${cmsModuleDetail_index+1}" value="${cmsModuleDetail.commonId}"/>
-                              <input type="hidden" name="moduleDetails[${cmsModuleDetail_index}].subType" id="subType${cmsModuleDetail_index+1}" value="${cmsModuleDetail.subType}"/>
-                              <input type="hidden" name="moduleDetails[${cmsModuleDetail_index}].linkUrl" id="linkUrl${cmsModuleDetail_index+1}" value="${cmsModuleDetail.linkUrl}"/>
+                              <input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].sortNo" id="sortNo${cmsModuleDetailS.index+1}" value="${cmsModuleDetailS.index+1}" />
+                              <input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].commonId" id="commonId${cmsModuleDetailS.index+1}" value="${cmsModuleDetail.commonId}"/>
+                              <input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].subType" id="subType${cmsModuleDetailS.index+1}" value="${cmsModuleDetail.subType}"/>
+                              <%--<input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].linkUrl" id="linkUrl${cmsModuleDetailS.index+1}" value="${cmsModuleDetail.linkUrl}"/>--%>
                           </div>
-                          <c:if test="${not empty cmsModule.moduleStyle && !(cmsModule.moduleStyle eq null)  && ((cmsModule.moduleStyle==5 && cmsModuleDetail_index%2!=0) || cmsModule.moduleStyle == 3 || cmsModule.moduleStyle == 11 || cmsModule.moduleStyle == 17)}">
+                          <c:if test="${not empty cmsModule.moduleStyle && !(cmsModule.moduleStyle eq null)  && ((cmsModule.moduleStyle==5 && cmsModuleDetailS.index%2!=0) || cmsModule.moduleStyle == 3 || cmsModule.moduleStyle == 11 || cmsModule.moduleStyle == 17)}">
           					</div>
 						  </c:if>
 					  </c:if>
@@ -773,6 +772,6 @@
 	  </div>
 	</div>
 </div>
-    </div>
+    </div></div>
 </body>
 </html>

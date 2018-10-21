@@ -83,7 +83,7 @@
 	          </div>
 	      </div><!--leftCon1-->
 	      <div class="rightCon1">
-	      <form id="form1" name="form1" action="${BasePath}/system/CmsModuleController/updateModule.sc" method="post">
+	      <form id="form1" name="form1" action="${BasePath}/cmsModuleController/updateModule.sc" method="post">
 	      	  <input type="hidden" id="id" name="id" value="${cmsModule.id}" />
 			  <input type="hidden" id="effectRange" name="effectRange" value="1" />
 			  <input type="hidden" id="moduleStyle" name="moduleStyle" value="${moduleStyle}" />

@@ -566,7 +566,7 @@ function showAdvertType(data,value,id){
 	     $("#tip"+value+id+" span").eq(1).empty();
 	     option =option+"<input id='topicsInput"+id+"' list='topicsName"+id+"' class='ipt_text'/><datalist id='topicsName"+id+"' name='topicsName'>";
 		 for(var i=0; i<data.length ; i ++){
-			 option =option+ "<option id='"+data[i].id+"' value='"+data[i].topicsName+"'>"+data[i].topicsName+"</option>";
+			 option =option+ "<option id='"+data[i].id+"' value='"+data[i].name+"'>"+data[i].name+"</option>";
 	  	 }
 	  	 option =option+"</datalist>";
 	  	 $("#tip"+value+id+" span").eq(1).append(option);
@@ -652,7 +652,7 @@ function showAdvertType(data,value,id){
 		$("#tip"+value+id+" span").eq(1).empty();
 	    option =option+"<input id='activityInput"+id+"' list='activityName"+id+"' class='ipt_text'/><datalist id='activityName"+id+"' name='activityName'>";
 		for(var i=0; i<data.length ; i ++){
-			 option =option+ "<option id='"+data[i].id+"' value='"+data[i].activityName+"'>"+data[i].activityName+"</option>";
+			 option =option+ "<option id='"+data[i].id+"' value='"+data[i].name+"'>"+data[i].name+"</option>";
 	  	}
 	  	option =option+"</datalist>";
 	  	$("#tip"+value+id+" span").eq(1).append(option);

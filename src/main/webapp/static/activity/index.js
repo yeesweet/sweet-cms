@@ -86,7 +86,7 @@ function showIndex(){
 		var navigationId = $("#navigationId").val();
 		if(moduleId != ""){
 			if(window.confirm("确定要删除该模块？")==true){
-				$.post("/system/CmsModuleController/deleteModule.sc",
+				$.post("/cmsModuleController/deleteModule.sc",
 						{"moduleId":moduleId,"activityId":activityId,"navigationId":navigationId},function(str){
 					if(str == "success"){
 						content.remove();

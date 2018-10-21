@@ -124,7 +124,7 @@
             </li>
 			</c:if>
 		</c:if>
-		<c:if test="${not empty cmsModule.moduleStyle && !(cmsModule.moduleStyle eq null) && cmsModule.moduleStyle == 108}">
+		<c:if test="${not empty cmsModule.moduleStyle && !(cmsModule.moduleStyle eq null) && cmsModule.moduleStyle == 1}">
 			<c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
 				<li class="a1" style="margin-top:${cmsModule.space}px">
 					<input type="hidden" name="moduleId" value="${cmsModule.id}"/>
@@ -274,7 +274,7 @@
 			            	<div class="fl" style="width:100%;">
                                 <c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
                                     <c:choose>
-                                        <c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+                                        <c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
                                             <img src="${cmsModuleDetail.imgUrl}" style="margin-bottom:5px;height:${(cmsModule.height eq "") or (cmsModule.height eq null)?'128':cmsModule.height}px;"/>
                                         </c:when>
                                         <c:otherwise>
