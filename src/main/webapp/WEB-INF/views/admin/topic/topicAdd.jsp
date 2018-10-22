@@ -51,6 +51,7 @@
         if(rows.length==0){
             alert('未勾选商品')
         }else{
+            alert(rows);
             //关闭弹窗，数据处理后执行
             $('#topic-add-window').window('close');
         }
@@ -171,7 +172,7 @@
         </form>
         <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
              style="width:1000px;height:600px;padding:5px;">
-            <div class="easyui-panel" data-options="href : '${path}/topic/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
+            <div class="easyui-panel" data-options="href : '${path}/commodity/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
 
 
             </div>

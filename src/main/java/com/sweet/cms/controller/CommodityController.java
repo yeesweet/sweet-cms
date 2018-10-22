@@ -295,4 +295,13 @@ public class CommodityController extends BaseController {
             return renderError("修改库存失败！");
         }
     }
+
+    /**
+     * 点击按条件添加商品弹出商品选择框列表
+     * @return
+     */
+    @GetMapping("/getCommodityList")
+    public String getCommodityList() {
+        return "admin/commodity/commoditySalePageList";
+    }
 }
