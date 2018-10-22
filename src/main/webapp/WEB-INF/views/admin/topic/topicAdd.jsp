@@ -38,20 +38,15 @@
         });
     });
 
-    function selectGoods() {
+    function selectGoodsDialog() {
         $('#topic-add-window').window('open');
-        <%--parent.$.modalDialog({--%>
-            <%--title : '选择商品',--%>
-            <%--width : 1000,--%>
-            <%--height : 600,--%>
-            <%--href : '${path}/topic/getCommodityList',--%>
-            <%--buttons : [ {--%>
-                <%--text : '确定',--%>
-                <%--handler : function() {--%>
-                    <%--$.modalDialog.close();--%>
-                <%--}--%>
-            <%--} ]--%>
-        <%--});--%>
+    }
+
+    function selectGoods(){
+        var effectModel = $("input:checkbox[name='ck']:checked").map(function(index,elem) {
+            return $(elem).val();
+        }).get().join(',');
+        alert(effectModel);
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
@@ -119,7 +114,7 @@
                                 <textarea rows="5" cols="35" name="activeTopicIds"></textarea>
                                 <span>&nbsp;</span><span></span>
                                 <a class="l-btn" onclick="addCommodityByIds(this)" ><span>添加商品</span></a>&nbsp;&nbsp;
-                                <a class="l-btn" onclick="javascript:selectGoods();"><span>按条件添加商品</span></a>
+                                <a class="l-btn" onclick="javascript:selectGoodsDialog();"><span>按条件添加商品</span></a>
                                 &nbsp;&nbsp;
                                 <br/><br/>
                                 <span style="margin-left:55px;">(多个商品编号之间用<span style="color:red;">英文逗号或换行</span>隔开，最多
@@ -160,8 +155,21 @@
             </table>
         </form>
         <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,href : '${path}/topic/getCommodityList'"
-             style="width:500px;height:400px;padding:5px;">
+             style="width:1000px;height:600px;padding:5px;">
+            <div class="easyui-layout" data-options="fit:true">
+                <div data-options="region:'west',split:true" style="width:100px"></div>
+                <div data-options="region:'center'" style="padding:10px;">
+                    <div class="files-area">
 
+                    </div>
+                </div>
+                <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+                       onclick="javascript:selectGoods()" style="width:180px">插入选中的商品</a>
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)"
+                       onclick="javascript:$('#topic-add-window').window('close')" style="width:80px">取消</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
