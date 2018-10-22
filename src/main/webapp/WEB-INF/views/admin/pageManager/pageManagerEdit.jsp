@@ -68,30 +68,30 @@
                     <td>活动页名称</td>
                     <td><input name="name" id="activityName" type="text" placeholder="" class="easyui-validatebox span2"
                                data-options="required:true"
-                               value=""></td>
+                               value="${pageManager.name}"></td>
                 </tr>
                 <tr>
                     <td>顶部标题</td>
                     <td><input name="topName" type="text" placeholder="" id="topName"  class="easyui-validatebox span2"
                                data-options="required:true"
-                               value=""></td>
+                               value="${pageManager.topName}"></td>
                 </tr>
                 <tr>
                     <td>模块背景：</td>
                     <td>
                         <select class="ipt_text" name="typeBg" id="typeBg"
                                 onchange="javascript:getTypeBg();">
-                            <option value="0" selected="selected">请选择</option>
-                            <option value="2">背景色</option>
+                            <option value="0" ${(pageManager.typeBg==null || pageManager.typeBg=='' || pageManager.typeBg==0)?'selected="selected"':''}>请选择</option>
+                            <option value="2" ${(pageManager.typeBg!=null && pageManager.typeBg!='' && pageManager.typeBg==2)?'selected="selected"':''}>背景色</option>
                         </select>
-                        <input id="bg" name="bg" type="hidden"/>
+                        <input id="bg" name="bg" type="hidden" value="${pageManager.bg}"/>
                     </td>
                 </tr>
-                <tr id="bg2" style="display:none">
+                <tr id="bg2" ${(pageManager.typeBg!=null && pageManager.typeBg!='' && pageManager.typeBg==2)?'':'style="display:none"'}>
                     <td>色值：</td>
                     <td>
                         <div style="float:left;"><input id="bgColor" name="bgColor" type="text" class="ipt_text"
-                                                        onblur="javascript:changeBgColor();"/></div>
+                                                        onblur="javascript:changeBgColor();" value="${pageManager.bg}"/></div>
                         <div id="bgColorBlock"
                              style="width: 15px;height: 15px;margin: 5px 20px 0 10px;float:left;"></div>
                     </td>
@@ -99,10 +99,10 @@
                 <tr>
                     <td>状态</td>
                     <td>
-                        <select id="editStatus" name="status" class="easyui-combobox"
+                        <select id="isDisplay" name="isDisplay" class="easyui-combobox"
                                 data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-                            <option value="0">正常</option>
-                            <option value="1">停用</option>
+                            <option value="1" ${(pageManager.isDisplay!=null && pageManager.isDisplay!='' && pageManager.isDisplay==1)?'selected':''}>启用</option>
+                            <option value="0" ${(pageManager.isDisplay!=null && pageManager.isDisplay!='' && pageManager.isDisplay==0)?'selected':''}>停用</option>
                         </select>
                     </td>
                 </tr>

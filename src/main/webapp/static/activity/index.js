@@ -240,7 +240,7 @@ function selectBoardByTime(activityId){
 
 //异步添加促销专题商品数据
 function getTopicCommodityMore(topicId,moduleId,page){
-	$.getJSON("/system/CmsModuleController/getTopicCommodityMore.sc?para=new Date()",{"topicId":topicId,"page":page},function(data){
+	$.getJSON("/cmsModuleController/getTopicCommodityMore.sc?para=new Date()",{"topicId":topicId,"page":page},function(data){
 		var html="";
 		$.each(data.moduleCommodityList, function(i,item){
 			html+="<div class='goodTwodiv'>"+
