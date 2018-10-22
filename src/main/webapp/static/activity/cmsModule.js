@@ -88,13 +88,13 @@ for(var i=1;i<=num;i++){
 		    					"<option value='1001'>摇一摇页面(app专用)</option>";
 	//	    }
 		    	//divHtml=divHtml+"<option value='1003'>品牌页面</option>"+
-		    	divHtml=divHtml+"<option value='1007'>商品详情页</option>"+
-		            "<option value='1005'>分类一级页面</option>"+
+		    	divHtml=divHtml+"<option value='1007'>商品详情页</option>";
+		            // "<option value='1005'>分类一级页面</option>"+
 	/*		        "<option value='1006'>分类二级页面</option>"+*/
-		            "<option value='1008'>购物车页</option>"+
-		            "<option value='1011'>查看物流</option>"+
-		            "<option value='9'>手动输入链接</option>"+
-		            "<option value='8'>优购快报</option>";
+		            // "<option value='1008'>购物车页</option>"+
+		            // "<option value='1011'>查看物流</option>"+
+		            // // "<option value='9'>手动输入链接</option>"+
+		            // "<option value='8'>优购快报</option>";
 	//	    if(currentPLC.indexOf("wap")>=0 && currentPLC.indexOf("vm8")<0 && currentPLC!="ALL"){
 		    	divHtml=divHtml+"<option value='1023'>会员中心(h5专用)</option>"+
 		    					"<option value='22'>我的优购(h5专用)</option>"+
@@ -103,10 +103,10 @@ for(var i=1;i<=num;i++){
 	//	    }
 		    divHtml=divHtml+"<option value='1026'>页面列表</option>";
 		    divHtml=divHtml+"<option value='2'>分类列表</option>";
-		    divHtml=divHtml+"<option value='1'>品牌列表</option>";
-		    divHtml=divHtml+"<option value='7'>搜索关键字</option>";
-		    divHtml=divHtml+"<option value='1029'>关键字列表</option>";
-		    divHtml=divHtml+"<option value='2000'>自定义参数</option>";
+		    // divHtml=divHtml+"<option value='1'>品牌列表</option>";
+		    // divHtml=divHtml+"<option value='7'>搜索关键字</option>";
+		    // divHtml=divHtml+"<option value='1029'>关键字列表</option>";
+		    // divHtml=divHtml+"<option value='2000'>自定义参数</option>";
 	    }
 	    divHtml=divHtml+"</select></p>"+
 	            "<p id='tip5"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>促销专题：<span></span></p>"+

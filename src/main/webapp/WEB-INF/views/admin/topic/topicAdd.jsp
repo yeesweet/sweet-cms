@@ -40,6 +40,21 @@
 
     function selectGoodsDialog() {
         $('#topic-add-window').window('open');
+        $('#topic-win-panel').height(520)
+    }
+
+    //弹窗确认按钮执行
+    function getCheckGooods() {
+        //获取勾选数据，支持翻页后记录
+        var rows = $('#commodityDataGrid ').datagrid('getChecked');
+        console.log('rows',rows)
+        if(rows.length==0){
+            alert('未勾选商品')
+        }else{
+            //关闭弹窗，数据处理后执行
+            $('#topic-add-window').window('close');
+        }
+
     }
 
     function selectGoods(){
@@ -154,21 +169,15 @@
                 </tr>
             </table>
         </form>
-        <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,href : '${path}/topic/getCommodityList'"
+        <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
              style="width:1000px;height:600px;padding:5px;">
-            <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region:'west',split:true" style="width:100px"></div>
-                <div data-options="region:'center'" style="padding:10px;">
-                    <div class="files-area">
+            <div class="easyui-panel" data-options="href : '${path}/topic/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
 
-                    </div>
-                </div>
-                <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
-                       onclick="javascript:selectGoods()" style="width:180px">插入选中的商品</a>
-                    <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)"
-                       onclick="javascript:$('#topic-add-window').window('close')" style="width:80px">取消</a>
-                </div>
+
+            </div>
+            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;width: 1000px;height: 100px;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:getCheckGooods()" style="width:80px">确定</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#topic-add-window').window('close');" style="width:80px">取消</a>
             </div>
         </div>
     </div>

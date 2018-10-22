@@ -116,6 +116,7 @@ function commodityCleanFun() {
 function commoditySearchFun() {
      commodityDataGrid.datagrid('load', $.serializeObject($('#commoditySearchForm')));
 }
+
 </script>
 
 <div class="easyui-layout" data-options="fit:true,border:false">
