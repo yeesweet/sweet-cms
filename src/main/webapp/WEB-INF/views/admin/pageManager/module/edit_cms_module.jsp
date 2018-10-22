@@ -494,7 +494,7 @@
 
                                                     </c:choose>
                                                     <p>库存：${moduleCommodity.inventoryNumber}</p>
-                                                    <p>¥${moduleCommodity.salePriceN}<span>/¥<del>${moduleCommodity.publicPrice}</del></span></p>
+                                                    <p>¥${moduleCommodity.salePrice}<span>/¥<del>${moduleCommodity.marketPrice}</del></span></p>
                                                     <a href="javascript:void(0);"><img class="close delCommodity" src="${staticPath }/static/style/images/homepage/close.png"></a>
                                                 </div>
                                             </c:forEach>
@@ -524,7 +524,7 @@
 
                                             </c:choose>
                                             <p>库存：${moduleCommodity.inventoryNumber}</p>
-                                            <p>¥${moduleCommodity.salePriceN}<span>/¥<del>${moduleCommodity.publicPrice}</del></span></p>
+                                            <p>¥${moduleCommodity.salePrice}<span>/¥<del>${moduleCommodity.marketPrice}</del></span></p>
                                             <a href="javascript:void(0);"><img class="close delCommodity" src="${staticPath }/static/style/images/homepage/close.png"></a>
                                         </div>
                                     </c:forEach>

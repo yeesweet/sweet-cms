@@ -778,7 +778,7 @@
 											</c:otherwise>
 										</c:choose>
                                             <p>库存：${cmsModuleCommodity.inventoryNumber}</p>
-                                            <p>¥${cmsModuleCommodity.salePriceN}<span>/¥<del>${cmsModuleCommodity.publicPrice}</del></span></p>
+                                            <p>¥${cmsModuleCommodity.salePrice}<span>/¥<del>${cmsModuleCommodity.marketPrice}</del></span></p>
 										</div>
 									</c:forEach>
                             	</div>
@@ -863,7 +863,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <p>库存：${cmsModuleCommodity.inventoryNumber}</p>
-                                    <p>¥${cmsModuleCommodity.salePriceN}<span>/¥<del>${cmsModuleCommodity.publicPrice}</del></span></p>
+                                    <p>¥${cmsModuleCommodity.salePrice}<span>/¥<del>${cmsModuleCommodity.marketPrice}</del></span></p>
                                 </div>
                             </c:forEach>
                         </div>
@@ -907,7 +907,7 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             <p>库存：${cmsModuleCommodity.inventoryNumber}</p>
-                                            <p>¥${cmsModuleCommodity.salePriceN}<span>/¥<del>${cmsModuleCommodity.publicPrice}</del></span></p>
+                                            <p>¥${cmsModuleCommodity.salePrice}<span>/¥<del>${cmsModuleCommodity.marketPrice}</del></span></p>
                                         </div>
                                     </c:forEach>
                                 </div>
@@ -1086,7 +1086,7 @@
                                                     <img src="${staticPath }/static/style/images/homepage/2img1.jpg" />
                                                 </c:otherwise>
                                             </c:choose>
-                                            <p>¥${cmsModuleDetail.salePriceN}<span>/¥<del>${cmsModuleDetail.publicPrice}</del></span></p>
+                                            <p>¥${cmsModuleCommodity.salePrice}<span>/¥<del>${cmsModuleCommodity.marketPrice}</del></span></p>
                                             <p>
                                                 <c:if test="${not empty cmsModule.secState && !(cmsModule.secState eq null)}">
                                                     <c:choose>

@@ -1138,14 +1138,14 @@ function addCommodity(){
 				html+="<div class='slbdiv'>"+
 			          "<img src='"+item.defaultPic+"'/>"+
 			          "<p>库存："+item.inventoryNumber+"</p>"+
-			          "<p>¥"+item.salePriceN+"<span>/¥<del>"+item.publicPrice+"</del></span></p>"+
+			          "<p>¥"+item.salePrice+"<span>/¥<del>"+item.marketPrice+"</del></span></p>"+
 		              "<a href='javascript:void(0);'><img class='close delCommodity' src='/static/style/images/homepage/close.png'></a></div>";
 			}
 			if(flag == 15){
 				html+="<div class='goodThreediv'>"+
 				"<img src='"+item.defaultPic+"' class='goodDivImg'/>"+
 				"<p>库存："+item.inventoryNumber+"</p>"+
-				"<p>¥"+item.salePriceN+"<span>/¥<del>"+item.publicPrice+"</del></span></p>"+
+				"<p>¥"+item.salePrice+"<span>/¥<del>"+item.marketPrice+"</del></span></p>"+
 				"<a href='javascript:void(0);'><img class='close delCommodity' src='/static/style/images/homepage/close.png'></a></div>";
 			}
 		});

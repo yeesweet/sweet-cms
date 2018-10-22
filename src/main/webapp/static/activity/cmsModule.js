@@ -64,7 +64,7 @@ for(var i=1;i<=num;i++){
     	divHtml=divHtml+"<p class='title'><span class='red'>&nbsp;</span>模块名称：<input type='text' id='title"+i+"' name='moduleDetails["+(i-1)+"].title' class='ipt_text'/></p>";
     }
     if(data==104){//优购快报
-    	divHtml=divHtml+"<p class='title'><span class='red'>*</span>快报标题：<input type='text' id='title"+i+"' name='moduleDetails["+(i-1)+"].title' class='ipt_text' style='width:300px;'/>(50个字以内)</p>";
+    	// divHtml=divHtml+"<p class='title'><span class='red'>*</span>快报标题：<input type='text' id='title"+i+"' name='moduleDetails["+(i-1)+"].title' class='ipt_text' style='width:300px;'/>(50个字以内)</p>";
     }
     if(data != 19){
 	    if(data == 16){
@@ -81,28 +81,28 @@ for(var i=1;i<=num;i++){
 	    }
 	    if(!(data==16 || data == 18)){
 	//	    if(currentPLC.indexOf("vm8")>=0 && currentPLC.indexOf("wap")<0 && currentPLC!="ALL"){
-		    	divHtml=divHtml+"<option value='100'>横滑专题列表(app专用)</option>"+
-		    					"<option value='1025'>竖滑专题列表(app专用)</option>"+
-		    					"<option value='13'>web专题列表(app专用)</option>"+
-		    					"<option value='1028'>账户管理(app专用)</option>"+
-		    					"<option value='1001'>摇一摇页面(app专用)</option>";
+	// 	    	divHtml=divHtml+"<option value='100'>横滑专题列表(app专用)</option>"+
+	// 	    					"<option value='1025'>竖滑专题列表(app专用)</option>"+
+	// 	    					"<option value='13'>web专题列表(app专用)</option>"+
+	// 	    					"<option value='1028'>账户管理(app专用)</option>"+
+	// 	    					"<option value='1001'>摇一摇页面(app专用)</option>";
 	//	    }
 		    	//divHtml=divHtml+"<option value='1003'>品牌页面</option>"+
-		    	divHtml=divHtml+"<option value='1007'>商品详情页</option>";
+		    	divHtml=divHtml+"<option value='1007'>商品详情页</option>"+
 		            // "<option value='1005'>分类一级页面</option>"+
 	/*		        "<option value='1006'>分类二级页面</option>"+*/
 		            // "<option value='1008'>购物车页</option>"+
 		            // "<option value='1011'>查看物流</option>"+
-		            // // "<option value='9'>手动输入链接</option>"+
+		            "<option value='9'>手动输入链接</option>";
 		            // "<option value='8'>优购快报</option>";
 	//	    if(currentPLC.indexOf("wap")>=0 && currentPLC.indexOf("vm8")<0 && currentPLC!="ALL"){
-		    	divHtml=divHtml+"<option value='1023'>会员中心(h5专用)</option>"+
-		    					"<option value='22'>我的优购(h5专用)</option>"+
-		    					"<option value='1014'>我的订单(h5专用)</option>"+
-		    					"<option value='1015'>我的收藏(h5专用)</option>";
+	// 	    	divHtml=divHtml+"<option value='1023'>会员中心(h5专用)</option>"+
+	// 	    					"<option value='22'>我的优购(h5专用)</option>"+
+	// 	    					"<option value='1014'>我的订单(h5专用)</option>"+
+	// 	    					"<option value='1015'>我的收藏(h5专用)</option>";
 	//	    }
 		    divHtml=divHtml+"<option value='1026'>页面列表</option>";
-		    divHtml=divHtml+"<option value='2'>分类列表</option>";
+		    // divHtml=divHtml+"<option value='2'>分类列表</option>";
 		    // divHtml=divHtml+"<option value='1'>品牌列表</option>";
 		    // divHtml=divHtml+"<option value='7'>搜索关键字</option>";
 		    // divHtml=divHtml+"<option value='1029'>关键字列表</option>";
@@ -110,19 +110,19 @@ for(var i=1;i<=num;i++){
 	    }
 	    divHtml=divHtml+"</select></p>"+
 	            "<p id='tip5"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>促销专题：<span></span></p>"+
-				"<p id='tip100"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>横滑专题：<span></span></p>"+
-		 		"<p id='tip13"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>web专题：<span></span></p>"+
-		 		"<p id='tip1007"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>商品名称：<span></span></p>"+	 
-		 		"<p id='tip1006"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>分类选择：<span></span></p>"+
+				// "<p id='tip100"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>横滑专题：<span></span></p>"+
+		 		// "<p id='tip13"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>web专题：<span></span></p>"+
+		 		"<p id='tip1007"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>商品名称：<span></span></p>"+
+		 		// "<p id='tip1006"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>分类选择：<span></span></p>"+
 		 		"<p id='tip9"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>请输入链接：<span></span></p>"+
-	    		"<p id='tip8"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>优购快报：<span></span></p>"+
-	    		"<p id='tip1026"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>页面列表：<span></span></p>"+
-	    		"<p id='tip1025"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>竖滑专题：<span></span></p>"+
-	    		"<p id='tip2"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：<span></span></p>"+
-	    		"<p id='tip1"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌：<span></span></p>"+
-	    		"<p id='tip7"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>关&nbsp;&nbsp;键&nbsp;字：<span></span></p>"+
-	    		"<p id='tip1029"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>关&nbsp;&nbsp;键&nbsp;字：<span></span></p>"+
-	    		"<p id='tip2000"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>自定义参数：<span></span></p>";
+	    		// "<p id='tip8"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>优购快报：<span></span></p>"+
+	    		"<p id='tip1026"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>页面列表：<span></span></p>";
+	    		// "<p id='tip1025"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>竖滑专题：<span></span></p>"+
+	    		// "<p id='tip2"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：<span></span></p>"+
+	    		// // "<p id='tip1"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌：<span></span></p>"+
+	    		// "<p id='tip7"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>关&nbsp;&nbsp;键&nbsp;字：<span></span></p>"+
+	    		// "<p id='tip1029"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>关&nbsp;&nbsp;键&nbsp;字：<span></span></p>"+
+	    		// "<p id='tip2000"+i+"' class='choosep' style='display:none;'><span class='red'>*</span>自定义参数：<span></span></p>";
     }
 	if(data == 101||data==104){//轮播图或者优购快报
     	divHtml=divHtml+"<span class='red'>*</span>排&nbsp;序&nbsp;&nbsp;号：<input type='text' class='ipt_text' name='moduleDetails["+(i-1)+"].sortNo' id='sortNo"+i+"' value='' />";

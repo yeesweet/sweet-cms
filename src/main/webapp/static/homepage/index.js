@@ -260,7 +260,7 @@ function getTopicCommodityMore(topicId,boardId,page){
 			html+="<div class='goodTwodiv'>"+
 			"<img src='"+item.defaultPic+"' class='goodDivImg'/>"+
 			"<p>库存："+item.inventoryNumber+"</p>"+
-			"<p>¥"+item.salePriceN+"<span>/¥<del>"+item.publicPrice+"</del></span></p></div>";
+			"<p>¥"+item.salePrice+"<span>/¥<del>"+item.marketPrice+"</del></span></p></div>";
 		});
 		$("#goodTwoCon"+boardId).append(html);
 		if(!data.hasNext){
