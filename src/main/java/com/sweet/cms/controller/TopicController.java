@@ -282,39 +282,11 @@ public class TopicController extends BaseController {
 
     /**
      * 点击按条件添加商品弹出商品选择框列表
-     * @param searchVo
-     * @param page
-     * @param rows
-     * @param sort
-     * @param order
      * @return
      */
-    @PostMapping("/commodityList")
-    @ResponseBody
-    public PageInfo commodityList(CommoditySearchVo searchVo, Integer page, Integer rows, String sort, String order) {
-        PageInfo pageInfo = new PageInfo(page, rows, sort, order);
-        Map<String, Object> condition = new HashMap<String, Object>();
-
-        if (StringUtils.isNotBlank(searchVo.getCommodityName())) {
-            condition.put("commodityName", searchVo.getCommodityName());
-        }
-        if (StringUtils.isNotBlank(searchVo.getCommodityNo())) {
-            condition.put("commodityNo", searchVo.getCommodityNo());
-        }
-        if (searchVo.getShowDateStart() != null) {
-            condition.put("startTime", searchVo.getShowDateStart());
-        }
-        if (searchVo.getShowDateEnd() != null) {
-            condition.put("endTime", searchVo.getShowDateEnd());
-        }
-        if(searchVo.getSecondCategoryId() != null){
-            condition.put("categoryId", searchVo.getSecondCategoryId());
-        }
-        condition.put("commodityStatus", Consts.COMMODITY_SHOW_STATUS);
-
-        pageInfo.setCondition(condition);
-        commodityService.selectDataGrid(pageInfo);
-        return pageInfo;
+    @GetMapping("/getCommodityList")
+    public String getCommodityList() {
+        return "admin/topic/commoditySaleList";
     }
 
 
