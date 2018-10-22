@@ -1200,31 +1200,4 @@
             </c:if>
         </c:if>
 	</c:forEach>
-				<!--<li class="a1">
-		        	<div class="area3">
-		        		<p class="titleName"><span></span>优惠券14</p>	
-		            	<p class="timer">
-		        			2016-01-28 17:31:22 至
-		        			2016-01-31 17:31:22
-		        		</p>
-		              	<a href="javascript:void(0);"><img src="${staticPath }/static/style/images/homepage/close.png" class="close"/></a>
-		              	<div class="divs">
-			            	<div class="fl" style="width:100%;" >
-                                <a href="javascript:void(0);" class="clickLeft"><img src="/images/activity/div_arrowleft.jpg" /></a>
-                                <div class="allimgs">
-                                    <div class="imgs">
-                                        <div class="slbdiv slbdivTwo">
-	                                    	<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
-                                        </div>
-                                        <div class="slbdiv slbdivTwo">
-	                                    	<img src="${staticPath }/static/style/images/homepage/1img2.jpg" />
-                                        </div>
-                                    </div>
-                              	</div>
-                                <a href="javascript:void(0);" class="clickRight"><img src="/images/activity/div_arrowright.jpg" /></a>
-                            </div> 
-		              	</div>
-						<img src='${staticPath }/static/style/images/homepage/prompt_img3.png' class='imgState' style="display:none"/>
-		            </div>
-	          	</li>-->
-</c:if>>
+</c:if>

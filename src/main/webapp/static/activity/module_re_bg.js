@@ -81,7 +81,7 @@ function changeBgColor(){
 }
 
 //删除图片
-$("body").on("click",".closeBg",function(){
+$(".closeBg").click(function(){
 	$("#iptimg0").attr("src","/images/homepage/2img1.jpg");
 	$("#bg").val("");
 });

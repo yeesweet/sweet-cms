@@ -66,7 +66,7 @@ $(function(){
 
 	  });
 	//推荐模块删除
-	$("body").on("click",".delete2", function() {
+	$(".delete2").click(function() {
 		var rows = $("#rows").val();
 		if(rows==''){
 			alert("请设置模块行数");
@@ -122,7 +122,7 @@ $(function(){
 		  $(".recommendlist").eq((index-1)/4).find("img").eq(3).attr("src","/static/style/images/homepage/tuijian1.jpg");
 	  });
 	//推荐模块删除
-	$("body").on("click",".delete1", function() {
+	$(".delete1").click(function() {
 		var num=$(".recommendlist").size(); 
 		var dataIndex = $(this).parent(".recommendlist").index();
 		if(num>1){    
@@ -163,7 +163,7 @@ $(function(){
 	  	   }
 	  });
 	//轮播图删除或者优购快报
-	$("body").on("click",".deleteL", function() {
+	$(".deleteL").click(function() {
 		var num=$(".lunboimgshow").size();
 		var dataIndex = $(this).parent(".lunboimgshow").index();
 		if(num>1){    
@@ -204,7 +204,7 @@ $(function(){
 	  $(".oneimg").eq(index).find("img").attr("src","/static/style/images/homepage/img6.jpg");
 	  });
 	//模块3删除
-	$("body").on("click",".delete3", function() {
+	$(".delete3").click(function() {
 		var num=$(".oneimg").size();
 		var dataIndex = $(this).parent(".oneimg").index();
 		if(num>1){    
@@ -253,7 +253,7 @@ $(function(){
 	    $(".twoimg").eq((index-1)/2).find("img").eq(1).attr("src","/static/style/images/homepage/2img1.jpg");
 	  });
 	//模块5删除
-	$("body").on("click",".delete5", function() {
+	$(".delete5").click(function() {
 		var num=$(".twoimg").size();
 		var dataIndex = $(this).parent(".twoimg").index();
 		if(num>1){    
@@ -292,7 +292,7 @@ $(function(){
 	  $(".threeimg").eq(index).find("img").attr("src","/static/style/images/homepage/img6.jpg");
 	  });
 	//模块11删除
-	$("body").on("click",".delete11", function() {
+	$(".delete11").click(function() {
 		var num=$(".threeimg").size();
 		var dataIndex = $(this).parent(".threeimg").index();
 		if(num>1){    
@@ -334,7 +334,7 @@ $(function(){
 	  $("#leftBoard17 .slbdiv").eq(index).find("img").eq(0).attr("src","/static/style/images/homepage/2img1.jpg");
 	});
 	//模块12删除
-	$("body").on("click",".delModule17", function() {
+	$(".delModule17").click(function() {
 		var num=$("#leftBoard17 .slbdiv").size();
 		var dataIndex = $(this).parent().parent(".slbdiv").index();
 		if(num>4){    
@@ -439,7 +439,7 @@ $(function(){
 	 }
 	
 	//删除图片
-	$("body").on("click",".close1",function(){
+	$(".close1").click(function(){
 		$(this).parent().siblings().eq(0).attr("src","/static/style/images/homepage/1img1.jpg");
 		$(this).parent().siblings().eq(1).val("");
 		var id = $(this).parent().siblings().eq(0).attr("id").substring(6);
@@ -493,7 +493,7 @@ $(function(){
     /*模块12左右点击结束*/
     
     //模块12、模块15商品删除
-    $("body").on("click",".delCommodity",function(){
+    $(".delCommodity").click(function(){
     	if(flag == 12){
     		var commoditySize = $(".slbdiv").size();
     		if(commoditySize <= 4){
@@ -813,7 +813,7 @@ function setRecommend2Rows(){
 		$('.recommendlist').html(divHtml);
 
 
-		$.getScript(BasePath + "/js/activity/cmsModule.js",function(){  //加载js,成功后，执行回调函数
+		$.getScript(BasePath + "/static/activity/cmsModule.js",function(){  //加载js,成功后，执行回调函数
 		  //alert("load cmsBoard.js");
 		});
 	}

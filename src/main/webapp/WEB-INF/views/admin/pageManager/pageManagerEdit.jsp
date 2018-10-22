@@ -172,10 +172,11 @@
 
                                         <input type="button" value="保存并发布" style="color:#fff;margin:20px 0px 20px 210px"
                                                class="btn_save" onclick="edit()"/>
-                                        <%@ include file="/WEB-INF/views/admin/pageManager/index_rightcon.jsp" %>
+
 
                                     </div><!--contentshow-->
                                 </div>
+                                <%@ include file="/WEB-INF/views/admin/pageManager/index_rightcon.jsp" %>
                             </div>
                         </div>
                     </table>
