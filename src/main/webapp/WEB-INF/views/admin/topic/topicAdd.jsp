@@ -39,18 +39,19 @@
     });
 
     function selectGoods() {
-        parent.$.modalDialog({
-            title : '选择商品',
-            width : 1000,
-            height : 600,
-            href : '${path}/topic/getCommodityList',
-            buttons : [ {
-                text : '确定',
-                handler : function() {
-                    $.modalDialog.close();
-                }
-            } ]
-        });
+        $('#topic-add-window').window('open');
+        <%--parent.$.modalDialog({--%>
+            <%--title : '选择商品',--%>
+            <%--width : 1000,--%>
+            <%--height : 600,--%>
+            <%--href : '${path}/topic/getCommodityList',--%>
+            <%--buttons : [ {--%>
+                <%--text : '确定',--%>
+                <%--handler : function() {--%>
+                    <%--$.modalDialog.close();--%>
+                <%--}--%>
+            <%--} ]--%>
+        <%--});--%>
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
@@ -158,5 +159,9 @@
                 </tr>
             </table>
         </form>
+        <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,href : '${path}/topic/getCommodityList'"
+             style="width:500px;height:400px;padding:5px;">
+
+        </div>
     </div>
 </div>
