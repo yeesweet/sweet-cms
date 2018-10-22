@@ -688,15 +688,36 @@ function showAdvertType(data,value,id){
 		return false;
 	}
 }
+
 //添加商品
 function selectSingleGoods(id){
-	 commoditySingleSelector.open({},function(json){
-	// 通过约定格式获取选定数据
-		$.each(json,function(n,value) {
-			$('#commodityName'+id).val(value.commodityName);
-			$('#commonId'+id).val(value.no);
-		});
-	});
+	if(typeof commodityDataGrid_singleSelect !='undefined'){
+        commodityDataGrid_singleSelect = true;
+	}else{
+		window.commodityDataGrid_singleSelect = true;
+	}
+    $('#pageManager-goods-window').window('open');
+    $('#topic-win-panel').height(520)
+	//  commoditySingleSelector.open({},function(json){
+	// // 通过约定格式获取选定数据
+	// 	$.each(json,function(n,value) {
+	// 		$('#commodityName'+id).val(value.commodityName);
+	// 		$('#commonId'+id).val(value.no);
+	// 	});
+	// });
+}
+
+function getSelectGoods() {
+    //获取勾选数据，支持翻页后记录
+    var rows = $('#commodityDataGrid ').datagrid('getChecked');
+    console.log('rows',rows)
+    if(rows.length==0){
+        alert('未勾选商品')
+    }else{
+        alert(rows);
+        //关闭弹窗，数据处理后执行
+        $('#topic-add-window').window('close');
+    }
 }
 //上传图片
 function ajaxImageUpload(em) {

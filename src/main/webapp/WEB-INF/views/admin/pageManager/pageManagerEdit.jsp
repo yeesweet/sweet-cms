@@ -14,33 +14,33 @@
 
 <script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js?v=201809242210"></script>
 <script type="text/javascript" src="${staticPath }/static/component/imageSelector.js?v=201809242210"></script>
-<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>
+<%--<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>--%>
 <script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>
 
 <script type="text/javascript">
     $(function () {
-        <%--$('#pageManagerEditForm').form({--%>
-        <%--url : '${path}/pageManager/edit',--%>
-        <%--onSubmit : function() {--%>
-        <%--progressLoad();--%>
-        <%--var isValid = $(this).form('validate');--%>
-        <%--if (!isValid) {--%>
-        <%--progressClose();--%>
-        <%--}--%>
-        <%--return isValid;--%>
-        <%--},--%>
-        <%--success : function(result) {--%>
-        <%--progressClose();--%>
-        <%--result = $.parseJSON(result);--%>
-        <%--if (result.success) {--%>
-        <%--parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了--%>
-        <%--parent.$.modalDialog.handler.dialog('close');--%>
-        <%--} else {--%>
-        <%--var form = $('#pageManagerEditForm');--%>
-        <%--parent.$.messager.alert('错误', eval(result.msg), 'error');--%>
-        <%--}--%>
-        <%--}--%>
-        <%--});--%>
+        $('#addActivityForm').form({
+        url : '${path}/pageManager/edit',
+        onSubmit : function() {
+        progressLoad();
+        var isValid = $(this).form('validate');
+        if (!isValid) {
+        progressClose();
+        }
+        return isValid;
+        },
+        success : function(result) {
+        progressClose();
+        result = $.parseJSON(result);
+        if (result.success) {
+        parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+        parent.$.modalDialog.handler.dialog('close');
+        } else {
+        var form = $('#pageManagerEditForm');
+        parent.$.messager.alert('错误', eval(result.msg), 'error');
+        }
+        }
+        });
 
 
     });
@@ -58,7 +58,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="pageManagerEditForm" method="post">
+        <form id="editActivityForm" method="post" action="${path}/pageManager/edit">
             <input type="hidden" id="id" name="id" value="${pageManager.id}"/>
             <input type="hidden" id="pageManagerId" name="pageManagerId" value="${pageManager.id}"/>
             <input type="hidden" id="moduleIds" name="moduleIds"/>
@@ -66,13 +66,13 @@
             <table class="grid">
                 <tr>
                     <td>活动页名称</td>
-                    <td><input name="name" type="text" placeholder="" class="easyui-validatebox span2"
+                    <td><input name="name" id="activityName" type="text" placeholder="" class="easyui-validatebox span2"
                                data-options="required:true"
                                value=""></td>
                 </tr>
                 <tr>
                     <td>顶部标题</td>
-                    <td><input name="topName" type="text" placeholder="" class="easyui-validatebox span2"
+                    <td><input name="topName" type="text" placeholder="" id="topName"  class="easyui-validatebox span2"
                                data-options="required:true"
                                value=""></td>
                 </tr>
@@ -183,6 +183,18 @@
 
                 </tr>
             </table>
+            <div style="width:600px;height: 60px;"></div>
         </form>
+        <div id="pageManager-goods-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
+             style="width:1000px;height:600px;padding:5px;">
+            <div class="easyui-panel" data-options="href : '${path}/commodity/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
+
+
+            </div>
+            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;width: 1000px;height: 100px;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:getSelectGoods()" style="width:80px">确定</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#pageManager-goods-window').window('close');" style="width:80px">取消</a>
+            </div>
+        </div>
     </div>
 </div>

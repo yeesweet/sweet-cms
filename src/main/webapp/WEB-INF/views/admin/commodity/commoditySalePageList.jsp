@@ -26,7 +26,7 @@
         striped : true,
         rownumbers : true,
         pagination : true,
-        singleSelect : false,
+        singleSelect : typeof commodityDataGrid_singleSelect =="boolean"?false:true,
         idField : 'id',
         sortName : 'downDate',
         sortOrder : 'desc',
@@ -44,7 +44,7 @@
         },{
             width : '60',
             height:'60',
-            title : '商品图片',
+            title : '商品2图片',
             field : 'defaultPic',
             sortable : false,
             formatter : function(value, row, index) {

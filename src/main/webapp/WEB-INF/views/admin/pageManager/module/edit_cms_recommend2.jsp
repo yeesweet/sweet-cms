@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/component/commoditySingleSelector.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/component/imageSelector.js?v=201809242210"></script>
-	<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>
+	<%--<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>--%>
 	<script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="${staticPath }/static/activity/module_re_bg.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/activity/module_common.js?v=201809242210"></script>

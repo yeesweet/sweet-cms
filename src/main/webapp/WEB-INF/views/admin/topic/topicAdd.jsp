@@ -39,6 +39,12 @@
     });
 
     function selectGoodsDialog() {
+        if(typeof commodityDataGrid_singleSelect !='undefined'){
+            commodityDataGrid_singleSelect = false;
+        }else{
+            window.commodityDataGrid_singleSelect = false;
+        }
+        commodityDataGrid_singleSelect = false;
         $('#topic-add-window').window('open');
         $('#topic-win-panel').height(520)
     }

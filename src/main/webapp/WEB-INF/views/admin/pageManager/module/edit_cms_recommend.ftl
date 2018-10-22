@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="${BasePath}/component/commoditySingleSelector.js?${YOUGOU_JS_VERSION}"></script>
 	<script type="text/javascript" src="/component/imageSelector.js?${YOUGOU_JS_VERSION}"></script> 
 	<script type="text/javascript" src="${BasePath}/js/common.min.js"></script> 
-	<script type="text/javascript" src="${BasePath}/js/ygdialog/lhgdialog.min.js?s=chrome"></script> 
+	<#--<script type="text/javascript" src="${BasePath}/js/ygdialog/lhgdialog.min.js?s=chrome"></script> -->
 	<script type="text/javascript" src="${BasePath}/js/activity/module_common.js"></script>
 </head>
 <body style="background:#f6f6f6">

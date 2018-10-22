@@ -16,7 +16,7 @@
 				<option value="5" <c:if test="${not empty cmsModuleDetail.subType && !(cmsModuleDetail.subType eq null) && cmsModuleDetail.subType ==5}">selected</c:if>>专题列表</option>
 			</c:otherwise>
 		</c:choose>
-		<c:if test="${cmsModule.moduleStyle == 16 || cmsModule.moduleStyle == 18}">
+		<c:if test="${cmsModule.moduleStyle != 16 && cmsModule.moduleStyle != 18}">
 	  		<%--<option value="100" <c:if test="${not empty cmsModuleDetail.subType && !(cmsModuleDetail.subType eq null) && cmsModuleDetail.subType == 100}">selected</c:if>>横滑专题列表(app专用)</option>--%>
 			<%--<option value="1025" <c:if test="${not empty cmsModuleDetail.subType && !(cmsModuleDetail.subType eq null) && cmsModuleDetail.subType == 1025}">selected</c:if>>竖滑专题列表(app专用)</option>--%>
 			<%--<option value="13" <c:if test="${not empty cmsModuleDetail.subType && !(cmsModuleDetail.subType eq null) && cmsModuleDetail.subType == 13}">selected</c:if>>web专题列表(app专用)</option>--%>

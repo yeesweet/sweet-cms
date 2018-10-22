@@ -1,5 +1,5 @@
 @charset "utf-8";
-#pageManagerEditForm{
+#editActivityForm{
     height: 600px;
     overflow-y: scroll;
 }

@@ -77,10 +77,10 @@ function save(){
 			productLineCodesLength +=1; 
 		}
 	}
-	if(productLineCodeStr ==''){
-		alert("至少要选择一个关联平台.");
-		return false;
-	}
+	// if(productLineCodeStr ==''){
+	// 	alert("至少要选择一个关联平台.");
+	// 	return false;
+	// }
 	if(productLineCodesLength == productLineCodes.length){
 		productLineCodeStr ="ALL";
 	}
@@ -127,10 +127,10 @@ function edit(){
 			productLineCodesLength +=1; 
 		}
 	}
-	if(productLineCodeStr ==''){
-		alert("至少要选择一个关联平台.");
-		return false;
-	}
+	// if(productLineCodeStr ==''){
+	// 	alert("至少要选择一个关联平台.");
+	// 	return false;
+	// }
 	if(productLineCodesLength == productLineCodes.length){
 		productLineCodeStr ="ALL";
 	}
