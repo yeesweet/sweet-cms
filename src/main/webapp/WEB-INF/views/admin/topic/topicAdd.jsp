@@ -37,6 +37,21 @@
             }
         });
     });
+
+    function selectGoods() {
+        parent.$.modalDialog({
+            title : '选择商品',
+            width : 1000,
+            height : 600,
+            href : '${path}/topic/getCommodityList',
+            buttons : [ {
+                text : '确定',
+                handler : function() {
+                    $.modalDialog.close();
+                }
+            } ]
+        });
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
     <div data-options="region:'center',border:false" style="overflow: auto;padding: 3px;" >
