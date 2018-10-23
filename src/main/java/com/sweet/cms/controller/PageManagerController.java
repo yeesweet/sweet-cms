@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.sweet.cms.commons.base.BaseController;
 import com.sweet.cms.commons.result.PageInfo;
+import com.sweet.cms.commons.utils.StringUtils;
 import com.sweet.cms.constant.PageManagerConstant;
 import com.sweet.cms.model.CmsModule;
 import com.sweet.cms.model.PageManager;
@@ -20,10 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -157,7 +155,22 @@ public class PageManagerController extends BaseController {
      */
     @PostMapping("/edit")
     @ResponseBody
-    public Object edit(@Valid PageManager pageManager) {
+    public Object edit(@Valid PageManager pageManager,String moduleIds) {
+        //修改模块排序
+        String[] idArr = moduleIds.split(";");
+        if(idArr != null){
+            for(int i=0; i<idArr.length; i++){
+                if(StringUtils.isNotBlank(idArr[i])){
+                    CmsModule cmsModule = new CmsModule();
+                    cmsModule.setId(Long.parseLong(idArr[i]));
+                    cmsModule.setSortNo(i+1);
+                    cmsModule.setUpdateTime(new Date());
+                    cmsModule.setIsDisplay(PageManagerConstant.DISPLAYED);
+                    cmsModuleService.updateById(cmsModule);
+                }
+            }
+        }
+
         pageManager.setOperator(this.getStaffName());
         pageManager.setUpdateTime(new Date());
         boolean b = pageManagerService.updateById(pageManager);
