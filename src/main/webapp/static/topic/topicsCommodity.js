@@ -121,106 +121,87 @@ function allChk(obj,chkName){
    }
 }
 
-// //添加商品
-// function addActityCommodity(){
-// 	promotionCommoditySelector.open({},function(json){
-// 	// 通过约定格式获取选定数据
-// 		var checkIds = "";
-// 		$.each(json,function(n,value) {
-// 			checkIds+=value.no;
-// 			if(n!=json.length-1)
-// 			{
-// 				checkIds+=',';
-// 			}
-// 		});
-// 		$("#addProducts").html(checkIds);
-// 		fillProduct();
-// 	});
-//  }
+//选择添加商品
+function fillCommodityByIds(commodityText){
+    var myIds = "";
+    if(commodityText.indexOf(",")>=0){
+        myIds = commodityText.split(',');
+    }else{
+        myIds = commodityText.split('\n');
+    }
+    if(myIds.length>100){
+        alert("提交编号过多，最多可以添加100个商品，请减少编号数量！本次录入了"+myIds.length+"个商品编号。");
+        return false;
+    }
+    for(var i=0;i<myIds.length;i++){
+        if(myIds[i] !="" && commodityNos.indexOf(myIds[i])>=0){
+            alert("编号为"+myIds[i]+"的商品已经添加过了！请删掉在添！");
+            return false;
+        }
+    }
+    var myId = "";
+    for(var i=0;i<myIds.length;i++){
+        if(i == myIds.length-1){
+            myId += myIds[i];
+        }else{
+            myId += myIds[i] + ",";
+        }
+    }
 
-// //添加商品
-// function selectGoods(){
-// 	commoditySelector.open({},function(json){
-// 	// 通过约定格式获取选定数据
-// 		var checkIds = "";
-// 		$.each(json,function(n,value) {
-// 			checkIds+=value.no;
-// 			if(n!=json.length-1)
-// 			{
-// 				checkIds+=',';
-// 			}
-// 		});
-// 		$("#addProducts").html(checkIds);
-// 		fillProduct();
-// 	});
-// }
-//
-// //将添加的商品显示到列表中
-// function fillProduct(){
-// 	var myId=$("#addProducts").html().Trim();
-// 	if(myId.length<=0){
-// 		return false;
-// 	}
-// 	var sortNum=commodityNos.split(",").length;//排序号等于上次添加的商品的最大排序号开始
-// 	var myIds=new Array();
-// 	myIds=myId.Trim().split(',');
-// 	var html="";//将填充到商品列表中的html代码
-// 	//获得异步请求到得json数据
-// 	$.getJSON("/system/cmsTopicsController/getCommodityByIds.sc?para=new Date()",{ids:myId},function(data){
-// 		var errorIds="";
-// 		$.each(data.errorid,function(i,item){
-// 			myId=myId.substring(0,myId.indexOf(item))+myId.substring((myId.indexOf(item)+1)+(item+"").length);
-// 			errorIds+=","+item;
-// 		});
-// 		if(errorIds!=""){
-// 			alert("下面的商品是已经下架的商品"+errorIds+"已被自动过滤掉!");
-// 		}
-// 		var sellIds="";
-// 		$.each(data.sellid,function(i,item){
-// 			myId=myId.substring(0,myId.indexOf(item))+myId.substring((myId.indexOf(item)+1)+(item+"").length);
-// 			sellIds+=","+item;
-// 		});
-// 		if(sellIds!=""){
-// 			alert("下面的商品是已经售罄的商品"+sellIds+"已被自动过滤掉!");
-// 		}
-// 		$.each(data.result, function(i,item){
-// 			var commodityObj = $("#commodityCode"+item.no).val();
-// 			if(commodityObj == null){
-// 				myId=myId.substring(0,myId.indexOf(item.no))+myId.substring((myId.indexOf(item.no)+1)+item.no.length);
-// 				commodityNos+=item.no+",";
-// 				if(item.commodityStatus==2){
-// 					item.commodityStatus="上架";
-// 				}else{
-// 					item.commodityStatus="下架";
-// 				}
-// 				html="<tr id='commodityNo_"+item.no+"' >"+
-// 						"<td ><input type='checkbox' name='chk' value='"+item.no+"' /></td>"+
-// 					"<td><img src="+item.picSmall+" height='40px' width='40px' /><input type='hidden' id='commodityCode"+item.no+"'  name='commodityCode"+item.no+"' value="+item.no+"><input type='hidden' name='commodityCode' value="+item.no+"></td>"+
-// 					"<td>"+item.commodityName+"</td>"+
-// 					"<td>"+item.no+"</td>"+
-// 					"<td>"+item.inventoryNumber+"</td>"+
-// 					"<td>"+item.publicPrice+"</td>"+
-// 					"<td>"+item.salePrice+"</td>"+
-// 					"<td>"+item.catName+"</td>"+//所属分类
-// 					"<td>"+item.specName+"</td>"+
-// 					"<td>"+item.commodityStatus+"</td>"+
-// 					"<td><input class='inputtxt' type='text' style='width:20px;' name='sortNoComm' value="+(sortNum+i)+" ></td>"+
-// 					"<td><select class='selecttxt' name='isDisplayComm'><option value='1' selected>是</option><option value='0'>否</option></select></td>"+
-// 					"<td><input type='button' class='btn-add-normal' onclick='deleteMyComm(this,"+item.no+")' value='删除' /></td></tr>";
-// 					$("#commodityShow").append(html);
-// 			}
-// 		});
-// 		//当前栏目的商品总数
-// 		$("#commCount").html((commodityNos.split(",").length)-1);
-// 		var commodityLength = $("#commodityShow tr").length;
-// 		if(commodityLength ==0){
-// 			$("#commodityCheckboxlist").hide();
-// 		}else{
-// 			$("#commodityCheckboxlist").show();
-// 		}
-// 		$("#chkb").removeAttr("checked");
-// 	});
-// }
+    var sortNum=commodityNos.split(",").length;//排序号等于上次添加的商品的最大排序号开始
+    var html="";//将填充到商品列表中的html代码
+    //获得异步请求到得json数据
+    $.getJSON("/topic/getCommodityByNo.sc?para=new Date()",{"commodityCodes":myId},function(data){
+        var sellIds="";
+        $.each(data.sellIds,function(i,item){
+            myId=myId.substring(0,myId.indexOf(item))+myId.substring((myId.indexOf(item)+1)+(item+"").length);
+            sellIds+=","+item;
+        });
+        if(sellIds!=""){
+            alert("下面的商品是已经售罄的商品"+sellIds+"已被自动过滤掉!");
+        }
+        $.each(data.result, function(i,item){
+            myId=myId.substring(0,myId.indexOf(this.commodityNo))+myId.substring((myId.indexOf(this.commodityNo)+1)+(this.commodityNo+"").length);
+            commodityNos+=this.commodityNo+",";
+            if(item.status==2){
+                item.status="上架";
+            }else{
+                item.status="下架";
+            }
+            html="<tr id='commodityNo_"+item.commodityNo+"' >"+
+                "<td ><input type='checkbox' name='chk' value='"+item.commodityNo+"' /></td>"+
+                "<td><img src="+item.defaultPic+" height='40px' width='40px' /><input type='hidden' name='commodityCode' value="+item.commodityNo+"></td>"+
+                "<td>"+item.commodityName+"</td>"+
+                "<td>"+item.commodityNo+"</td>"+
+                "<td>"+item.stock+"</td>"+
+                "<td>"+item.marketPrice+"</td>"+
+                "<td>"+item.salePrice+"</td>"+
+                "<td>"+item.propNo+"</td>"+
+                "<td>"+item.status+"</td>"+
+                "<td><input class='inputtxt' type='text' style='width:20px;' name='sortNoComm' value="+(sortNum+i)+" ></td>"+
+                "<td><input type='button' class='btn-add-normal' onclick='deleteMyComm(this,"+item.no+")' value='删除' /></td></tr>";
+            $("#commodityShow").append(html);
+        });
+        if(html==""){
+            alert("没有找到跟输入商品编号匹配的商品！");
+        }else{
+            alert("全部添加商品成功！");
+        }
+
+        if(myId!=""){
+            alert("编号"+myId+"找不到商品");
+        }
+        //当前栏目的商品总数
+        $("#commCount").html((commodityNos.split(",").length)-1);
+        var commodityLength = $("#commodityShow tr").length;
+        if(commodityLength ==0){
+            $("#commodityCheckboxlist").hide();
+        }else{
+            $("#commodityCheckboxlist").show();
+        }
+        $("#chkb").removeAttr("checked");
+    });
+}
 
 
 //删除当前栏目的商品

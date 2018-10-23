@@ -207,7 +207,7 @@ public class TopicController extends BaseController {
             topic.setCommitityCount(topicCommodityList.size());
             for(int i=0;i<topicCommodityList.size();i++){
                 TopicCommodity topicCommodity = topicCommodityList.get(i);
-                if(topicCommodity != null){
+                if(topicCommodity != null && StringUtils.isNotBlank(topicCommodity.getCommodityNo())){
                     commodityNoList.add(topicCommodity.getCommodityNo());
                 }
             }
