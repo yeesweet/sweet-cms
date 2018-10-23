@@ -10,9 +10,10 @@
                 var commodityNoArr = "";
                 var checkObj=$("input[name='chk']");
                 checkObj.each(function(index, element) {
-                    commodityNoArr = $(this).val();
+                    var commodityNo = $(this).val();
+                    commodityNoArr = commodityNoArr + commodityNo;
                     if(index != (checkObj.length-1)){
-                        commodityNoArr = ",";
+                        commodityNoArr = commodityNoArr + ",";
                     }
                 });
                 $("#commodityNoArr").val(commodityNoArr);
@@ -53,22 +54,20 @@
     function getCheckGooods() {
         //获取勾选数据，支持翻页后记录
         var rows = $('#commodityDataGrid ').datagrid('getChecked');
-        console.log('rows',rows)
         if(rows.length==0){
             alert('未勾选商品')
         }else{
-            alert(rows);
             //关闭弹窗，数据处理后执行
             $('#topic-add-window').window('close');
+            var commodityText = "";
+            for(var i=0;i<rows.length;i++){
+                commodityText = commodityText + rows[i].commodityNo;
+                if(i != rows.length-1){
+                    commodityText = commodityText + ",";
+                }
+            }
+            fillCommodityByIds(commodityText);
         }
-
-    }
-
-    function selectGoods(){
-        var effectModel = $("input:checkbox[name='ck']:checked").map(function(index,elem) {
-            return $(elem).val();
-        }).get().join(',');
-        alert(effectModel);
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
@@ -178,7 +177,7 @@
         </form>
         <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
              style="width:1000px;height:600px;padding:5px;">
-            <div class="easyui-panel" data-options="href : '${path}/commodity/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
+            <div class="easyui-panel" data-options="href : '${path}/topic/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
 
 
             </div>

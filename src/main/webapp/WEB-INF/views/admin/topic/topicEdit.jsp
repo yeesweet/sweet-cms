@@ -37,6 +37,31 @@
         $("#editStatus").val('${topic.status}'); 
         
     });
+
+    function selectGoodsDialog() {
+        $('#topic-add-window').window('open');
+        $('#topic-win-panel').height(520)
+    }
+
+    //弹窗确认按钮执行
+    function getCheckGooods() {
+        //获取勾选数据，支持翻页后记录
+        var rows = $('#commodityDataGrid ').datagrid('getChecked');
+        if(rows.length==0){
+            alert('未勾选商品')
+        }else{
+            //关闭弹窗，数据处理后执行
+            $('#topic-add-window').window('close');
+            var commodityText = "";
+            for(var i=0;i<rows.length;i++){
+                commodityText = commodityText + rows[i].commodityNo;
+                if(i != rows.length-1){
+                    commodityText = commodityText + ",";
+                }
+            }
+            fillCommodityByIds(commodityText,${topic.id});
+        }
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: auto;padding: 3px;">
@@ -123,7 +148,7 @@
                                 <textarea rows="5" cols="35" name="activeTopicIds"></textarea>
                                 <span>&nbsp;</span><span></span>
                                 <a class="l-btn" onclick="addCommodityByIds(this,${topic.id})" ><span>添加商品</span></a>&nbsp;&nbsp;
-                                <a class="l-btn" onclick="javascript:selectGoods();"><span>按条件添加商品</span></a>
+                                <a class="l-btn" onclick="javascript:selectGoodsDialog();"><span>按条件添加商品</span></a>
                                 &nbsp;&nbsp;
                                 <br/><br/>
                                 <span style="margin-left:55px;">(多个商品编号之间用<span style="color:red;">英文逗号或换行</span>隔开，最多
@@ -192,5 +217,16 @@
                 </tr>
             </table>
         </form>
+        <div id="topic-add-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
+             style="width:1000px;height:600px;padding:5px;">
+            <div class="easyui-panel" data-options="href : '${path}/topic/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
+
+
+            </div>
+            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;width: 1000px;height: 100px;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:getCheckGooods()" style="width:80px">确定</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#topic-add-window').window('close');" style="width:80px">取消</a>
+            </div>
+        </div>
     </div>
 </div>
