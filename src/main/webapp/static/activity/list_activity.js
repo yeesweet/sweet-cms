@@ -182,96 +182,32 @@ function save(){
 
 //还原单条频道数据
 function restoreActivityById(id,page){
-	location="/system/CmsActivityController/restoreActivityById.sc?id="+id+"&page="+page;
+	location="/cmsActivityController/restoreActivityById.sc?id="+id+"&page="+page;
 }
 
 //删除单条回收站频道数据
 function physicalDeleteById(id,page){
 	if(window.confirm("确定要删除此项内容？")==true){
-		location="/system/CmsActivityController/physicalDeleteById.sc?id="+id+"&page="+page;
+		location="/cmsActivityController/physicalDeleteById.sc?id="+id+"&page="+page;
 	}
 }
 
 //清空回收站
 function emptyRecycle(){
 	if(window.confirm("确定要删除所有内容？")==true){
-		location="/system/CmsActivityController/emptyRecycle.sc";
+		location="/cmsActivityController/emptyRecycle.sc";
 	}
 }
 
 //还原回收站
 function restoreAll(){
 	if(window.confirm("确定要还原所有内容？")==true){
-		location="/system/CmsActivityController/restoreAll.sc";
+		location="/cmsActivityController/restoreAll.sc";
 	}
 }
 
 function toEditActivity(id,page){
-	location="/system/CmsActivityController/toEditActivity.sc?activityId="+id+"&mark=act";
-}
-
-function edit(){
-	var activityName =$("#activityName").val();
-	if(activityName == null || activityName ==""){
-		alert("请填写活动页名称!");
-	 	return false;
-	}
-	if(checkText(activityName)){
-		alert("活动页名称不能包含特殊字符！");
-		return false;
-	}
-	if(strlen(activityName) > 20){
-		alert("活动页名称长度超过了10个汉字或20个字母，请重新输入!");
-		return false;
-	}
-	var topName =$("#topName").val();
-	if(topName == null || topName ==""){
-	 	alert("请填写顶部标题!");
-	 	return false;
-	}
-	if(checkText(topName)){
-		alert("顶部标题不能包含特殊字符！");
-		return false;
-	}
-	if(strlen(topName) > 20){
-		alert("顶部标题长度超过了10个汉字或20个字母，请重新输入!");
-		return false;
-	}
-	
-	//产品线数据封装处理
-	var productLineCodeStr ='';
-	var productLineCodes = document.getElementsByName('productLineCodes');
-	var productLineCodesLength =0;
-	for(var i = 0 ; i < productLineCodes.length ;i++){
-		if(productLineCodes[i].checked){
-			productLineCodeStr +=productLineCodes[i].value+";";
-			productLineCodesLength +=1; 
-		}
-	}
-	// if(productLineCodeStr ==''){
-	// 	alert("至少要选择一个关联平台.");
-	// 	return false;
-	// }
-	if(productLineCodesLength == productLineCodes.length){
-		productLineCodeStr ="ALL";
-	}
-	$("#productLineCode").val(productLineCodeStr);
-	
-	var shareContent =$("#shareContent").val();
-	if(shareContent != null && shareContent !="" && strlen(shareContent) > 100){
-		alert("分享说明长度超过了50个汉字或100个字母，请重新输入!");
-		$("#shareContent").focus();
-		return false;
-	}
- 	
-	var moduleIds = "";
-	$("input[name='moduleId']").each(function(){
-		if($(this).val() != ""){
-			moduleIds += $(this).val()+";";
-		}
-	});
-	$("#moduleIds").val(moduleIds);
-    $("#editActivityForm").submit();
+	location="/cmsActivityController/toEditActivity.sc?activityId="+id+"&mark=act";
 }
 
 //跳转到编辑导航页面

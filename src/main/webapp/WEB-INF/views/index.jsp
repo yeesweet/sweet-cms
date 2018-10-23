@@ -10,6 +10,81 @@
     var index_tabs;
     var indexTabsMenu;
     var indexMenuZTree;
+    (function ($) {
+        $.getUrlParam = function (url,name) {
+            let search = typeof url == 'string'?url.substr(url.indexOf('?')):document.location.search;
+            let pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+            let matcher = pattern.exec(search);
+            let items = null;
+            if (null != matcher) {
+                try {
+                    items = decodeURIComponent(decodeURIComponent(matcher[1]));
+                } catch (e) {
+                    try {
+                        items = decodeURIComponent(matcher[1]);
+                    } catch (e) {
+                        items = matcher[1];
+                    }
+                }
+            }
+            return items;
+        };
+        $.setUrlParam = function (url, ref, value) {
+            let str = "";
+            let jIndex = url.indexOf('#');
+            let jStr = '';
+            let tempurl = url;
+            if (jIndex != -1) {
+                jStr = url.substr(jIndex);
+                tempurl = url.substring(0, jIndex);
+            }
+            if (tempurl.indexOf('?') != -1) {
+                str = tempurl.substr(tempurl.indexOf('?') + 1);
+            } else {
+                return tempurl + "?" + ref + "=" + value + jStr;
+            }
+            let returnurl = "";
+            let setparam = "";
+            let arr;
+            let modify = "0";
+            let i;
+            if (str.indexOf('&') != -1) {
+                arr = str.split('&');
+                for (i in arr) {
+                    if (arr[i].split('=')[0] == ref) {
+                        setparam = value;
+                        modify = "1";
+                    }
+                    else {
+                        setparam = arr[i].split('=')[1];
+                    }
+                    returnurl = returnurl + arr[i].split('=')[0] + "=" + setparam + "&";
+                }
+                returnurl = returnurl.substr(0, returnurl.length - 1);
+                if (modify == "0")
+                    if (returnurl == str)
+                        returnurl = returnurl + "&" + ref + "=" + value;
+            } else {
+                if (str.indexOf('=') != -1) {
+                    arr = str.split('=');
+                    if (arr[0] == ref) {
+                        setparam = value;
+                        modify = "1";
+                    }
+                    else {
+                        setparam = arr[1];
+                    }
+                    returnurl = arr[0] + "=" + setparam;
+                    if (modify == "0")
+                        if (returnurl == str)
+                            returnurl = returnurl + "&" + ref + "=" + value;
+                }
+                else
+                    returnurl = ref + "=" + value;
+            }
+            return url.substring(0, url.indexOf('?')) + "?" + returnurl + jStr;
+        }
+    })(jQuery);
     $(function() {
         $('#index_layout').layout({fit : true});
         
@@ -129,6 +204,7 @@
                 }
             }
         });
+        openPageManagerList();
     });
 
     function addTab(opts) {
@@ -137,6 +213,24 @@
             t.tabs('select', opts.title);
         } else {
             t.tabs('add', opts);
+        }
+    }
+
+    //根据url中的tab参数默认打开对应选项卡(慎用)
+    function openPageManagerList() {
+        let tabUrl = $.getUrlParam(null,'tab');
+        if(tabUrl){
+           let opt= {
+                border: false,
+                closable: true,
+                fit: true,
+                href: tabUrl,
+                iconCls: "fi-annotate",
+                index: 1,
+                selected: true,
+                title: "页面管理"
+           }
+            addTab(opt)
         }
     }
     

@@ -98,7 +98,7 @@
 	<span class="red">*</span>商品名称：
 	<span>
 		<c:choose>
-			<c:when test="${not empty cmmodityStyle && !(cmmodityStyle eq null)}">
+			<c:when test="${not empty cmsModuleDetail.commodityName && !(cmsModuleDetail.commodityName eq null)}">
 				<input type="text" name="commodityName" id="commodityName${cmsModuleDetailS.index+1}" readonly="readonly" size="50" maxlength="150" value="${cmsModuleDetail.commodityName}"/>
 			</c:when>
 			<c:otherwise>

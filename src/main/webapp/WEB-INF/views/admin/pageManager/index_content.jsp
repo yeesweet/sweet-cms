@@ -101,7 +101,7 @@
 						<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
 							<div>
 							<c:choose>
-								<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+								<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
 									<img src="${cmsModuleDetail.imgUrl}" />
 								</c:when>
 								<c:otherwise>
@@ -372,7 +372,7 @@
 							<c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
 								<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
 									<c:choose>
-										<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+										<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
 											<img src="${cmsModuleDetail.imgUrl}" />
 										</c:when>
 										<c:otherwise>
@@ -642,7 +642,7 @@
 							<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
 								<div class="fl" style="width:25%;height:138px;">
 								<c:choose>
-									<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+									<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
 										<img src="${cmsModuleDetail.imgUrl}" />
 									</c:when>
 									<c:otherwise>
@@ -684,7 +684,7 @@
 									<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
 										<li class="meglist">
 										<c:choose>
-											<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+											<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
 												<img src="${cmsModuleDetail.imgUrl}" />
 											</c:when>
 											<c:otherwise>
@@ -727,7 +727,7 @@
 			            	<div class="fl" style="width:100%;">
 								<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail">
 									<c:choose>
-										<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null)} && cmsModuleDetail.imgUrl != ''">
+										<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
 											<img src="${cmsModuleDetail.imgUrl}" style="margin-bottom:5px;height:${cmsModule.height}px;"/>
 										</c:when>
 										<c:otherwise>
@@ -855,7 +855,7 @@
                             <c:forEach  items="${cmsModule.moduleCommoditys}" var="cmsModuleCommodity">
                                 <div class="goodThreediv">
                                     <c:choose>
-                                        <c:when test="${not empty cmsModuleCommodity.defaultPic && !(cmsModuleCommodity.defaultPic eq null)} && cmsModuleCommodity.defaultPic != ''">
+                                        <c:when test="${not empty cmsModuleCommodity.defaultPic && !(cmsModuleCommodity.defaultPic eq null) && cmsModuleCommodity.defaultPic != ''}">
                                             <img src="${cmsModuleCommodity.defaultPic}" class='goodDivImg'/>
                                         </c:when>
                                         <c:otherwise>
@@ -899,7 +899,7 @@
                                     <c:forEach  items="${cmsModule.moduleCommoditys}" var="cmsModuleCommodity">
                                         <div class="goodTwodiv">
                                             <c:choose>
-                                                <c:when test="${not empty cmsModuleCommodity.defaultPic && !(cmsModuleCommodity.defaultPic eq null)} && cmsModuleCommodity.defaultPic != ''">
+                                                <c:when test="${not empty cmsModuleCommodity.defaultPic && !(cmsModuleCommodity.defaultPic eq null) && cmsModuleCommodity.defaultPic != ''}">
                                                     <img src="${cmsModuleCommodity.defaultPic}" class='goodDivImg'/>
                                                 </c:when>
                                                 <c:otherwise>

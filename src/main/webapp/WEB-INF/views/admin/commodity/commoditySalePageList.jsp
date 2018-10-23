@@ -26,7 +26,7 @@
         striped : true,
         rownumbers : true,
         pagination : true,
-        singleSelect : typeof commodityDataGrid_singleSelect =="boolean"?false:true,
+        singleSelect : typeof commodityDataGrid_singleSelect !="undefined" && commodityDataGrid_singleSelect?false:true,
         idField : 'id',
         sortName : 'downDate',
         sortOrder : 'desc',
