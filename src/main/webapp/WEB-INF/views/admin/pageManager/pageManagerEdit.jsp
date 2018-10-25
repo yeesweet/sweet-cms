@@ -183,7 +183,7 @@
                 <tr>
                     <td>状态</td>
                     <td>
-                        <select id="isDisplay" name="isDisplay" class="easyui-combobox"
+                        <select class="ipt_text" id="isDisplay" name="isDisplay"
                                 data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="1" ${(pageManager.isDisplay!=null && pageManager.isDisplay!='' && pageManager.isDisplay==1)?'selected':''}>启用</option>
                             <option value="0" ${(pageManager.isDisplay!=null && pageManager.isDisplay!='' && pageManager.isDisplay==0)?'selected':''}>停用</option>

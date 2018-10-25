@@ -124,7 +124,7 @@ function pageManagerEditFun(id) {
     }
     editPageDialog = parent.$.modalDialog({
         title : '编辑',
-        width : 1500,
+        width : 1300,
         height : 600,
         href :  '${path}/pageManager/editPage?id=' + id,
         buttons : [ {
