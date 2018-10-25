@@ -505,7 +505,18 @@
 	    </div>
 	  </div>
 	</div>
-</div>	  
+</div>
+<div id="pageManager-goods-window" class="easyui-window" title="选择商品" data-options="iconCls:'icon-save',closed:true,model:true"
+	 style="width:1000px;height:600px;padding:5px;">
+	<div class="easyui-panel" data-options="href : '${path}/commodity/getCommodityList',fit:true" id="topic-win-panel" style="width:1000px;height:300px;padding:5px;overflow-y: auto">
+
+
+	</div>
+	<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;width: 1000px;height: 100px;">
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:getSelectGoods()" style="width:80px">确定</a>
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#pageManager-goods-window').window('close');" style="width:80px">取消</a>
+	</div>
+</div>
 </body>
 
 
