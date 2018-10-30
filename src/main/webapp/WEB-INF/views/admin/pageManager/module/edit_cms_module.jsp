@@ -28,7 +28,7 @@
   	<!--工具栏start-->
     <div class="toolbar">
 			<div class="t-content"> <!--操作按钮start-->
-				<div class="btn" onclick="goto_back('${navigationId}','${activityId}')">
+				<div class="btn" onclick="goto_back('${pageManagerId}')">
 					<span class="btn-back"></span>
 					<b class="ico_btn back"></b>
 					<span class="btn_txt">返回</span>
@@ -657,7 +657,7 @@
               <input type="hidden" id="pageManagerId" name="pageManagerId" value="${pageManagerId}" />
 	          <div style="color:#3d4245;font-size:14px;">
 	          	<p>当前状态：
-                    <c:choose><c:when test="${cmsModule.isDisplay==1}">启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${activityId}');" style="margin-left:40px;"/>
+                    <c:choose><c:when test="${cmsModule.isDisplay==1}">启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${pageManagerId}');" style="margin-left:40px;"/>
                     </c:when><c:otherwise>停用</c:otherwise></c:choose>
 				</p>
 	          </div>

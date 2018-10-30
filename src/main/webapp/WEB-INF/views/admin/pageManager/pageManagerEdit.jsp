@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/commons/global.jsp" %>
-<%@ include file="/commons/basejs.jsp" %>
+<%-- [my97日期时间控件] --%>
+<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
+<%-- [jQuery] --%>
+<script type="text/javascript" src="${staticPath }/static/easyui/jquery.min.js" charset="utf-8"></script>
+<%-- [EasyUI] --%>
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui/themes/gray/easyui.css" />
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui/themes/icon.css" />
+<script type="text/javascript" src="${staticPath }/static/easyui/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="${staticPath }/static/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/sys-base.css?v=201809242210"/>
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/sys-global.css?v=201809242210"/>
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/page-edit.css?v=201809242210"/>
@@ -12,7 +20,6 @@
 <script type="text/javascript" src="${staticPath }/static/homepage/yxMobileSlider.js?v=201809242210"></script>
 <script type="text/javascript" src="${staticPath }/static/activity/index.js?v=201809242210"></script>
 
-<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js?v=201809242210"></script>
 <script type="text/javascript" src="${staticPath }/static/component/imageSelector.js?v=201809242210"></script>
 <%--<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>--%>
 <script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>

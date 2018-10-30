@@ -93,7 +93,7 @@
 	          	<p>当前状态：
 					<c:choose>
 						<c:when test="${cmsModule.isDisplay==1}">
-							启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${activityId}');" style="margin-left:40px;"/>
+							启用<input type="button" value="停用" onclick="changeStatus('${cmsModule.id}',0,'${currentPLC}','${pageManagerId}');" style="margin-left:40px;"/>
 						</c:when>
 						<c:otherwise>
 							停用

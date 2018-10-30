@@ -24,7 +24,7 @@
   	<!--工具栏start--> 
     <div class="toolbar">
 			<div class="t-content"> <!--操作按钮start-->
-				<div class="btn" onclick="goto_back('${navigationId}','${activityId}')">
+				<div class="btn" onclick="goto_back('${pageManagerId}')">
 					<span class="btn-back"></span>
 					<b class="ico_btn back"></b>
 					<span class="btn_txt">返回</span>

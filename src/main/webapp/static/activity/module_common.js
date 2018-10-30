@@ -805,11 +805,11 @@ function checkText(str){
 }
 
 //启用停用功能；参数说明：moduleId模块id，status启用状态，currentPLC当前频道关联平台,activityId活动页id
-function changeStatus(moduleId,status,currentPLC,activityId){
+function changeStatus(moduleId,status,currentPLC,pageManagerId){
 	if(status ==0){
-		location="toChangeStatus.sc?status=0&moduleId="+moduleId+"&currentPLC="+currentPLC+"&activityId="+activityId;
+		location="toChangeStatus.sc?status=0&moduleId="+moduleId+"&currentPLC="+currentPLC+"&pageManagerId="+pageManagerId;
 	}else{
-		location="toChangeStatus.sc?status=1&moduleId="+moduleId+"&currentPLC="+currentPLC+"&activityId="+activityId;
+		location="toChangeStatus.sc?status=1&moduleId="+moduleId+"&currentPLC="+currentPLC+"&pageManagerId="+pageManagerId;
 	}
 }
 //设置自定义推荐模块行/列

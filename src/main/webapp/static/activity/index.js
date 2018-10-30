@@ -215,11 +215,6 @@ function atuoScroll(){
     });
 }
 
-//切换频道内容
-function changeNavigation(activityId,navigationId){
-	location="/system/CmsActivityController/toEditActivity.sc?activityId="+activityId+"&navigationId="+navigationId;
-}
-
 //首页根据时间查询模块
 function selectBoardByTime(activityId){
 	var startTime = $("#startTime").val();
