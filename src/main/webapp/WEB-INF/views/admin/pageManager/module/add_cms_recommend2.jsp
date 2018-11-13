@@ -118,8 +118,8 @@
                       <input class="ipt_text" name="cols" id="cols" type="text"  maxlength="1" onkeyup="this.value=getRecommend2RowNums(this.value.replace(/\D/g,''))" onafterpaste="this.value=getRecommend2RowNums(this.value.replace(/\D/g,''))"/>
                   </p>
                   <p><span class="red">*</span>模块高：
-                      <input class="ipt_text" name="boardHeight" id="boardHeight" />
-                      <input style="display: none" class="ipt_text" name="boardWidth" id="boardWidth" value="640" />
+                      <input class="ipt_text" name="height" id="height" />
+                      <input style="display: none" class="ipt_text" name="width" id="width" value="640" />
                   </p>
                   <div>
 		              <a class="btn_save" onclick="setRecommend2Rows()" style="color:#fff;">确定行列数</a>
@@ -139,7 +139,7 @@
                       </p>
                       <div class="uploadimgshow">
                           <a href="javascript:void(0)"><img class="closeBg" src="${staticPath }/static/style/images/homepage/close.png"/></a>
-                          <img src="${staticPath }/static/style/images/homepage/2img1.jpg" id="iptimg0" class="iptimgs" style="height:50px;"/>
+                          <img src="${staticPath }/static/style/images/homepage/1img1.jpg" id="iptimg0" class="iptimgs" style="height:50px;"/>
                       </div>
                   </div>
                   <div id="bg2" style="margin:0 0 35px 10px;display:none">

@@ -52,25 +52,25 @@
 	          <div class="divlist">
 	            <div class="addBox">
 				<c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
-					<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="status">
-					<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && status.index%(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols))==0}">
+					<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="cmsModuleDetailS">
+					<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && cmsModuleDetailS.index%(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols))==0}">
 	             	<div class="recommendlist"  id="editDiv108" >
 					   </c:if>
 	                    <div class="col<c:choose><c:when test="${not empty cmsModule.cols && !(cmsModule.cols eq null)}">${cmsModule.cols}</c:when><c:otherwise>4</c:otherwise></c:choose>">
 	                        <a href="#">
 								<c:choose>
 									<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
-										<img id="fl108${status.index+1}" src="${cmsModuleDetail.imgUrl}" />
+										<img id="fl108${cmsModuleDetailS.index+1}" src="${cmsModuleDetail.imgUrl}" />
 									</c:when>
 									<c:otherwise>
-										<img id="fl108${status.index+1}" src="${staticPath }/static/style/images/homepage/tuijian1.jpg" />
+										<img id="fl108${cmsModuleDetailS.index+1}" src="${staticPath }/static/style/images/homepage/tuijian1.jpg" />
 									</c:otherwise>
 								</c:choose>
 	                        </a>
-	                        <span class="num" style="display:none;">${status.index+1}.</span>
+	                        <span class="num" style="display:none;">${cmsModuleDetailS.index+1}.</span>
 	                        <p>${cmsModuleDetail.title}</p>
 	                    </div>
-						<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && status.index%(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols))==(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols)-1)}">
+						<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && cmsModuleDetailS.index%(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols))==(Integer.valueOf(cmsModule.rows)*Integer.valueOf(cmsModule.cols)-1)}">
 	                    <a href="javascript:void(0);" class="delete2">删除</a>
 					</div>
 						</c:if>
@@ -154,7 +154,7 @@
 								  <img src="${cmsModule.bg}" id="iptimg0" class="iptimgs" style="height:50px;"/>
 							  </c:when>
 							  <c:otherwise>
-								  <img src="${staticPath }/static/style/images/homepage/2img1.jpg" id="iptimg0" class="iptimgs" style="height:50px;"/>
+								  <img src="${staticPath }/static/style/images/homepage/1img1.jpg" id="iptimg0" class="iptimgs" style="height:50px;"/>
 							  </c:otherwise>
 						  </c:choose>
                       </div>
@@ -169,35 +169,35 @@
 	          	<div class="TjArea">
 	          		<div class="TjAreaCon">
 						<c:if test="${not empty cmsModule.moduleDetails && !(cmsModule.moduleDetails eq null)}">
-							<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="status">
-							<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && status.index%4==0}">
+							<c:forEach  items="${cmsModule.moduleDetails}" var="cmsModuleDetail" varStatus="cmsModuleDetailS">
+							<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && cmsModuleDetailS.index%4==0}">
 			              	 <div class="Tj">
 							</c:if>
-			              	 	<div id="upload${status.index+1}" class="upload">
-			              	 		<p>图片<span class="number">${status.index+1}</span>：
-			              	 		<input id="fileimg${status.index+1}" class="fileimg" type="file" name="file"/>
-									<input id="uploadBtn${status.index+1}" class="uploadBtn" type="button" onclick="javascript:ajaxImageUpload(this)" value="上传图片"/>
-									<input type="button" class="addImageBtn" value="添加图片" onclick="javaScript:selectImage(${status.index+1});" />
+			              	 	<div id="upload${cmsModuleDetailS.index+1}" class="upload">
+			              	 		<p>图片<span class="number">${cmsModuleDetailS.index+1}</span>：
+			              	 		<input id="fileimg${cmsModuleDetailS.index+1}" class="fileimg" type="file" name="file"/>
+									<input id="uploadBtn${cmsModuleDetailS.index+1}" class="uploadBtn" type="button" onclick="javascript:ajaxImageUpload(this)" value="上传图片"/>
+									<input type="button" class="addImageBtn" value="添加图片" onclick="javaScript:selectImage(${cmsModuleDetailS.index+1});" />
 									</p>
 									<div class="uploadimgshow">
 									   <a href="javascript:void(0)"><img class="close1" src="${staticPath }/static/style/images/homepage/close.png"/></a>
 										<c:choose>
 											<c:when test="${not empty cmsModuleDetail.imgUrl && !(cmsModuleDetail.imgUrl eq null) && cmsModuleDetail.imgUrl != ''}">
-												<img src="${cmsModuleDetail.imgUrl}" id="iptimg${status.index+1}" class="iptimgs"/>
+												<img src="${cmsModuleDetail.imgUrl}" id="iptimg${cmsModuleDetailS.index+1}" class="iptimgs"/>
 											</c:when>
 											<c:otherwise>
-												<img src="${staticPath }/static/style/images/homepage/1img1.jpg" id="iptimg${status.index+1}" class="iptimgs"/>
+												<img src="${staticPath }/static/style/images/homepage/1img1.jpg" id="iptimg${cmsModuleDetailS.index+1}" class="iptimgs"/>
 											</c:otherwise>
 										</c:choose>
-									<input id="img${status.index+1}" type="hidden" name="moduleDetails[${status.index}].imgUrl" value="${cmsModuleDetail.imgUrl}"/>
+									<input id="img${cmsModuleDetailS.index+1}" type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].imgUrl" value="${cmsModuleDetail.imgUrl}"/>
 									</div>
 
 									<%@ include file="/WEB-INF/views/admin/pageManager/module/module_link_position.jsp" %>
-									<input type="hidden" name="moduleDetails[${status.index}].sortNo" id="sortNo${status.index+1}" value="${status.index+1}" />
-									<input type="hidden" name="moduleDetails[${status.index}].commonId" id="commonId${status.index+1}" value="${cmsModuleDetail.commonId}"/>
-									<input type="hidden" name="moduleDetails[${status.index}].subType" id="subType${status.index+1}" value="${cmsModuleDetail.subType}"/>
+									<input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].sortNo" id="sortNo${cmsModuleDetailS.index+1}" value="${cmsModuleDetailS.index+1}" />
+									<input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].commonId" id="commonId${cmsModuleDetailS.index+1}" value="${cmsModuleDetail.commonId}"/>
+									<input type="hidden" name="moduleDetails[${cmsModuleDetailS.index}].subType" id="subType${cmsModuleDetailS.index+1}" value="${cmsModuleDetail.subType}"/>
 			              	 	</div>
-								<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && status.index%4==3}">
+								<c:if test="${not empty cmsModuleDetail && !(cmsModuleDetail eq null) && cmsModuleDetailS.index%4==3}">
 								<div class="Tj">
 									</c:if>
 					  		</c:forEach>

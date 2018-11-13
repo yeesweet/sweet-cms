@@ -2,15 +2,17 @@
 function ajaxImageUploadBg(em) {
 	var $this = $(em);
 	var id =$this.attr("id").substring(9);
-	var file = $("#fileimg"+id).val();
-	if(file==""){
-		alert("请选择文件");
-		return false;
-	} 
+	alert(id);
+    var file = document.getElementById("fileimg"+id).files[0];
+    var fileName = $("#fileimg" + id).val();
+    if (fileName == "") {
+        alert("请选择文件");
+        return false;
+    }
 	var fileInput = $("#fileimg"+id)[0];
     byteSize  = fileInput.files[0].size;
     var fileSize = Math.floor(byteSize / 1024);
-	var fileType = file.substring(file.lastIndexOf(".")+1);
+	var fileType = fileName.substring(fileName.lastIndexOf(".")+1);
 	if(fileType.toLowerCase()=="gif" && fileSize > 100){
 		alert("上传GIF格式图片大小不能超过100KB！");
 		return false;
@@ -42,8 +44,8 @@ function ajaxImageUploadBg(em) {
             success: function (data) {
                 if(data.status == "success"){
                     alert("上传成功！");
-                    $("#iptimg"+id).attr("src",data.picpath);
-                    $("#bg").val(data.picpath);
+                    $("#iptimg"+id).attr("src",data.imageUrl);
+                    $("#bg").val(data.imageUrl);
                 }else{
                     alert(data.errorDesc);
                     $("#iptimg"+id).attr("src","/images/homepage/2img1.jpg");
@@ -74,7 +76,7 @@ function getTypeBg(){
 	var typeBg = $("#typeBg").val();
 	$("#bg1").css("display","none");
 	$("#bg2").css("display","none");
-	$("#iptimg0").attr("src","/images/homepage/2img1.jpg");
+	$("#iptimg0").attr("src","/static/style/images/homepage/1img1.jpg");
 	$("#bgColor").val("");
 	$("#bgColorBlock").css("background-color","");
 	$("#bg").val("");
@@ -92,6 +94,6 @@ function changeBgColor(){
 
 //删除图片
 $(".closeBg").click(function(){
-	$("#iptimg0").attr("src","/images/homepage/2img1.jpg");
+	$("#iptimg0").attr("src","/static/style/images/homepage/1img1.jpg");
 	$("#bg").val("");
 });

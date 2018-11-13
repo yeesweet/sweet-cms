@@ -154,11 +154,11 @@ public class CmsModuleController extends BaseController {
 			cmsModule.setUpdateTime(new Date());
 			cmsModule.setOperator(this.getStaffName());
 			String starttime = cmsModule.getStarttime();
-			if(starttime!=null && starttime!=""){
+			if(StringUtils.isNotBlank(starttime)){
 				cmsModule.setStartTime(DateUtil.getdate1(starttime));
 			}
 			String endtime = cmsModule.getEndtime();
-			if(endtime!=null && endtime!=""){
+			if(StringUtils.isNotBlank(endtime)){
 				cmsModule.setEndTime(DateUtil.getdate1(endtime));
 			}
 			cmsModuleService.insert(cmsModule);
@@ -235,11 +235,11 @@ public class CmsModuleController extends BaseController {
 				moduleDetail.setOperator(this.getStaffName());
 				
 				String subStarttime = moduleDetail.getSubStarttime();
-				if(subStarttime!=null && subStarttime!=""){
+				if(StringUtils.isNotBlank(subStarttime)){
 					moduleDetail.setSubStartTime(DateUtil.getdate1(subStarttime));
 				}
 				String subEndtime = moduleDetail.getSubEndtime();
-				if(subEndtime!=null && subEndtime!=""){
+				if(StringUtils.isNotBlank(subEndtime)){
 					moduleDetail.setSubEndTime(DateUtil.getdate1(subEndtime));
 				}
 				moduleDetail.setUpdateTime(new Date());
