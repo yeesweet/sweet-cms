@@ -723,57 +723,64 @@ function getSelectGoods() {
 }
 //上传图片
 function ajaxImageUpload(em) {
-	var $this = $(em);
-	var id =$this.attr("id").substring(9);
-	var file = $("#fileimg"+id).val();
-	if(file==""){
-		alert("请选择文件");
-		return false;
-	} 
-	var fileInput = $("#fileimg"+id)[0];
-    byteSize  = fileInput.files[0].size;
+    var $this = $(em);
+    var id = $this.attr("id").substring(9);
+    var file = document.getElementById("fileimg"+id).files[0];
+    var fileName = $("#fileimg" + id).val();
+    if (fileName == "") {
+        alert("请选择文件");
+        return false;
+    }
+    var fileInput = $("#fileimg" + id)[0];
+    byteSize = fileInput.files[0].size;
     var fileSize = Math.floor(byteSize / 1024);
-	var fileType = file.substring(file.lastIndexOf(".")+1);
-	if(fileType.toLowerCase()=="gif" && fileSize > 100){
-		alert("上传GIF格式图片大小不能超过100KB！");
-		return false;
-	} else if (fileType.toLowerCase()!="gif" && fileSize > 60){
-		alert("上传图片大小不能超过60KB！");
-		return false;
-	}
-	if(fileType.toLowerCase()!="jpg" && fileType.toLowerCase()!="png" && fileType.toLowerCase()!="gif" && fileType.toLowerCase()!="bmp"){
-		 alert("只能上传图片!");
-		 return false;
-	 }else{
+    var fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
+    if (fileType.toLowerCase() == "gif" && fileSize > 100) {
+        alert("上传GIF格式图片大小不能超过100KB！");
+        return false;
+    } else if (fileType.toLowerCase() != "gif" && fileSize > 60) {
+        alert("上传图片大小不能超过60KB！");
+        return false;
+    }
+    if (fileType.toLowerCase() != "jpg" && fileType.toLowerCase() != "png" && fileType.toLowerCase() != "gif" && fileType.toLowerCase() != "bmp") {
+        alert("只能上传图片!");
+        return false;
+    } else {
         var date = new Date();
-        var year=date.getFullYear();
-        var month=date.getMonth()+1;
-        var path = "pagemanager/"+year+"/"+month;
-		 $.ajaxFileUpload({
-	            url: '/cmsImageControler/uploadImage.sc?type=1&path='+path,
-	            type: 'post',
-	            secureuri: false, //一般设置为false
-	            fileElementId: 'fileimg'+id, // 上传文件的id、name属性名
-	            dataType: 'json', //返回值类型，一般设置为json、application/json
-	            success: function(data){  
-	                if(data.status == "success"){
-	                	alert("上传成功！");
-	                	$("#iptimg"+id).attr("src",data.imageUrl);
-		                $("#img"+id).val(data.imageUrl);
-		                $("#fl"+flag+id).attr("src",data.imageUrl);
-	                }else{
-	                	alert(data.errorDesc);
-	                	$("#iptimg"+id).attr("src","/static/style/images/homepage/1img1.jpg");
-		                $("#fl"+flag+id).attr("src","/static/style/images/homepage/1img1.jpg");
-	                }
-	            },
-	            error: function(data, e){ 
-	                alert(e);
-	                alert("上传失败！");
-	                $("#iptimg"+id).attr("src","/static/style/images/homepage/1img1.jpg");
-	            }
-	        });
-	 }
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var path = "pagemanager/" + year + "/" + month;
+
+        var formData = new FormData();
+        formData.append("file", file);
+        formData.append("path", encodeURI(path, "UTF-8"));
+        formData.append("type", 1);
+        $.ajax({
+            url: '/cmsImageControler/uploadImage.sc',
+            type: 'post',
+            data: formData,
+            dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (data) {
+                if (data.status == "success") {
+                    alert("上传成功！");
+                    $("#iptimg" + id).attr("src", data.imageUrl);
+                    $("#img" + id).val(data.imageUrl);
+                    $("#fl" + flag + id).attr("src", data.imageUrl);
+                } else {
+                    alert(data.errorDesc);
+                    $("#iptimg" + id).attr("src", "/static/style/images/homepage/1img1.jpg");
+                    $("#fl" + flag + id).attr("src", "/static/style/images/homepage/1img1.jpg");
+                }
+            },
+            error: function (data, e) {
+                alert("上传失败！");
+                $("#iptimg" + id).attr("src", "/static/style/images/homepage/1img1.jpg");
+            }
+        });
+    }
 }
 
 //选择图片方法
@@ -837,7 +844,6 @@ function setRecommend2Rows(){
 
 
 		$.getScript(BasePath + "/static/activity/cmsModule.js",function(){  //加载js,成功后，执行回调函数
-		  //alert("load cmsBoard.js");
 		});
 	}
 }

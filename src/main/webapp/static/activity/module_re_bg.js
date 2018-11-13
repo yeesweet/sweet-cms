@@ -22,28 +22,38 @@ function ajaxImageUploadBg(em) {
 		 alert("只能上传图片!");
 		 return false;
 	 }else{
-		 $.ajaxFileUpload({
-	            url: '../cmsImageControler/uploadImage.sc?type=1', 
-	            type: 'post',
-	            secureuri: false, //一般设置为false
-	            fileElementId: 'fileimg'+id, // 上传文件的id、name属性名
-	            dataType: 'json', //返回值类型，一般设置为json、application/json
-	            success: function(data){  
-	                if(data.status == "success"){
-	                	alert("上传成功！");
-	                	$("#iptimg"+id).attr("src",data.picpath);
-		                $("#bg").val(data.picpath);
-	                }else{
-	                	alert(data.errorDesc);
-	                	$("#iptimg"+id).attr("src","/images/homepage/2img1.jpg");
-	                }
-	            },
-	            error: function(data, e){ 
-	                alert(e);
-	                alert("上传失败！");
-	                $("#iptimg"+id).attr("src","/images/homepage/2img1.jpg");
-	            }
-	        });
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var path = "pagemanager/" + year + "/" + month;
+
+        var formData = new FormData();
+        formData.append("file", file);
+        formData.append("path", encodeURI(path, "UTF-8"));
+        formData.append("type", 1);
+        $.ajax({
+            url: '/cmsImageControler/uploadImage.sc',
+            type: 'post',
+            data: formData,
+            dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (data) {
+                if(data.status == "success"){
+                    alert("上传成功！");
+                    $("#iptimg"+id).attr("src",data.picpath);
+                    $("#bg").val(data.picpath);
+                }else{
+                    alert(data.errorDesc);
+                    $("#iptimg"+id).attr("src","/images/homepage/2img1.jpg");
+                }
+            },
+            error: function (data, e) {
+                alert("上传失败！");
+                $("#iptimg"+id).attr("src","/images/homepage/2img1.jpg");
+            }
+        });
 	 }
 }
 

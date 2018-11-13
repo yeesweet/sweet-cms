@@ -12,10 +12,10 @@
 	<link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/sys-activity.css?v=201809242210" />
 
 	<%--<script type="text/javascript" src="${staticPath }/static/homepage/jquery-1.6.2.min.js?v=201809242210"></script>--%>
-	<script type="text/javascript" src="${staticPath }/static/homepage/common.min.js"></script>
+	<script type="text/javascript" src="${staticPath }/static/activity/common.min.js"></script>
 	<script type="text/javascript" src="${staticPath }/static/activity/list_activity.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/jquery/jquery.dragsort-0.5.2.min.js"></script>
-	<script type="text/javascript" src="${staticPath }/static/homepage/yxMobileSlider.js?v=201809242210"></script>
+	<script type="text/javascript" src="${staticPath }/static/activity/yxMobileSlider.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/activity/index.js?v=201809242210"></script>
 
 	<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js?v=201809242210"></script>
