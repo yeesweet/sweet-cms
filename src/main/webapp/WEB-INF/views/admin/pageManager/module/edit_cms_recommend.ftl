@@ -9,9 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="${BasePath}/styles/sys-base.css"/>
 	<link rel="stylesheet" type="text/css" href="${BasePath}/styles/sys-global.css"/>
 	<link rel="stylesheet" type="text/css" href="${BasePath}/styles/sys-activity.css"/>
-	<script type="text/javascript" src="${BasePath}/js/jquery/jquery-1.6.2.min.js"></script> 
+	<#--<script type="text/javascript" src="${BasePath}/js/jquery/jquery-1.6.2.min.js"></script> -->
 	<script type="text/javascript" src="${BasePath}/js/datepicker/WdatePicker.js?${YOUGOU_JS_VERSION}"></script>
-	<script type="text/javascript" src="${BasePath}/js/ajaxfileupload.js"></script>
+	<#--<script type="text/javascript" src="${BasePath}/js/ajaxfileupload.js"></script>-->
 	<script type="text/javascript" src="${BasePath}/component/commoditySingleSelector.js?${YOUGOU_JS_VERSION}"></script>
 	<script type="text/javascript" src="/component/imageSelector.js?${YOUGOU_JS_VERSION}"></script> 
 	<script type="text/javascript" src="${BasePath}/js/common.min.js"></script> 

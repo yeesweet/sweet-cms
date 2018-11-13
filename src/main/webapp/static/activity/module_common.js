@@ -40,13 +40,13 @@ $(function(){
 		  var str=$(".addBox").html();
 		  var str1=$(".TjAreaCon").last().html();
 		  clonearea="<div class='recommendlist'>" + $(".recommendlist").clone().html() + "</div>";
-		  clonearea1="<div class='Tj2'>" + $(".Tj2").clone().html() + "</div>";
+		  clonearea1="<div class='Tj'>" + $(".Tj").clone().html() + "</div>";
 		  $(".addBox").html(str+clonearea);
-		  $(".TjAreaCon2").last().append(clonearea1);
+		  $(".TjAreaCon").last().append(clonearea1);
 
 	       //设置链接位置为0
-		  $(".Tj2").last().children(".upload").children(".place").children("select").val(0);
-		  $(".Tj2").last().children(".upload").children(".choosep").hide();
+		  $(".Tj").last().children(".upload").children(".place").children("select").val(0);
+		  $(".Tj").last().children(".upload").children(".choosep").hide();
 
 		  var number=$(".number").length;
 		  for(var i=num+1;i<=number;i++){
@@ -82,7 +82,7 @@ $(function(){
 		var dataIndex = $(this).parent(".recommendlist").index();
 		if(num>1){
 			$(this).parent(".recommendlist").remove();
-			$(".Tj2").get(dataIndex).remove();
+			$(".Tj").get(dataIndex).remove();
 			for(var i=0;i < num*rows_cols; i++){
 				//修改左侧id和name值
 				$(".recommendlist img").eq(i).attr("id","fl108"+(i+1));

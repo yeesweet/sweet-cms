@@ -10,14 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/sys-global.css?v=201809242210" />
 	<link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/sys-activity.css?v=201809242210" />
 
-	<script type="text/javascript" src="${staticPath }/static/activity/jquery-1.6.2.min.js?v=201809242210"></script>
+	<%--<script type="text/javascript" src="${staticPath }/static/activity/jquery-1.6.2.min.js?v=201809242210"></script>--%>
 	<script type="text/javascript" src="${staticPath }/static/activity/common.min.js"></script>
 
 	<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/component/commoditySingleSelector.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/component/imageSelector.js?v=201809242210"></script>
 	<%--<script type="text/javascript" src="${staticPath }/static/ygdialog/lhgdialog.min.js?s=chrome"></script>--%>
-	<script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>
+	<%--<script type="text/javascript" src="${staticPath }/static/jquery/ajaxfileupload.js"></script>--%>
 	<script type="text/javascript" src="${staticPath }/static/activity/module_re_bg.js?v=201809242210"></script>
 	<script type="text/javascript" src="${staticPath }/static/activity/module_common.js?v=201809242210"></script>
 </head>
@@ -78,7 +78,7 @@
 				</c:if>
 	              </div>
 	              <div class="Addimg">                  
-	                  <a href="javascript:void(0)" class="addArea">＋</a>
+	                  <a href="javascript:void(0)" class="addArea2">＋</a>
 	              </div>
 	          </div>
 	      </div><!--leftCon1-->
