@@ -89,11 +89,13 @@ public class CmsModule extends Model<CmsModule>  implements Serializable {
 	/**
 	 * 行
 	 */
-	private Integer rows = 0;
+	@TableField("rows")
+	private Integer rows;
 	/**
 	 * 列
 	 */
-	private Integer cols = 0;
+	@TableField("cols")
+	private Integer cols;
 
 	/**
 	 * 页数

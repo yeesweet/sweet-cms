@@ -193,11 +193,11 @@ public class CmsModuleController extends BaseController {
 			cmsModuleDetailsService.delModuleDetailsByPid(cmsModule.getId());
 			cmsModule.setOperator(this.getStaffName());
 			String starttime = cmsModule.getStarttime();
-			if(starttime!=null && starttime!=""){
+			if(StringUtils.isNotBlank(starttime)){
 				cmsModule.setStartTime(DateUtil.getdate1(starttime));
 			}
 			String endtime = cmsModule.getEndtime();
-			if(endtime!=null && endtime!=""){
+			if(StringUtils.isNotBlank(endtime)){
 				cmsModule.setEndTime(DateUtil.getdate1(endtime));
 			}
 			cmsModuleService.updateCmsModule(cmsModule);
