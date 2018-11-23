@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.cms.mapper.OrderDetailMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sweet.cms.model.OrderDetail">
+		<id column="id" property="id" />
+		<result column="order_no" property="orderNo" />
+		<result column="product_total_num" property="productTotalNum" />
+		<result column="product_total_amt" property="productTotalAmt" />
+		<result column="product_promotion_total_amt" property="productPromotionTotalAmt" />
+		<result column="commodity_no" property="commodityNo" />
+		<result column="sale_price" property="salePrice" />
+		<result column="mark_price" property="markPrice" />
+		<result column="commodity_name" property="commodityName" />
+		<result column="commodity_pic" property="commodityPic" />
+		<result column="brand_name" property="brandName" />
+		<result column="prop_no" property="propNo" />
+		<result column="prop_name" property="propName" />
+		<result column="item_no" property="itemNo" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="delete_flag" property="deleteFlag" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_no AS orderNo, product_total_num AS productTotalNum, product_total_amt AS productTotalAmt, product_promotion_total_amt AS productPromotionTotalAmt, commodity_no AS commodityNo, sale_price AS salePrice, mark_price AS markPrice, commodity_name AS commodityName, commodity_pic AS commodityPic, brand_name AS brandName, prop_no AS propNo, prop_name AS propName, item_no AS itemNo, create_time AS createTime, update_time AS updateTime, delete_flag AS deleteFlag
+    </sql>
+
+</mapper>
